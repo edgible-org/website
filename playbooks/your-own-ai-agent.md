@@ -56,4 +56,4 @@ Nothing is hidden: each chapter ends with the same steps done by hand, and every
 
 - **Chapter 1 done,** on a machine with **8 GB of memory** or more: the gateway and the agent need about 6 GB between them while they work.
 - **Claude,** on a paid plan, on your computer and your phone.
-- **An AI provider account with a little credit.** We suggest DeepSeek: reliable, and cents a day for most people. Five dollars goes a long way.
+- **An account with an AI provider, and a little credit.** OpenAI, Anthropic, Google Gemini, DeepSeek, Mistral, Groq or OpenRouter will do; you add them in chapter 3, one at a time. We use DeepSeek in the examples: reliable, and cents a day for most people. Five dollars goes a long way.
