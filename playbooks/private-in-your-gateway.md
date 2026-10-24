@@ -18,25 +18,31 @@ Here the second machine earns its keep. The gateway runs on `edgible-vm`. The mo
 > - [Chapter 2](../your-private-model/) done: the model downloaded, and the key stored as `ollama`.
 > - Your gateway from the [agent playbook](../your-ai-gateway/), still called `ai-gateway`.
 
-## 1. Fill the private slots
+## 1. Add Ollama to the gateway
 
-In Claude, on your phone or computer, say:
+It's the same sentence you used to add a cloud provider in [the gateway chapter](../your-ai-gateway/). In Claude, on your phone or computer, say:
 
-> Add my private model to my AI gateway. Use qwen2.5:7b for private and gpt-oss:20b for private-smart, from the ollama app on edgible-osx.
+> Add my Ollama on edgible-osx to the AI gateway, with qwen2.5:7b for private and gpt-oss:20b for private-smart.
 
-Claude updates the gateway in place and asks first. It points `private` and `private-smart` at your `ollama` app's address, and gives the gateway the stored `ollama` key **by reference**: the key goes from your Edgible account to the gateway, and is never shown or written into a file. Your other models and keys are untouched, and so are the keys and budgets of the agents that use them.
+Name the models you downloaded in chapter 2, so it never guesses. Claude finds your `ollama` app's address and the stored `ollama` key, then tells you what it's about to do and asks, something like:
 
-Only used one model so far? Leave out `private-smart`, and say so.
+> I'll add Ollama, at your ollama address on edgible-osx: **private** uses qwen2.5:7b and **private-smart** uses gpt-oss:20b. The key goes to the gateway by reference. The gateway restarts and doesn't answer for about a minute. OK?
 
-## 2. Check it answers
+Say yes. The key goes from your Edgible account to the gateway, and is never shown or written into a file. Your other providers and keys are untouched, and so are the keys and budgets of the agents that use them.
+
+Only downloaded one model so far? Leave out `private-smart`, and say so.
+
+## 2. See that it answers
+
+When the gateway is back, Claude has already asked each purpose it changed a tiny question, and reports, in words like these:
+
+> Added Ollama. **private** uses qwen2.5:7b and **private-smart** uses gpt-oss:20b. Both answered a test question, from your Mac. To change one, say "make private use …".
+
+You can ask again any time:
 
 > Check my AI gateway answers on private.
 
-It sends one tiny question through the gateway to the model on your Mac, and tells you which model answered, how long it took, and what it cost. The first answer after a quiet spell takes longer, while the Mac loads the model into memory.
-
-Then try the bigger one:
-
-> Check my AI gateway answers on private-smart.
+It sends one tiny question through the gateway to the model on your Mac, and tells you which model answered, how long it took, and what it cost. The first answer after a quiet spell takes longer, while the Mac loads the model into memory. Try `private-smart` the same way: the bigger model takes a little longer to load.
 
 ## 3. See what it costs
 
@@ -48,7 +54,7 @@ Then try the bigger one:
 
 Two rules, both on purpose:
 
-- **`private` never falls back to a cloud model.** If your Mac is asleep or off, `private` doesn't quietly send your question to DeepSeek. It says it can't answer. A fallback would defeat the point.
+- **`private` never falls back to a cloud model.** If your Mac is asleep or off, `private` doesn't quietly send your question to a cloud provider. It says it can't answer. A fallback would defeat the point.
 - **`private-smart` falls back to `private`,** the smaller model on the same Mac, and nowhere else.
 
 ## What you've just done
