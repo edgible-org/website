@@ -9,7 +9,7 @@ next: private-in-your-gateway
 
 *Chapter 2 of [A private model for your agent](../a-private-model-for-your-agent/). Draft: [tell us how it goes](mailto:stefano@edgible.com?subject=Playbook%20feedback).*
 
-The model runs in **Ollama**, a popular open-source program for running AI models on your own computer. Edgible's `ollama-mac` recipe installs it on the Mac's GPU and puts a key in front of it.
+The model runs in **Ollama**, a popular open-source program for running AI models on your own computer. Edgible's `ollama-osx` recipe installs it on the Mac's GPU and puts a key in front of it.
 
 Two details are worth knowing, because they're why this is safe:
 
@@ -64,10 +64,10 @@ You have a private AI model, and it's well guarded:
 <details>
 <summary>Prefer to do it by hand?</summary>
 
-What Claude Code does, in order. The recipe is the [ollama-mac card](https://github.com/edgible-org/cards/tree/main/ollama-mac); its README has every step, and our regression runs it as written.
+What Claude Code does, in order. The recipe is the [ollama-osx card](https://github.com/edgible-org/cards/tree/main/ollama-osx); its README has every step, and our regression runs it as written.
 
 1. **Fetch the card**, set `DEVICE` to `edgible-osx` and `ORG_LABEL` to your organisation's name in `card.env`, and run its Check.
-2. **Install**: `sh ollama-mac/install.sh` with `card.env` exported. It stops, naming the program, if either port is in use.
+2. **Install**: `sh ollama-osx/install.sh` with `card.env` exported. It stops, naming the program, if either port is in use.
 3. **Pull a model** on the Mac: `curl http://127.0.0.1:11434/api/pull -d '{"model": "qwen2.5:7b"}'`.
 4. **Publish** the app `ollama` on `api-key`, as the README's Publish step shows.
 5. **Make the gateway's key** with `edgible app api-keys create --app ollama --name gateway`. It is shown once: store it straight away with `edgible secret set ollama`, from a file that holds only the key, and delete the file.
