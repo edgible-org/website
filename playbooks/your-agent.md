@@ -38,6 +38,8 @@ Open the address, and sign in with Edgible. You're in OpenClaw: a chat, with you
 
 > What can you do for me?
 
+If the page shows *"Proxy client attribution is required."*, reload it once. It means a request reached your agent without Edgible's sign-in having said who you are, and it can happen just after the agent starts. If it stays in one browser while another browser works, that browser is holding an old session for the same address, from an earlier agent you ran there, say: clear this site's cookies and data, or open the page in a private window, and sign in again. Nothing is wrong with your agent.
+
 Its first answers come from **fast**, your gateway's everyday model. The menu by the message box lets you pick another, such as **smart** for harder questions, or **best** when it really matters.
 
 ## 3. Let it look after your apps
