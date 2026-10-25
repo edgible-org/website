@@ -44,6 +44,8 @@ This playbook starts where the agent playbook ends.
 ("Words a second" is tokens a second, close enough to words for reading speed. Your Mac will differ. "Cold" includes loading the model, which happens once, after it's been idle.)
 
 - **A Mac that stays awake.** If it sleeps, the private model is unreachable. `private` never falls back to a cloud model, by design, so it simply doesn't answer. Set the Mac to stay awake when plugged in, or use one that stays on.
+- **Which Claude model:** chapters 1 to 4 change things on your machines, asking your permission first, so choose a Sonnet-class model or better for them. Chapter 5 and everyday questions afterwards are fine on a smaller, cheaper one. We haven't tested smaller models on these steps yet.
+
 - **About an hour,** most of it waiting for a model to download.
 
 ## Why a second machine
