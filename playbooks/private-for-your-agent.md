@@ -24,7 +24,9 @@ Open your agent's address, and sign in with Edgible. In the model menu by the me
 
 > In two sentences, what's the difference between an LLC and a corporation?
 
-Nothing about the chat looks different. The words came from your Mac. The first question after a quiet spell is slow while the Mac loads the model, then it's quick.
+Nothing about the chat looks different. The words came from your own computer.
+
+**The first message of a new conversation is slow.** Your agent sends about 12,000 tokens of instructions and tools with it, and the computer has to read them before it answers. We saw about 80 seconds with `private`. Every message after that in the same conversation is quick, because the model keeps what it has read. Leave it for more than five minutes and the computer forgets, so the next conversation pays the wait again. Give it a moment the first time, then carry on.
 
 ## 2. Ask it something you'd rather keep to yourself
 
@@ -40,13 +42,13 @@ Your agent answers with its own spending against its budget, as before. The priv
 
 ## 4. Use it for what it's good at
 
-A small model on a Mac is good at a lot: summarising, rewording, drafting, explaining, answering from text you paste in. It's less sure at being an agent on a long job: planning many steps and using many tools without drifting. [Chapter 5](../choosing-between-them/) is about exactly that.
+A small model on your own computer is good at a lot: summarising, rewording, drafting, explaining, answering from text you paste in. It's less sure at being an agent on a long job: planning many steps and using many tools without drifting. [Chapter 5](../choosing-between-them/) is about exactly that.
 
 ## What you've just done
 
 Your agent now has a private mode:
 
-- **One agent, two worlds.** Cloud models when you want the best answer, your own Mac when you want it private.
+- **One agent, two worlds.** Cloud models when you want the best answer, your own computer when you want it private.
 - **You decide per question,** with one tap in the model menu.
 - **The budget still applies.** The private model counts toward your agent's budget at a token price, so nothing runs away.
 
