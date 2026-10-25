@@ -55,5 +55,5 @@ Nothing is hidden: each chapter ends with the same steps done by hand, and every
 ## What you'll need
 
 - **Chapter 1 done,** on a machine with **8 GB of memory** or more: the gateway and the agent need about 6 GB between them while they work.
-- **Claude,** on a paid plan, on your computer and your phone.
+- **Claude,** on a paid plan, on your computer and your phone. **Which model:** the setup chapters change things on your machines, asking your permission first, so choose a Sonnet-class model or better for them. For everyday questions afterwards, such as what's running or what you've spent, a smaller, cheaper model is likely fine. We haven't tested smaller models on these steps yet: if you try one, [tell us how it goes](mailto:stefano@edgible.com?subject=Playbook%20feedback).
 - **An account with an AI provider, and a little credit.** OpenAI, Anthropic, Google Gemini, DeepSeek, Mistral, Groq or OpenRouter will do; you add them in chapter 3, one at a time. We use DeepSeek in the examples: reliable, and cents a day for most people. Five dollars goes a long way.
