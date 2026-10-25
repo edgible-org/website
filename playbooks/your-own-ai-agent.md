@@ -44,7 +44,7 @@ Five apps in all, each a web address with its own rule for who gets in. You'll s
 | --- | --- | --- | --- | --- |
 | 2 | The connector | `https://mcp-signin.<you>.edgible.app/mcp` | Where Claude's apps call your Edgible tools | Anyone can knock, but only Claude with your permission gets an answer |
 | 2 | The connector's sign-in page | `https://mcp-signin-login.<you>.edgible.app` | Where you sign in and allow Claude, and where key links open | Only you and your organisation |
-| 3 | The gateway's admin | `https://ai-gateway.<you>.edgible.app` | The gateway's own settings page | Only you and your organisation |
+| 3 | The gateway's admin (advanced) | `https://ai-gateway.<you>.edgible.app` | The gateway's own settings page. You won't need it: it asks for the gateway's master key, which your connector keeps and never shows, so you do everything by asking Claude | Only you and your organisation |
 | 3 | The gateway's API | `https://ai-gateway-api.<you>.edgible.app` | Where your agents send their AI requests | Anyone can knock, but only agents holding a key the gateway gave them get an answer |
 | 4 | Your agent | `https://my-agent.<you>.edgible.app` | Your agent's chat and settings | Only you |
 
