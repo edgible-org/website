@@ -32,19 +32,19 @@ Ask yourself one question first: **would I mind if this left my computer?** If s
 
 ## What it isn't good at, yet
 
-We measured these on a Mac with 32 GB of memory. Yours will differ, but the shape won't.
+We measured these on a computer with 32 GB of memory its GPU can use. Yours will differ, but the shape won't.
 
-- **The start of an agent conversation.** The numbers below are for short questions. Your agent opens every conversation with about 12,000 tokens of instructions and tools, and a local model reads them at the pace of its hardware: 80 seconds with `qwen2.5:7b` on our Mac, then under a second per message for the rest of that conversation. The wait comes back after five idle minutes, when the Mac unloads the model. It is a cost per conversation, not per message, so a few long conversations suit a private model better than many short ones.
+- **The start of an agent conversation.** The numbers below are for short questions. Your agent opens every conversation with about 12,000 tokens of instructions and tools, and a local model reads them at the pace of its hardware: 80 seconds with `qwen2.5:7b` on our test computer, then under a second per message for the rest of that conversation. The wait comes back after five idle minutes, when the computer unloads the model. It is a cost per conversation, not per message, so a few long conversations suit a private model better than many short ones.
 - **Speed.** A small model answers a short question almost at once. The 20 billion parameter one is fine. The biggest we tried, `qwen3.5:27b`, produced about six words a second, and took half a minute for a short answer once you count loading it. Good for a document you leave running. Slow for a chat.
-- **Memory.** A model needs about its own size in memory *on top of* everything else on the Mac. A model that nearly fits makes everything slow.
+- **Memory.** A model needs about its own size in memory *on top of* everything else on the computer. A model that nearly fits makes everything slow.
 - **Long jobs with many tools.** A single tool call works: we asked both `qwen2.5:7b` and `gpt-oss:20b` for the weather in Paris with a weather tool on offer, three times each, and every time they called it correctly. What we saw go wrong was a long agent session on a small model with a full set of tools: slow, mostly at the start of each conversation (above), and clumsy. Cloud models are still the safer choice for that. Use private for what you say and ask, and a cloud model for a long job you want your agent to *do*, unless you've tried a local model on your own tasks and it holds up.
 - **Strength.** A 7 billion parameter model is not a cloud model. For hard problems it will be wrong more often, and say it with the same confidence. Check what matters.
 
 ## Keep an eye on
 
-- **Is the Mac awake?** `private` doesn't fall back, by design. "It can't answer" means check the Mac.
+- **Is the GPU computer awake?** `private` doesn't fall back, by design. "It can't answer" means check that computer.
 - **Which model did you pick?** The menu in your agent says.
-- **Disk.** Models are big. `ollama` on the Mac lists them; delete the ones you don't use.
+- **Disk.** Models are big. `ollama` on that computer lists them; delete the ones you don't use.
 
 ## What you've just done
 
