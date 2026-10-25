@@ -6,7 +6,7 @@ next: second-machine
 
 # A private model for your agent
 
-*Draft: the Mac side is tested on our own machine; the Claude steps are being run end to end now. You're early, so please [tell us how it goes](mailto:stefano@edgible.com?subject=Playbook%20feedback).*
+*Draft. Chapters 3 and 4, the gateway and your agent, have been run end to end in Claude on a clean machine. Chapters 1 and 2, which use Claude Code on your Mac, are tested piece by piece but not yet run as the prompts you'll type, and the screenshots are still to come. You're early, so please [tell us how it goes](mailto:stefano@edgible.com?subject=Playbook%20feedback).*
 
 Some things shouldn't leave your hardware: client documents, medical notes, a half-written contract, your own diary. This playbook adds a **private model** to the agent you built in [Your own AI agent, from anywhere](../your-own-ai-agent/):
 
