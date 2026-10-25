@@ -47,9 +47,11 @@ It asks the model a tiny question on the Mac and confirms it ran entirely on the
 
 ## 4. Make a key for your gateway
 
-> Make an API key for my AI gateway to use my private model, and keep it safe in my Edgible account.
+> Make an Edgible API key for my ollama app, for my AI gateway to use, and keep it safe in my Edgible account.
 
-It makes a key just for the gateway, named for it, and stores it in your Edgible account as `ollama`. You never see it and it never goes into the chat. If the gateway is ever compromised, you delete that one key and nothing else changes.
+Name the `ollama` app, so it can't mean something else: a key for an app that calls the gateway is a different thing, with its own budget. Claude tells you what it's about to do, something like *"make a key named `ai-gateway` for the `ollama` app and store it as the secret `ollama`"*, and asks. You never see the key and it never goes into the chat. If the gateway is ever compromised, you delete that one key and nothing else changes.
+
+Already have a key stored from an earlier try? Claude says so, and warns that making a new one deletes the old: anything still using it stops until it's given the new one. In chapter 3, adding Ollama to the gateway gives it the new key and restarts it.
 
 ## What you've just done
 
