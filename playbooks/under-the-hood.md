@@ -71,9 +71,24 @@ Everything Edgible doesn't do is open and yours: the apps, the recipes and the d
 - **Moving is built in.** An app can move to another machine, data and all, with a check that the data arrived intact.
 - **Your own domain** for any app, with HTTPS, without interrupting it.
 
+## <span class="ico" aria-hidden="true"><svg><use href="../../images/icons.svg#machine"/></svg></span>7. Two machines, one private model
+
+For [A private model for your agent](../a-private-model-for-your-agent/), which adds a GPU machine to the picture:
+
+- **Ollama never faces your network.** It listens on the Mac only. What Edgible publishes is a small guard in front of it, which tells Ollama the request came from the Mac itself, because Ollama refuses anything else. That's why we don't just open Ollama to the network: it has no sign-in of its own, so everyone on your wifi would be able to use your GPU and change your models.
+- **A key can use the model, not change it.** The guard passes on asking, chatting and listing models, and refuses downloading, copying, creating and deleting them. Edgible checks the key itself, on the Mac, before a request reaches the guard.
+- **The key is made for one caller and stored once.** The gateway holds it by reference from your Edgible account, never in a file or in chat, and you can end it alone.
+- **`private` never leaves.** It doesn't fall back to a cloud model, so an asleep Mac gives you silence, not a leak. `private-smart` falls back only to `private`.
+- **Each downloaded program is checked** against its publisher's checksum before it is unpacked.
+
 ## <span class="ico" aria-hidden="true"><svg><use href="../../images/icons.svg#map"/></svg></span>Known limits
 
 We'd rather you heard these from us:
+
+- **The private model needs a Mac with Apple silicon today.** A card for Linux with an NVIDIA GPU is planned.
+- **We tested two machines on one computer** (a Mac and a virtual machine on it), not two physical machines on different networks. The path between them is the same Edgible address either way, but we haven't proved it across networks yet.
+- **The guard is a workaround.** Edgible can't yet forward a host name of your choosing to an app, which publishing Ollama directly would need, so a small guard does that part. It works, and it adds one more program to keep up to date.
+- **A small local model is a less steady agent than a cloud one on long jobs.** A single tool call works, but a long, many-step session drifts. It is a good private reader and writer; give your agent a cloud model for long jobs with many tools.
 
 - **Your agent can't give you key links yet,** so storing a key happens in Claude, not in the agent's chat.
 - **A lost first-use password needs a terminal** to recover today. A no-terminal way is planned.

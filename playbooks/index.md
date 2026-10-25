@@ -22,6 +22,12 @@ New:
   4. [Your agent](your-agent/)
   5. [Run it from your phone](run-it-from-your-phone/)
   6. [A home for everything you've built](a-home-for-your-apps/)
+- **[A private model for your agent](a-private-model-for-your-agent/):** run an AI model on your own GPU computer and give your agent the choice of it, so private work never leaves your hardware. Builds on the agent playbook.
+  1. [Add a second machine](second-machine/)
+  2. [Your private model](your-private-model/)
+  3. [Private in your gateway](private-in-your-gateway/)
+  4. [Private for your agent](private-for-your-agent/)
+  5. [Choosing between them](choosing-between-them/)
 
 For the experts and the curious:
 
