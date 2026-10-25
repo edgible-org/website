@@ -43,6 +43,8 @@ This playbook starts where the agent playbook ends.
 
 ("Words a second" is tokens a second, close enough to words for reading speed. Your Mac will differ. "Cold" includes loading the model, which happens once, after it's been idle.)
 
+Those are short questions. **Your agent is different.** It opens every conversation with about 12,000 tokens of its own instructions and tool descriptions, and the model has to read them before it answers. On this Mac that took **about 80 seconds** with `qwen2.5:7b` the first time: 72 reading, 5 loading the model, 2 answering. Every message after that in the same conversation took well under a second, because the model keeps what it has read. On the same test text, `gpt-oss:20b` read in 19 seconds against 55 for the 7B, plus about 24 seconds to load the larger model once. Leave it for more than five minutes and Ollama unloads the model, so the next conversation pays again.
+
 - **A Mac that stays awake.** If it sleeps, the private model is unreachable. `private` never falls back to a cloud model, by design, so it simply doesn't answer. Set the Mac to stay awake when plugged in, or use one that stays on.
 - **Which Claude model:** chapters 1 to 4 change things on your machines, asking your permission first, so choose a Sonnet-class model or better for them. Chapter 5 and everyday questions afterwards are fine on a smaller, cheaper one. We haven't tested smaller models on these steps yet.
 

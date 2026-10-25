@@ -24,7 +24,9 @@ Open your agent's address, and sign in with Edgible. In the model menu by the me
 
 > In two sentences, what's the difference between an LLC and a corporation?
 
-Nothing about the chat looks different. The words came from your Mac. The first question after a quiet spell is slow while the Mac loads the model, then it's quick.
+Nothing about the chat looks different. The words came from your Mac.
+
+**The first message of a new conversation is slow.** Your agent sends about 12,000 tokens of instructions and tools with it, and the Mac has to read them before it answers. We saw about 80 seconds with `private`. Every message after that in the same conversation is quick, because the model keeps what it has read. Leave it for more than five minutes and the Mac forgets, so the next conversation pays the wait again. Give it a moment the first time, then carry on.
 
 ## 2. Ask it something you'd rather keep to yourself
 
