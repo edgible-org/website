@@ -38,6 +38,8 @@ Open the address, and sign in with Edgible. You're in OpenClaw: a chat, with you
 
 > What can you do for me?
 
+Just after the agent starts, the very first page may show *"Proxy client attribution is required."* once. It's a single request that arrived before Edgible's sign-in had labelled it. Reload the page, and it goes away.
+
 Its first answers come from **fast**, your gateway's everyday model. The menu by the message box lets you pick another, such as **smart** for harder questions, or **best** when it really matters.
 
 ## 3. Let it look after your apps

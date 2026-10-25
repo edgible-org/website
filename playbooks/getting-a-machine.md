@@ -40,6 +40,12 @@ And in step 4:
 
 The virtual machine runs while your computer is on and awake. For anything other people rely on, choose a spare computer or a cloud server instead.
 
+**One thing to know about its clock.** When your computer sleeps, the virtual machine stops with it, and can wake hours behind. Edgible then refuses the machine's requests without saying why: an app waits for ever for its certificate, or a sign-in code is rejected. Your AI sets the machine's clock to correct itself when it makes it, so this should be rare. If it ever happens, say:
+
+> Check the clock on edgible-vm.
+
+It's a quick fix, and nothing is lost.
+
 ## A small cloud server
 
 A server you rent by the month, from Hetzner, DigitalOcean or AWS Lightsail for example. You make the account and pay; your AI walks you through the rest:
