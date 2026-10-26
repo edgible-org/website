@@ -1,7 +1,7 @@
 // The contact form's back end: checks Turnstile, then emails the message to TO_ADDRESS.
 
 const MAX = { name: 120, email: 254, topic: 60, message: 5000 };
-const TOPICS = ["Small business or club", "Family or home", "Investing or partnering", "Press", "Help with Edgible", "Something else"];
+const TOPICS = ["Small business or club", "Family or home", "Investing or partnering", "Press", "A playbook or card", "Help with Edgible", "Something else"];
 
 export default {
   async fetch(request, env) {
@@ -45,6 +45,9 @@ export default {
     });
     const verdict = await check.json().catch(() => ({}));
     // The token must have been issued to the contact form on our own page.
+    if (!verdict.success || verdict.action !== "contact" || verdict.hostname !== env.EXPECTED_HOSTNAME) {
+      console.log("turnstile rejected", JSON.stringify({ codes: verdict["error-codes"], action: verdict.action, hostname: verdict.hostname, http: check.status, hasSecret: Boolean(env.TURNSTILE_SECRET) }));
+    }
     if (!verdict.success || verdict.action !== "contact" || verdict.hostname !== env.EXPECTED_HOSTNAME) {
       return reply(400, { ok: false, error: "The spam check did not pass. Please try again." });
     }
