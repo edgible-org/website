@@ -96,4 +96,4 @@ The short version for a person choosing: if the app holds private data (member l
 
 ## Contact
 
-stefano@edgible.com
+contact@edgible.com, or the form at https://www.edgible.ai/contact/
