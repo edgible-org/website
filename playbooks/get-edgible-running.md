@@ -40,8 +40,8 @@ The skill is Edgible's recipe book for AI assistants: how to set Edgible up, our
 For a virtual machine or a server, name it instead, as [Getting a machine](../getting-a-machine/) shows. It checks the computer first, then takes you through the rest. Along the way:
 
 - **Your account.** If you don't have one yet, it sends you to [edgible.com](https://www.edgible.com) to sign up and create an organisation, the name your apps live under. It never asks for your password.
-- **The Edgible software.** It says what it will install, and asks before it does. Your computer may ask for its own password.
-- **Signing in.** It shows you a link and a short code. Open the link, check the code matches, and approve. That's how this computer gets permission to act for your account.
+- **A clean slate.** Before anything else, it signs this computer out of Edgible, so nothing is picked up by accident from an earlier sign-in. If the computer was signed in, it first tells you which account, so you know what it's leaving.
+- **Signing in, on purpose.** It shows you a link and a short code. Open the link, and check two things: the code matches, and the page names the account you mean to use. Browsers remember sign-ins, so if the page shows another account, such as a work one, sign out of it there or open the link in a private window. Then approve. That's how this computer gets permission to act for your account. Claude then reads the account back to you, for example *"Signed in as jane@example.com, organisation Jane's"*, and carries on only when you say it's right.
 - **A name for this computer,** such as `minipc` or `office-mac`. It's how you'll recognise it later.
 - **Whether it should stay on.** Say yes for anything other people rely on: Edgible then starts by itself whenever the computer starts.
 
@@ -81,7 +81,8 @@ These are the commands your AI runs, on macOS or Linux. You need `curl`, `unzip`
 curl -fsSL https://get.edgible.com/install.sh | bash
 export PATH="$HOME/.local/bin:$PATH"
 
-# Sign in: open the link it prints, and approve
+# Start clean, then sign in: open the link it prints, check the account, and approve
+edgible auth logout
 edgible auth login --no-browser
 
 # Make this computer a device that starts by itself (choose your own name)

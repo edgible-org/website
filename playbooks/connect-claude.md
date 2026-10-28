@@ -24,7 +24,7 @@ In Claude Code, on your own computer, say:
 
 > Connect Claude to my Edgible: set up the Edgible connector on my edgible-vm, and allow it to make changes on that machine only.
 
-It sets the connector up on your machine and gives it its own web address. Along the way it asks you to approve one sign-in, with a link and a code as in chapter 1: that lets the connector act for your Edgible account.
+It sets the connector up on your machine and gives it its own web address. Along the way it asks you to approve one more sign-in, with a link and a code as in chapter 1: that lets the connector act for your Edgible account. It is a separate sign-in from chapter 1's, so check again that the page names the account you mean to use. Claude reads the account back before it goes on.
 
 Along the way it may find and fix small problems, such as the clock on a virtual machine, and it tells you what it did. If you already have a connector, it says so, and you can keep using that one.
 
@@ -36,7 +36,7 @@ In the Claude app on your computer, or at claude.ai:
 
 1. Open **Settings**, then **Connectors**, then **Add custom connector**.
 2. Name it **Edgible**, paste the address, and choose **Add**.
-3. Choose **Connect**. An Edgible page opens: sign in with your Edgible account, and allow Claude.
+3. Choose **Connect**. An Edgible page opens: sign in with your Edgible account, and allow Claude. This is the third time you sign in to Edgible, and the last: this one lets Claude, not your machine, act for your account. Check the page names the account you mean to use.
 
 That's all. Your phone's Claude app picks it up by itself, since it's the same Claude account.
 
