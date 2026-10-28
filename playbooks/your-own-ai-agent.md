@@ -34,7 +34,7 @@ An agent works in loops: it thinks, calls a tool, reads the result, and thinks a
 
 So before we let an agent loose, we put the guardrails in. An AI gateway sits between your agents and the AI providers: one address, your keys in one safe place, a budget per agent, and a running total of what each one spends. Welcome to the world of AI gateways. We make it easy.
 
-Curious how it all works, or asked to vouch for it? [Under the hood](../under-the-hood/) sets out what this playbook does for you that's easy to miss, and its known limits.
+Want to stop, or start again? [Take it all down](../take-it-all-down/) removes it cleanly, keeping your data or not. Curious how it all works, or asked to vouch for it? [Under the hood](../under-the-hood/) sets out what this playbook does for you that's easy to miss, and its known limits.
 
 ## What it adds to your Edgible
 
