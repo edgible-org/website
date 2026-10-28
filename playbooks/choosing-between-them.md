@@ -2,6 +2,7 @@
 title: Choosing between them
 description: Which questions to send to your private model and which to the cloud, what the private model is good at, and what it isn't.
 prev: private-for-your-agent
+next: take-it-all-down
 ---
 
 # Choosing between them
@@ -57,4 +58,4 @@ You've built something most people don't have: a way to use AI that matches the 
 
 The next time someone says "I'd use AI for that but I can't put it in a cloud service", you know what to tell them.
 
-Later you'll want to take it all down again, the private model included. One tear-down page for both playbooks is planned, and it will go in reverse order, so nothing is left behind.
+Want to stop, or start again? [Take it all down](../take-it-all-down/) removes the private model and everything else cleanly, in reverse order, keeping your data or not.

@@ -12,6 +12,7 @@ Start here:
 - **[Get Edgible running](get-edgible-running/):** the first chapter of every playbook.
 - **[Getting a machine](getting-a-machine/):** no spare computer? A virtual machine on yours, or a small cloud server.
 - **[Use your own domain](use-your-own-domain/):** give any app an address on a domain you own.
+- **[Take it all down](take-it-all-down/):** remove what these playbooks set up, cleanly, keeping your data or not.
 
 New:
 
