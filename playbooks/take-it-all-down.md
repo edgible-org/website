@@ -67,7 +67,7 @@ The app keeps working at its Edgible address. Claude tells you which DNS record 
 
 > Remove linkding.
 
-Its bookmarks stay on your machine unless you also say: *"and delete its data"*. Its sign-in token, which you gave Claude to bookmark your apps, stays stored with Edgible until you delete it (section 5 covers stored keys too):
+Its bookmarks stay on your machine. Claude's Edgible tools can't delete an app's data, so to delete them too, ask Claude Code on that machine: *"Delete the data of my removed linkding app."* Its sign-in token, which you gave Claude to bookmark your apps, stays stored with Edgible until you delete it (section 5 covers stored keys too):
 
 > Delete my stored linkding token from Edgible.
 
@@ -75,13 +75,13 @@ Its bookmarks stay on your machine unless you also say: *"and delete its data"*.
 
 > Remove my agent, and revoke its gateway key.
 
-Its memory and conversations stay on your machine unless you also ask to delete its data. Its gateway key stops working at once, so nothing can spend on its behalf. Anything it was signed in to Edgible with goes with it.
+Its memory and conversations stay on your machine. Claude's Edgible tools can't delete an app's data, so to delete them too, ask Claude Code on that machine: *"Delete the data of my removed agent app."* Its gateway key stops working at once, so nothing can spend on its behalf. The keys stored for it go with it, and so does anything it was signed in to Edgible with.
 
 ## 5. Your AI gateway
 
 > Remove my AI gateway.
 
-Your provider keys stay stored with Edgible, ready if you set a gateway up again. So does its spending history, on your machine. To remove the keys too:
+This takes down the gateway's second, public address as well, and the master key stored for it. Your provider keys stay stored with Edgible, ready if you set a gateway up again. So does its spending history, on your machine. To remove the keys too:
 
 > Delete my stored AI keys from Edgible.
 
