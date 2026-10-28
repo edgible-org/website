@@ -7,7 +7,7 @@ next: your-own-ai-agent
 
 # Take it all down
 
-*An appendix to [Your own AI agent, from anywhere](../your-own-ai-agent/) and [A private model for your agent](../a-private-model-for-your-agent/). Draft: not yet tested end to end.*
+*An appendix to [Your own AI agent, from anywhere](../your-own-ai-agent/) and [A private model for your agent](../a-private-model-for-your-agent/). Tested on one real setup in October 2026: removing the gateway's private model, the agent, the AI gateway, stored keys and the connector were all run from Claude. Not yet run: the Claude Code prompts for the GPU computer, for deleting an app's data, and for taking a machine off your account.*
 
 You can walk away cleanly at any time, whether you were trying things out, want to start again, or need room for other apps. This page takes both playbooks down in reverse order, so nothing is left behind. Claude asks before each removal.
 
