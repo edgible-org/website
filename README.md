@@ -4,6 +4,7 @@ Edgible's website: the main page and the playbooks.
 
 - **`site/`:** the main page, `index.html`, published as it is. The copy comes from Edgible's Vision 2028 messaging. Images are in `site/images/`: the Edgible logo, symbol and favicon, and the icon set as one sprite, `icons.svg`. `site/llms.txt` is the plain-facts summary for AI assistants.
 - **`playbooks/`:** one Markdown file per chapter, built into pages at /playbooks in the site's look, with each Markdown source published beside its page. How to write one: [playbooks/README.md](playbooks/README.md).
+- **`worker/`:** the contact form's back end, a Cloudflare Worker deployed by hand (`npx wrangler deploy`, with the secret `TURNSTILE_SECRET` set by `npx wrangler secret put`). It checks Turnstile and emails the message to contact@edgible.com through Cloudflare Email Sending. The form is `site/contact/`.
 - **`build/`:** the build (`build.mjs`) and the playbook page template (`playbook.html`).
 
 Preview it locally:

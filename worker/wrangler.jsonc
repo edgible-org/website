@@ -1,0 +1,21 @@
+{
+  // Receives the contact form on www.edgible.ai/contact/ and emails it to contact@edgible.com.
+  "name": "edgible-contact",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-01",
+  "vars": {
+    "TO_ADDRESS": "contact@edgible.com",
+    "FROM_ADDRESS": "form@edgible.ai",
+    "ALLOWED_ORIGIN": "https://www.edgible.ai",
+    "EXPECTED_HOSTNAME": "www.edgible.ai"
+  },
+  // The Worker can send only from form@edgible.ai and only to contact@edgible.com.
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "destination_address": "contact@edgible.com",
+      "allowed_sender_addresses": ["form@edgible.ai"]
+    }
+  ]
+  // Secret, set with: npx wrangler secret put TURNSTILE_SECRET
+}

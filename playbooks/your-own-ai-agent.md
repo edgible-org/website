@@ -44,7 +44,7 @@ Five apps in all, each a web address with its own rule for who gets in. You'll s
 | --- | --- | --- | --- | --- |
 | 2 | The connector | `https://mcp-signin.<you>.edgible.app/mcp` | Where Claude's apps call your Edgible tools | Anyone can knock, but only Claude with your permission gets an answer |
 | 2 | The connector's sign-in page | `https://mcp-signin-login.<you>.edgible.app` | Where you sign in and allow Claude, and where key links open | Only you and your organisation |
-| 3 | The gateway's admin | `https://ai-gateway.<you>.edgible.app` | The gateway's own settings page | Only you and your organisation |
+| 3 | The gateway's admin (advanced) | `https://ai-gateway.<you>.edgible.app` | The gateway's own settings page. You won't need it: it asks for the gateway's master key, which your connector keeps and never shows, so you do everything by asking Claude | Only you and your organisation |
 | 3 | The gateway's API | `https://ai-gateway-api.<you>.edgible.app` | Where your agents send their AI requests | Anyone can knock, but only agents holding a key the gateway gave them get an answer |
 | 4 | Your agent | `https://my-agent.<you>.edgible.app` | Your agent's chat and settings | Only you |
 
@@ -55,5 +55,5 @@ Nothing is hidden: each chapter ends with the same steps done by hand, and every
 ## What you'll need
 
 - **Chapter 1 done,** on a machine with **8 GB of memory** or more: the gateway and the agent need about 6 GB between them while they work.
-- **Claude,** on a paid plan, on your computer and your phone.
-- **An AI provider account with a little credit.** We suggest DeepSeek: reliable, and cents a day for most people. Five dollars goes a long way.
+- **Claude,** on a paid plan, on your computer and your phone. **Which model:** the setup chapters change things on your machines, asking your permission first, so choose a Sonnet-class model or better for them. For everyday questions afterwards, such as what's running or what you've spent, a smaller, cheaper model is likely fine. We haven't tested smaller models on these steps yet: if you try one, [tell us how it goes](mailto:stefano@edgible.com?subject=Playbook%20feedback).
+- **An account with an AI provider, and a little credit.** OpenAI, Anthropic, Google Gemini, DeepSeek, Mistral, Groq or OpenRouter will do; you add them in chapter 3, one at a time. We use DeepSeek in the examples: reliable, and cents a day for most people. Five dollars goes a long way.

@@ -67,6 +67,6 @@ One finishing touch: [A home for everything you've built](../a-home-for-your-app
 <details>
 <summary>Prefer to do it by hand?</summary>
 
-Everything in this chapter is also in your agent's page and the gateway's admin page, in any browser. Spending is under the gateway admin's usage view, and an agent's budget under its key. The connector is only for asking Claude.
+Your agent is also in its own page, in any browser. Spending and budgets are also in the gateway's admin page, under its usage view and each agent's key, for anyone who has the gateway's master key: when you set the gateway up by hand, you do. With Claude's connector it is kept for you and never shown, so spending and budgets are one question to Claude away, as in this chapter.
 
 </details>
