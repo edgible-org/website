@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <script>document.documentElement.className += " js";</script>
+  <link rel="stylesheet" href="{{root}}menu.css">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{title}} · Edgible</title>
@@ -113,7 +115,8 @@
 <header class="bar">
   <div class="wrap">
     <a class="logo" href="{{root}}"><img src="{{root}}images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
-    <nav class="links">
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="links" id="site-nav">
       <a href="{{root}}playbooks/">Playbooks</a>
       <a href="{{root}}proof/">Proof</a>
       <a href="{{root}}contact/">Contact</a>
@@ -129,5 +132,6 @@
     <span><a href="https://cards.edgible.org">Cards</a> · <a href="{{root}}contact/">Contact</a> · <a href="{{root}}llms.txt">For AI assistants</a> · <a href="{{source}}">This page as Markdown</a></span>
   </div>
 </footer>
+<script src="{{root}}menu.js" defer></script>
 </body>
 </html>
