@@ -87,6 +87,8 @@
     footer a { color: #a7b1dc; }
     footer a:hover { color: #ffffff; }
     footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer .foot-right { display: flex; align-items: center; gap: 20px; }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
 
     @media (max-width: 560px) {
       .wrap { padding: 0 16px; }
@@ -130,7 +132,10 @@
 <footer>
   <div class="wrap">
     <span>© 2026 Edgible. Your data's coming home™ is a trade mark of Edgible.</span>
-    <span><a href="https://cards.edgible.org">Cards</a> · <a href="{{root}}contact/">Contact</a> · <a href="{{root}}llms.txt">For AI assistants</a> · <a href="{{source}}">This page as Markdown</a></span>
+    <div class="foot-right">
+      <span><a href="https://cards.edgible.org">Cards</a> · <a href="{{root}}contact/">Contact</a> · <a href="{{root}}llms.txt">For AI assistants</a> · <a href="{{source}}">This page as Markdown</a></span>
+      <a class="foot-logo" href="{{root}}"><img src="{{root}}images/edgible-symbol-white.png" alt="Edgible"></a>
+    </div>
   </div>
 </footer>
 <script src="{{root}}menu.js" defer></script>
