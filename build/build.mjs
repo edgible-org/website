@@ -39,6 +39,12 @@ function nav(meta, file) {
   const html = link(meta.prev, 'prev') + link(meta.next, 'next');
   return html ? `<nav class="chapters">${html}</nav>` : '';
 }
+// icon: names a symbol in site/images/icons.svg, drawn on a navy tile above the title.
+function pageIcon(meta, slug) {
+  if (!meta.icon) return '';
+  return `<span class="page-ico" aria-hidden="true"><svg><use href="${slug ? '../../' : '../'}images/icons.svg#${escape(meta.icon)}"/></svg></span>\n`;
+}
+
 for (const file of pages) {
   const source = readFileSync(join(dir, file), 'utf8');
   const { meta, body } = parse(source, file);
@@ -50,7 +56,7 @@ for (const file of pages) {
     .replaceAll('{{description}}', escape(meta.description || ''))
     .replaceAll('{{root}}', slug ? '../../' : '../')
     .replaceAll('{{source}}', slug ? `../${file}` : 'index.md')
-    .replace('{{content}}', marked.parse(body) + (slug ? nav(meta, file) : ''));
+    .replace('{{content}}', pageIcon(meta, slug) + marked.parse(body) + (slug ? nav(meta, file) : ''));
   writeFileSync(join(out, 'index.html'), html);
   writeFileSync(join(dist, 'playbooks', file), source);
 }

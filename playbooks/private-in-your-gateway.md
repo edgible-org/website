@@ -1,4 +1,5 @@
 ---
+icon: govern
 title: Private in your gateway
 description: Add your private model to your AI gateway as private and private-smart, with a budget and a spending record like any other model.
 prev: your-private-model

@@ -66,6 +66,11 @@
     th { color: var(--heading); }
     hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
     /* The site's icons are drawn light on dark, so on these pages each sits on a navy tile. */
+    /* A page's icon: a navy tile above its title; a small one beside each entry on the landing page. */
+    .page-ico { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px; background: var(--night-1); margin-bottom: 18px; }
+    .page-ico svg { width: 42px; height: 42px; }
+    .ico.sm { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--night-1); margin-right: 10px; vertical-align: middle; }
+    .ico.sm svg { width: 22px; height: 22px; }
     h2 .ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--night-1); margin-right: 12px; vertical-align: middle; flex: none; }
     h2 .ico svg { width: 30px; height: 30px; }
     h2:has(.ico) { display: flex; align-items: center; }

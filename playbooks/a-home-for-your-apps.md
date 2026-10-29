@@ -1,4 +1,5 @@
 ---
+icon: home
 title: A home for everything you've built
 description: Your agent sets you up your own bookmarks app, and every app you've built goes into it, one tap away on your phone and in every browser.
 prev: run-it-from-your-phone

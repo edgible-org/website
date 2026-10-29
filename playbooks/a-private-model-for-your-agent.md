@@ -1,4 +1,5 @@
 ---
+icon: lock
 title: A private model for your agent
 description: A playbook for running an AI model on your own GPU machine and giving your agent the choice of it, so private work never leaves your hardware.
 next: second-machine

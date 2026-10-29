@@ -1,4 +1,5 @@
 ---
+icon: machine
 title: Add a second machine
 description: Put Edgible on your GPU computer, so your gateway and agent on one machine can use a model on another.
 prev: a-private-model-for-your-agent

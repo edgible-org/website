@@ -1,4 +1,5 @@
 ---
+icon: govern
 title: Your AI gateway
 description: Cost guardrails before you run an agent: one place for your AI keys, a budget for every agent, and the spending in real dollars, on your own machine. Use the providers you like, added one at a time.
 prev: connect-claude

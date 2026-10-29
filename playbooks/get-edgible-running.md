@@ -1,4 +1,5 @@
 ---
+icon: machine
 title: Get Edgible running
 description: Put Edgible on a computer that stays on, with your AI assistant doing the technical work. The first chapter of every playbook.
 prev: your-own-ai-agent

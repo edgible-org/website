@@ -1,4 +1,5 @@
 ---
+icon: chat
 title: Your agent
 description: Your own AI agent, OpenClaw, on your machine, using your AI gateway with its own key and budget, behind your Edgible sign-in.
 prev: your-ai-gateway
