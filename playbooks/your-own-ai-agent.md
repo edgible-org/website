@@ -1,4 +1,5 @@
 ---
+icon: ai
 title: Your own AI agent, from anywhere
 description: A playbook for running your own AI agent on a machine you control, used from anywhere, your phone included, safely and with its costs under control.
 next: get-edgible-running

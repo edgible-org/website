@@ -1,4 +1,5 @@
 ---
+icon: cube
 title: Your private model
 description: Run an AI model on your computer's GPU with Ollama, behind a key, so only your own gateway can use it.
 prev: second-machine

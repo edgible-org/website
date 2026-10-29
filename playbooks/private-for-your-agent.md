@@ -1,4 +1,5 @@
 ---
+icon: key
 title: Private for your agent
 description: Your agent offers the private model beside its everyday ones, so you choose per question and see what each costs.
 prev: private-in-your-gateway

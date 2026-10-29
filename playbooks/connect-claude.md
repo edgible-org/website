@@ -1,4 +1,5 @@
 ---
+icon: plug
 title: Connect Claude to your Edgible
 description: Use Claude on your phone, desktop or the web to see and look after your apps, and to store keys safely, through a connector on your own machine.
 prev: get-edgible-running

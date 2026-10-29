@@ -1,4 +1,5 @@
 ---
+icon: map
 title: Choosing between them
 description: Which questions to send to your private model and which to the cloud, what the private model is good at, and what it isn't.
 prev: private-for-your-agent
