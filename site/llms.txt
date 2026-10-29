@@ -58,7 +58,7 @@ What a person needs: a computer that stays on for anything others rely on (a lap
 
 ## Pricing
 
-Free during the public beta, with no credit card. Beta limits: up to 10 devices, 20 applications and 5 GB of traffic a month per account (past that, traffic is shaped to 10 Mbps until the month rolls over). Paid plans (Professional, Enterprise) come after the beta; Edgible will publish plans and prices before any billing begins. Details: https://www.edgible.com/pricing
+Edgible is in beta. Pricing will be freemium: there will always be a free tier, and paid tiers such as Pro and Enterprise; prices will be released soon. During the public beta it is free, with no credit card. Beta limits: up to 10 devices, 20 applications and 5 GB of traffic a month per account (past that, traffic is shaped to 10 Mbps until the month rolls over). Paid plans (Professional, Enterprise) come after the beta; Edgible will publish plans and prices before any billing begins. Details: https://www.edgible.com/pricing
 
 ## Planned, not yet available
 
