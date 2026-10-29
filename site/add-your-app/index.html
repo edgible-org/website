@@ -86,6 +86,19 @@
       h1 { font-size: 32px; }
       table { display: block; overflow-x: auto; }
     }
+    /* The path, drawn. */
+    figure.flow { margin: 28px auto; max-width: 460px; }
+    figure.flow svg { width: 100%; height: auto; display: block; font-family: Nexa, Jost, system-ui, sans-serif; }
+    .flow .box { fill: #ffffff; stroke: var(--line); stroke-width: 1.5; }
+    .flow .box.opt { stroke-dasharray: 5 4; stroke: var(--muted); }
+    .flow .num { fill: var(--yellow); }
+    .flow .numt { fill: var(--heading); font-weight: 800; font-size: 16px; }
+    .flow .t { fill: var(--heading); font-weight: 800; font-size: 17px; }
+    .flow .t.b { font-size: 15px; }
+    .flow .s { fill: var(--muted); font-size: 13.5px; }
+    .flow .s2 { fill: var(--heading); font-weight: 700; font-size: 14px; }
+    .flow .arr { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .flow .arr.thin { stroke-width: 1.5; }
     .lead { font-size: 20px; color: var(--heading); }
     .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media (max-width: 560px) { .cols { grid-template-columns: 1fr; } }
@@ -105,6 +118,64 @@
 <main>
 <h1>Add your app</h1>
 <p class="lead">You built something, maybe with an AI. Edgible can put it on the internet, keep it running, and, if you want, list it in the card catalog so anyone can run it.</p>
+
+<h2>The whole path</h2>
+<figure class="flow">
+<svg viewBox="0 0 420 834" role="img" aria-labelledby="flow-t flow-d" xmlns="http://www.w3.org/2000/svg">
+<title id="flow-t">From an app you built to one running on Edgible</title>
+<desc id="flow-d">Five steps in order: create your Edgible account, give your AI the Edgible skill, set up Edgible on your computer, tell it about your app, fix what is missing. Then three things you might want: get it live, keep it running, and optionally share it, which means testing it on your own Edgible, opening a pull request, Edgible reading and testing it, and listing it in the catalog with its steward.</desc>
+<rect x="10" y="14" width="400" height="70" rx="14" class="box"/>
+<circle cx="44" cy="49" r="15" class="num"/><text x="44" y="55" class="numt" text-anchor="middle">1</text>
+<text x="72" y="44" class="t">Create your Edgible account</text>
+<text x="72" y="66" class="s">You: edgible.com. Free, no credit card</text>
+<path d="M210 84 V104" class="arr"/><path d="M204 98 L210 106 L216 98" class="arr"/>
+<rect x="10" y="110" width="400" height="70" rx="14" class="box"/>
+<circle cx="44" cy="145" r="15" class="num"/><text x="44" y="151" class="numt" text-anchor="middle">2</text>
+<text x="72" y="140" class="t">Give your AI the Edgible skill</text>
+<text x="72" y="162" class="s">You: one prompt, once</text>
+<path d="M210 180 V200" class="arr"/><path d="M204 194 L210 202 L216 194" class="arr"/>
+<rect x="10" y="206" width="400" height="70" rx="14" class="box"/>
+<circle cx="44" cy="241" r="15" class="num"/><text x="44" y="247" class="numt" text-anchor="middle">3</text>
+<text x="72" y="236" class="t">Set up Edgible on your computer</text>
+<text x="72" y="258" class="s">Your AI installs it. You approve the link</text>
+<path d="M210 276 V296" class="arr"/><path d="M204 290 L210 298 L216 290" class="arr"/>
+<rect x="10" y="302" width="400" height="70" rx="14" class="box"/>
+<circle cx="44" cy="337" r="15" class="num"/><text x="44" y="343" class="numt" text-anchor="middle">4</text>
+<text x="72" y="332" class="t">Tell it about your app</text>
+<text x="72" y="354" class="s">Your AI checks it and lists what a card needs</text>
+<path d="M210 372 V392" class="arr"/><path d="M204 386 L210 394 L216 386" class="arr"/>
+<rect x="10" y="398" width="400" height="70" rx="14" class="box"/>
+<circle cx="44" cy="433" r="15" class="num"/><text x="44" y="439" class="numt" text-anchor="middle">5</text>
+<text x="72" y="428" class="t">Fix what is missing</text>
+<text x="72" y="450" class="s">Your AI builds it. You make the calls</text>
+<path d="M210 468 V488" class="arr"/><path d="M204 482 L210 490 L216 482" class="arr"/>
+<path d="M73 486 H347" class="arr thin"/>
+<path d="M73 486 V494" class="arr thin"/>
+<rect x="10" y="494" width="126" height="62" rx="14" class="box"/>
+<text x="73" y="521" class="t b" text-anchor="middle">Get it live</text>
+<text x="73" y="542" class="s" text-anchor="middle">an address</text>
+<path d="M210 486 V494" class="arr thin"/>
+<rect x="147" y="494" width="126" height="62" rx="14" class="box"/>
+<text x="210" y="521" class="t b" text-anchor="middle">Keep it running</text>
+<text x="210" y="542" class="s" text-anchor="middle">kept safe</text>
+<path d="M347 486 V494" class="arr thin"/>
+<rect x="284" y="494" width="126" height="62" rx="14" class="box opt"/>
+<text x="347" y="521" class="t b" text-anchor="middle">Share it</text>
+<text x="347" y="542" class="s" text-anchor="middle">optional</text>
+<path d="M347 556 V572" class="arr"/><path d="M341 566 L347 574 L353 566" class="arr"/>
+<rect x="140" y="578" width="270" height="44" rx="12" class="box opt"/>
+<text x="275" y="605" class="s2" text-anchor="middle">Test it on your own Edgible</text>
+<path d="M275 622 V638" class="arr"/><path d="M269 632 L275 640 L281 632" class="arr"/>
+<rect x="140" y="644" width="270" height="44" rx="12" class="box opt"/>
+<text x="275" y="671" class="s2" text-anchor="middle">Open a pull request</text>
+<path d="M275 688 V704" class="arr"/><path d="M269 698 L275 706 L281 698" class="arr"/>
+<rect x="140" y="710" width="270" height="44" rx="12" class="box opt"/>
+<text x="275" y="737" class="s2" text-anchor="middle">Edgible reads it and tests it</text>
+<path d="M275 754 V770" class="arr"/><path d="M269 764 L275 772 L281 764" class="arr"/>
+<rect x="140" y="776" width="270" height="44" rx="12" class="box opt"/>
+<text x="275" y="803" class="s2" text-anchor="middle">Listed in the catalog, with its steward</text>
+</svg>
+</figure>
 
 <h2>Three things you might want</h2>
 <ul>
