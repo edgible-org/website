@@ -113,6 +113,11 @@
     .lost h1 { font-size: clamp(40px, 6.4vw, 72px); }
     .lost .lede { margin-bottom: 36px; }
     .lost .proof-links { margin-top: 0; }
+    .fact { margin-top: 48px; max-width: 640px; }
+    .fact .card { gap: 0; }
+    .fact #fact { font-size: 20px; color: var(--heading); margin: 0 0 16px; min-height: 3.2em; }
+    .fact button { align-self: flex-start; background: none; border: 0; padding: 0; color: var(--yellow); font: inherit; font-weight: 600; cursor: pointer; }
+    .fact button:hover { text-decoration: underline; }
     @media (max-width: 860px) {
       .scale, .ladder, .ways, .tiers, .beliefs, .beliefs.two { grid-template-columns: 1fr; }
       section { padding: 72px 0; }
@@ -141,6 +146,13 @@
         <a href="/proof/">Proof</a>
         <a href="/contact/">Contact</a>
       </div>
+      <div class="fact">
+        <div class="card">
+          <p class="label">While you're here</p>
+          <p id="fact" aria-live="polite">The first website ran on a NeXT computer at CERN, set up by the web's inventor, Tim Berners-Lee. The web began self-hosted.</p>
+          <button type="button" id="another" hidden>Another one &rarr;</button>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -151,6 +163,34 @@
     <a class="foot-logo" href="/"><img src="/images/edgible-symbol-white.png" alt="Edgible"></a>
   </div>
 </footer>
+
+
+<script>
+  (function () {
+    var facts = [
+      "The first website ran on a NeXT computer at CERN, set up by the web's inventor, Tim Berners-Lee. The web began self-hosted.",
+      "An old laptop in a cupboard makes a perfectly good server. It already has a screen, a battery and a keyboard for emergencies.",
+      "A self-hosted app keeps working when its maker changes the pricing, gets acquired or shuts down.",
+      "Linux, which now runs much of the internet, started as a hobby project. Self-hosting has always been where good things begin.",
+      "Your photos can't train someone else's AI if they never leave your house.",
+      "Self-hosting means no \u201cwe're updating our terms\u201d emails. You are the terms.",
+      "One small machine can run a website, a photo library and a password manager, all at the same time.",
+      "Gitea, WordPress and plenty of other well-loved apps are happy to live on a machine you own.",
+      "The cloud is someone else's computer. Self-hosting is the same idea, with the computer yours.",
+      "An app you host yourself moves with you: new machine, same app, same data."
+    ];
+    var el = document.getElementById("fact"), btn = document.getElementById("another"), last = -1;
+    function pick() {
+      var i;
+      do { i = Math.floor(Math.random() * facts.length); } while (i === last);
+      last = i;
+      el.textContent = facts[i];
+    }
+    pick();
+    btn.hidden = false;
+    btn.addEventListener("click", pick);
+  })();
+</script>
 
 </body>
 </html>
