@@ -62,7 +62,10 @@
     .lede { font-size: clamp(19px, 2.2vw, 22px); color: var(--muted); max-width: 760px; margin: 0 0 12px; }
     .lede strong { color: var(--heading); font-weight: 600; }
 
-    .scale-note { margin: 0 0 28px; font-size: 15px; color: var(--muted); max-width: 760px; }
+    h1 .fn-mark { position: absolute; margin-left: 4px; font-size: .5em; font-weight: 600; line-height: 1; color: var(--ink); text-decoration: none; }
+    h1 .fn-mark:hover { color: var(--heading); }
+    .footnote { padding: 0 0 40px; }
+    .footnote p { margin: 0; max-width: 760px; font-size: 13px; line-height: 1.5; color: var(--muted); opacity: .75; }
 
     section { padding: 96px 0; }
     section.alt { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -123,8 +126,7 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
       <p class="eyebrow">Why Edgible, why now</p>
-      <h1 id="hero-title"><span class="agents">A billion agents.</span><span class="apps">A trillion apps.</span></h1>
-      <p class="scale-note">Where we see computing heading, not a count of today. Most of these apps will be used once and thrown away. The ones worth keeping are the ones that hold our data.</p>
+      <h1 id="hero-title"><span class="agents">A billion agents.</span><span class="apps">A trillion apps.<a class="fn-mark" href="#footnote" aria-label="See the note at the foot of the page">*</a></span></h1>
       <p class="lede">We are entering a world where the way people and companies use computing changes for good. Software stops being something you buy and starts being something you ask for: <strong>highly customised, bespoke, targeted apps, built for "free" by an AI, for one person, one team or one afternoon.</strong></p>
       <p class="lede">Every one of those apps, and every agent that uses them, works only by knowing us: our files, our habits, our clients, our children. The question that decides everything is where all of that lives. Edgible is the answer that keeps it with you.</p>
 
@@ -276,6 +278,11 @@
       <a class="btn primary" href="../contact/">Get in touch</a>
     </div>
   </section>
+  <div class="footnote" id="footnote">
+    <div class="wrap">
+      <p>* Where we see computing heading, not a count of today. Most of these apps will be used once and thrown away; the ones worth keeping are the ones that hold our data.</p>
+    </div>
+  </div>
 </main>
 
 <footer>
