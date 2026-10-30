@@ -3,7 +3,7 @@ icon: home
 title: A home for everything you've built
 description: Your agent sets you up your own bookmarks app, and every app you've built goes into it, one tap away on your phone and in every browser.
 prev: run-it-from-your-phone
-next: take-it-all-down
+next: give-your-agent-your-files
 ---
 
 # A home for everything you've built
@@ -48,7 +48,7 @@ New apps appear. If you've removed one, Claude tells you its bookmark is out of 
 - **Everything you've built is one tap away,** on your phone and in every browser, under the **edgible** tag.
 - **Your bookmarks are yours,** on your machine, not in a browser company's account.
 
-From here, every app you add gets a home too.
+From here, every app you add gets a home too. Next, [give your agent your own files](../give-your-agent-your-files/) to read.
 
 Want nicer addresses, such as `links.yourname.com`? See [Use your own domain](../use-your-own-domain/). Curious what you've just built, and how it's kept safe? Read [Under the hood](../under-the-hood/).
 

@@ -2,7 +2,7 @@
 icon: clean
 title: Take it all down
 description: Remove what the AI agent and private model playbooks set up, cleanly, keeping your data or deleting it, whenever you want to stop or start again.
-prev: a-home-for-your-apps
+prev: give-your-agent-your-files
 next: your-own-ai-agent
 ---
 
