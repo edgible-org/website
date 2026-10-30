@@ -31,14 +31,8 @@ html[data-theme="light"] {
   --accent-text: #8a6500;
   --coral: #d4492a;
   --teal: #1f7a68;
-  --bar-bg: rgba(246,247,253,.86);
   --say-bg: rgba(17,24,39,.05);
   --icon: #1b2559;
-  --hover: rgba(17,24,39,.07);
-  --bar-solid: #f6f7fd;
-  --bar-line: rgba(17,24,39,.12);
-  --line-soft: rgba(17,24,39,.08);
-  --menu-ink: #1b2559;
 }
 html[data-theme="light"] .sky { display: none; }
 /* white panels with a hint of shadow in place of glass cards */
@@ -54,9 +48,14 @@ html[data-theme="light"] .headed { background: radial-gradient(ellipse at 20% 0%
 html[data-theme="light"] .closing { background: radial-gradient(ellipse at 50% 0%, rgba(255,210,31,.14), transparent 60%), var(--bg-alt); }
 html[data-theme="light"] .asks li { box-shadow: 0 4px 14px rgba(17,24,39,.12); }
 
-/* the logo and the symbol only exist in white: darken them */
-html[data-theme="light"] .logo img, html[data-theme="light"] .foot-logo img { filter: brightness(0); }
-html[data-theme="light"] .foot-logo img { opacity: .75; }
+/* the header and footer stay the very dark blue in light, with the dark theme's colours inside them */
+html[data-theme="light"] { --bar-bg: #111827; }
+html[data-theme="light"] header.bar, html[data-theme="light"] footer {
+  --heading: #ffffff; --ink: #e6eaff; --muted: #a7b1dc; --accent-text: #ffd21f;
+  --line: rgba(255,255,255,.12); --bar-line: rgba(255,255,255,.12); --line-soft: rgba(255,255,255,.08);
+  --hover: rgba(255,255,255,.08); --menu-ink: #e6eaff; --bar-solid: #111827;
+  color: var(--ink);
+}
 
 /* the AI-loop and padlock figures carry their colours as attributes: recolour them for light */
 html[data-theme="light"] .loop svg text[fill="#ffffff"], html[data-theme="light"] .padlock-fig svg text[fill="#ffffff"] { fill: var(--heading); }
