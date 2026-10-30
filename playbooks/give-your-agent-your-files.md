@@ -8,7 +8,7 @@ next: take-it-all-down
 
 # Give your agent your own files
 
-*Chapter 7 of [Your own AI agent, from anywhere](../your-own-ai-agent/). New: the agent side is tested on our own machines, the phone side not yet, so [tell us how it goes](mailto:stefano@edgible.com?subject=Playbook%20feedback).*
+*Chapter 7 of [Your own AI agent, from anywhere](../your-own-ai-agent/). New: tested on our own machines, from a phone, so [tell us how it goes](mailto:stefano@edgible.com?subject=Playbook%20feedback).*
 
 So far your agent knows what you tell it and what's on the web. This chapter lets it read **your own files**: a folder of notes, appointments, recipes, club minutes, anything you keep as text. Then you can ask from your phone, *"When's my dentist?"*, and it looks it up in your files, on your machine.
 
@@ -28,24 +28,24 @@ In your AI assistant on the machine (or in Claude, if it can reach it):
 
 Change the folder to yours. It does three things, and tells you what it's doing:
 
-- **Mounts the folder read-only** into your agent, so even a mistake can't change a file.
+- **Mounts the folder read-only** into your agent, as `notes` in its own workspace and as `/notes`, so even a mistake can't change a file.
 - **Adds the filesystem server** to your agent as `notes`, with only its reading tools: list, read and search. Writing, editing and moving are switched off.
 - **Restarts your agent** so it picks the folder up.
 
 ## 2. Ask it a question about your files
 
-Open your agent, on your computer or your phone, and be specific about where to look:
+Open your agent, on your computer or your phone. If it has been used a lot already, send `/new` first, for a clean start: an agent that has gone looking in the wrong place tends to keep doing it. Then ask:
 
-> List the files in /notes, read the ones that look relevant, and tell me what time my dentist appointment is.
+> Look in my notes folder and tell me what time my dentist appointment is.
 
-Name the folder, and ask it to list, then read. Two things that trip people up:
+Your agent lists the folder, reads what looks relevant, and answers from it. Two things that trip people up:
 
-- **"Look in my notes folder" isn't enough.** Your agent has its own workspace too, and may look there instead. Say `/notes`.
-- **Its search finds file names, not words inside files.** So asking it to *search for the dentist* may find nothing, while asking it to *read the appointments file* works.
+- **Its search finds file names, not words inside files.** It copes by listing the folder and reading, which is why a folder of a few dozen files works better than thousands.
+- **Small models fumble.** A model on your own machine with a few billion parameters may lose its way; your gateway's **fast** or **smart** is better. If it can't find the folder, say "the notes folder, with your notes tools".
 
 ## 3. Check it can't change anything
 
-> Add the line "Buy milk" to /notes/shopping.md, then tell me whether it worked.
+> Add the line "Buy milk" to shopping.md in my notes folder, then tell me whether it worked.
 
 The file stays as it was. Agents sometimes say a thing worked when it didn't, so **look at the file** instead of trusting the reply: that's the point of read-only, and why we show it to you.
 
@@ -68,7 +68,7 @@ This is the notes folder setting of the [edgible-agent card](https://github.com/
 
 **An agent that's already running:** the setting only applies at the first Start, so do it in two parts.
 
-1. In `docker-compose.yml`, under the `openclaw` service's `volumes:`, add `- /home/me/notes:/notes:ro`, and bring the agent up again.
+1. In `docker-compose.yml`, under the `openclaw` service's `volumes:`, add `- /home/me/notes:/notes:ro` and `- /home/me/notes:/home/node/.openclaw/workspace/notes:ro`, and bring the agent up again.
 2. Add the server, with its reading tools only:
 
 ```bash
