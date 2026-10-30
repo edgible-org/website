@@ -48,26 +48,21 @@
     .btn { display: inline-block; padding: 13px 24px; border-radius: 999px; font-weight: 600; font-size: 17px; text-decoration: none; }
     .btn.primary { background: var(--yellow); color: var(--bg); box-shadow: 0 6px 22px rgba(255,210,31,.25); }
 
-    .hero { padding: 88px 0 72px; background: radial-gradient(ellipse at 70% 100%, rgba(99,102,241,.18), transparent 60%); }
+    .hero { overflow: hidden; padding: 88px 0 72px; background: radial-gradient(ellipse at 70% 100%, rgba(99,102,241,.18), transparent 60%); }
     .eyebrow, .kicker { font-weight: 600; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 14px; }
     .eyebrow { color: var(--teal); }
     .kicker { color: var(--coral); }
     h1 { font-size: clamp(40px, 7vw, 80px); line-height: 1.04; letter-spacing: -.02em; margin: 0 0 24px; color: var(--heading); font-weight: 800; }
-    h1 span { display: block; }
-    h1 span + span { color: var(--yellow); }
+    /* The headline is the graphic: each line sits on its own field of dots, the second far denser than the first. */
+    h1 span { display: block; position: relative; padding: 4px 0; }
+    h1 span::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; right: -24px; -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,.1) 0%, rgba(0,0,0,.25) 45%, #000 100%); mask-image: linear-gradient(to right, rgba(0,0,0,.1) 0%, rgba(0,0,0,.25) 45%, #000 100%); }
+    h1 .agents::before { background-image: radial-gradient(circle, var(--teal) 2.2px, transparent 2.6px); background-size: 26px 26px; }
+    h1 .apps::before { background-image: radial-gradient(circle, var(--yellow) 1.4px, transparent 1.8px); background-size: 12px 12px; }
+    h1 { position: relative; z-index: 0; }
     .lede { font-size: clamp(19px, 2.2vw, 22px); color: var(--muted); max-width: 760px; margin: 0 0 12px; }
     .lede strong { color: var(--heading); font-weight: 600; }
 
-    /* The scale graphic: a field of dots for each number, the second far denser than the first. */
-    .scale { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 52px; }
-    .tile { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); min-height: 230px; padding: 26px; display: flex; flex-direction: column; justify-content: flex-end; background-color: rgba(255,255,255,.03); }
-    .tile::before { content: ""; position: absolute; inset: 0; opacity: .85; -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 78%); mask-image: linear-gradient(to bottom, #000 0%, transparent 78%); }
-    .tile.agents::before { background-image: radial-gradient(circle, var(--teal) 2.2px, transparent 2.6px); background-size: 26px 26px; }
-    .tile.apps::before { background-image: radial-gradient(circle, var(--yellow) 1.4px, transparent 1.8px); background-size: 12px 12px; }
-    .tile > * { position: relative; }
-    .tile .big { font-size: clamp(44px, 6vw, 72px); font-weight: 800; line-height: 1; letter-spacing: -.02em; color: var(--heading); margin: 0; }
-    .tile .what { margin: 8px 0 0; color: var(--muted); font-size: 18px; }
-    .scale-note { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+    .scale-note { margin: 0 0 28px; font-size: 15px; color: var(--muted); max-width: 760px; }
 
     section { padding: 96px 0; }
     section.alt { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -109,7 +104,7 @@
     footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
 
     @media (max-width: 860px) {
-      .scale, .ladder, .ways, .tiers, .beliefs, .beliefs.two { grid-template-columns: 1fr; }
+      .ladder, .ways, .tiers, .beliefs, .beliefs.two { grid-template-columns: 1fr; }
       section { padding: 72px 0; }
       .hero { padding: 64px 0 56px; }
     }
@@ -128,21 +123,11 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
       <p class="eyebrow">Why Edgible, why now</p>
-      <h1 id="hero-title"><span>A billion agents.</span><span>A trillion apps.</span></h1>
+      <h1 id="hero-title"><span class="agents">A billion agents.</span><span class="apps">A trillion apps.</span></h1>
+      <p class="scale-note">Where we see computing heading, not a count of today. Most of these apps will be used once and thrown away. The ones worth keeping are the ones that hold our data.</p>
       <p class="lede">We are entering a world where the way people and companies use computing changes for good. Software stops being something you buy and starts being something you ask for: <strong>highly customised, bespoke, targeted apps, built for "free" by an AI, for one person, one team or one afternoon.</strong></p>
       <p class="lede">Every one of those apps, and every agent that uses them, works only by knowing us: our files, our habits, our clients, our children. The question that decides everything is where all of that lives. Edgible is the answer that keeps it with you.</p>
 
-      <div class="scale" role="group" aria-label="The scale we are heading towards">
-        <div class="tile agents">
-          <p class="big">1 billion</p>
-          <p class="what">agents working on our behalf</p>
-        </div>
-        <div class="tile apps">
-          <p class="big">1 trillion</p>
-          <p class="what">small, bespoke apps for them to use</p>
-        </div>
-      </div>
-      <p class="scale-note">Where we see computing heading, not a count of today. Most of these apps will be used once and thrown away. The ones worth keeping are the ones that hold our data.</p>
     </div>
   </section>
 
