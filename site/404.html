@@ -109,17 +109,31 @@
     footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
 
 
-    .lost { padding: 120px 0 140px; background: radial-gradient(ellipse at 70% 100%, rgba(99,102,241,.18), transparent 60%); }
+    .lost { padding: 96px 0 64px; background: radial-gradient(ellipse at 70% 100%, rgba(99,102,241,.18), transparent 60%); }
     .lost h1 { font-size: clamp(40px, 6.4vw, 72px); }
     .lost .lede { margin-bottom: 36px; }
     .lost .proof-links { margin-top: 0; }
-    .fact { margin-top: 48px; max-width: 640px; }
-    .fact .card { gap: 0; }
-    .fact #fact a { color: var(--yellow); }
-    .fact #fact { font-size: 20px; color: var(--heading); margin: 0 0 16px; min-height: 3.2em; }
-    .fact button { align-self: flex-start; background: none; border: 0; padding: 0; color: var(--yellow); font: inherit; font-weight: 600; cursor: pointer; }
-    .fact button:hover { text-decoration: underline; }
+    /* A news ticker along the bottom of the screen: a label, then the facts scrolling past. */
+    .ticker { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; display: flex; align-items: stretch; height: 52px; background: #0b1020; border-top: 2px solid var(--yellow); box-shadow: 0 -8px 28px rgba(0,0,0,.35); }
+    .ticker .tag { flex: none; display: flex; align-items: center; padding: 0 20px; background: var(--yellow); color: var(--bg); font-weight: 800; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+    .ticker .window { flex: 1; overflow: hidden; display: flex; align-items: center; }
+    .ticker .track { display: flex; flex: none; white-space: nowrap; will-change: transform; animation: tick var(--dur, 120s) linear infinite; }
+    .ticker .window:hover .track, .ticker .window:focus-within .track { animation-play-state: paused; }
+    .ticker .item { display: inline-flex; align-items: center; font-size: 17px; color: var(--heading); }
+    .ticker .item::after { content: ""; width: 7px; height: 7px; margin: 0 28px; border-radius: 50%; background: var(--coral); flex: none; }
+    .ticker .item a { color: var(--yellow); font-weight: 600; margin-left: 8px; }
+    @keyframes tick { to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .ticker .track { animation: none; }
+      .ticker .item:not(:first-child) { display: none; }
+      .ticker .window { padding-left: 18px; }
+      .ticker .item::after { display: none; }
+      .ticker .item { white-space: normal; font-size: 16px; }
+      .ticker .track { white-space: normal; }
+    }
+    footer { padding-bottom: 84px; }
     @media (max-width: 860px) {
+      .ticker .tag { padding: 0 12px; font-size: 12px; }
       .scale, .ladder, .ways, .tiers, .beliefs, .beliefs.two { grid-template-columns: 1fr; }
       section { padding: 72px 0; }
       .hero { padding: 64px 0 56px; }
@@ -147,13 +161,6 @@
         <a href="/proof/">Proof</a>
         <a href="/contact/">Contact</a>
       </div>
-      <div class="fact">
-        <div class="card">
-          <p class="label">While you're here</p>
-          <p id="fact" aria-live="polite">The first website ran on a NeXT computer at CERN, set up by the web's inventor, Tim Berners-Lee. The web began self-hosted.</p>
-          <button type="button" id="another" hidden>Another one &rarr;</button>
-        </div>
-      </div>
     </div>
   </section>
 </main>
@@ -164,6 +171,11 @@
     <a class="foot-logo" href="/"><img src="/images/edgible-symbol-white.png" alt="Edgible"></a>
   </div>
 </footer>
+
+<div class="ticker" role="region" aria-label="Facts about self-hosting">
+  <span class="tag">Breaking</span>
+  <div class="window"><div class="track" id="track"><span class="item">The first website ran on a NeXT computer at CERN, set up by the web's inventor, Tim Berners-Lee. The web began self-hosted.</span></div></div>
+</div>
 
 
 <script>
@@ -186,23 +198,37 @@
       { t: "Edgible cards are tested on real machines, so what worked for someone else is what you get.", href: "/proof/", label: "See the proof" },
       { t: "No spare computer? Try Edgible inside a virtual machine on your laptop. It's free, safe and disposable." }
     ];
-    var el = document.getElementById("fact"), btn = document.getElementById("another"), last = -1;
-    function pick() {
-      var i;
-      do { i = Math.floor(Math.random() * facts.length); } while (i === last);
-      last = i;
-      el.textContent = facts[i].t;
-      if (facts[i].href) {
-        var a = document.createElement("a");
-        a.href = facts[i].href;
-        a.textContent = facts[i].label;
-        el.appendChild(document.createTextNode(" "));
-        el.appendChild(a);
-      }
+    var track = document.getElementById("track");
+    // A random order each visit, so the first fact differs.
+    for (var i = facts.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = facts[i]; facts[i] = facts[j]; facts[j] = t;
     }
-    pick();
-    btn.hidden = false;
-    btn.addEventListener("click", pick);
+    function items() {
+      var frag = document.createDocumentFragment();
+      facts.forEach(function (f) {
+        var item = document.createElement("span");
+        item.className = "item";
+        item.appendChild(document.createTextNode(f.t));
+        if (f.href) {
+          var a = document.createElement("a");
+          a.href = f.href;
+          a.textContent = f.label;
+          item.appendChild(a);
+        }
+        frag.appendChild(item);
+      });
+      return frag;
+    }
+    track.textContent = "";
+    track.appendChild(items());
+    var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!still) {
+      // The facts twice, so the loop has no gap: the track slides half its width, then starts over.
+      track.appendChild(items());
+      var clone = track.querySelectorAll(".item");
+      for (var k = facts.length; k < clone.length; k++) { clone[k].setAttribute("aria-hidden", "true"); clone[k].querySelectorAll("a").forEach(function (l) { l.tabIndex = -1; }); }
+      track.style.setProperty("--dur", Math.round(track.scrollWidth / 2 / 70) + "s");
+    }
   })();
 </script>
 
