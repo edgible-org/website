@@ -52,7 +52,7 @@ The file stays as it was. Agents sometimes say a thing worked when it didn't, so
 ## What you've just done
 
 - **Your agent can read your own files,** and answers from your phone, with your documents staying on your machine.
-- **It can't change them.** The folder is read-only twice over: the agent's writing tools are off, and the folder itself is locked.
+- **It can't change them.** The folder itself is locked read-only on your machine, so whichever of the agent's tools tries to write, it fails. The notes server also has its writing tools switched off.
 - **You added a new ability without writing code,** using one of the open MCP servers any agent can use. The same steps work for others.
 
 Honest limits: it reads text, not scans or photos, and it only sees that one folder. Add more folders, or other servers, the same way.
