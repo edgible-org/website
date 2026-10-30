@@ -1,15 +1,14 @@
-// The light/dark theme: sets data-theme on <html> before the page paints (the saved choice, else the system's
-// preference, else dark), and adds a sun/moon button to the header that flips it and remembers the choice.
+// The light/dark theme: sets data-theme on <html> before the page paints (the saved choice, else dark),
+// and adds a sun/moon button to the header that flips it and remembers the choice.
 (function () {
   var root = document.documentElement;
   var meta;
   function saved() { try { return localStorage.getItem('theme'); } catch (e) { return null; } }
-  function system() { return window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'; }
   function apply(theme) {
     root.setAttribute('data-theme', theme);
     if (meta) meta.setAttribute('content', theme === 'light' ? '#f6f7fd' : '#111827');
   }
-  var theme = saved() === 'light' || saved() === 'dark' ? saved() : system();
+  var theme = saved() === 'light' || saved() === 'dark' ? saved() : 'dark';
   apply(theme);
 
   document.addEventListener('DOMContentLoaded', function () {

@@ -1,5 +1,5 @@
 /* The light theme and its toggle, shared by every page. Dark is the default look; theme.js sets
-   data-theme="light" on <html> when the visitor picked light, or has no choice saved and their system prefers it. */
+   data-theme="light" on <html> when the visitor picked light. */
 :root { --icon: #e6eaff; }
 .ico { color: var(--icon); }
 
