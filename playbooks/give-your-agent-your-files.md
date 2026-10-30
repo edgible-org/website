@@ -2,23 +2,23 @@
 icon: data
 title: Give your agent your own files
 description: Let your own AI agent read a folder of your notes and documents, read-only, and answer questions about them from your phone.
-prev: a-home-for-your-apps
-next: take-it-all-down
+prev: private-for-your-agent
+next: choosing-between-them
 ---
 
 # Give your agent your own files
 
-*Chapter 7 of [Your own AI agent, from anywhere](../your-own-ai-agent/). New: tested on our own machines, from a phone, so [tell us how it goes](mailto:stefano@edgible.com?subject=Playbook%20feedback).*
+*Chapter 5 of [A private model for your agent](../a-private-model-for-your-agent/). New: tested on our own machines, from a phone, so [tell us how it goes](mailto:stefano@edgible.com?subject=Playbook%20feedback).*
 
 So far your agent knows what you tell it and what's on the web. This chapter lets it read **your own files**: a folder of notes, appointments, recipes, club minutes, anything you keep as text. Then you can ask from your phone, *"When's my dentist?"*, and it looks it up in your files, on your machine.
 
-It's the first thing your agent can do that you couldn't give it before, and it's read-only: your agent can read the folder, never change it.
+With your private model answering, nothing here leaves your machines: not your files, and not your questions. It's the first thing your agent can do that you couldn't give it before, and it's read-only: your agent can read the folder, never change it.
 
 > **What you need**
 >
-> - [Chapters 1 to 4](../your-own-ai-agent/) done: your agent running on your machine.
+> - [Chapters 1 to 4 of this playbook](../a-private-model-for-your-agent/) done: your agent running on your machine, offering your private model beside its everyday ones.
 > - A folder of files **on that machine**: text, Markdown or similar. A few notes are enough to start.
-> - **A capable model.** Small models fumble tools. Your gateway's **fast** or **smart** is fine; a 7 billion parameter model on your own machine isn't.
+> - **A capable model.** Small models fumble tools. Use `private-smart`, the 20 billion parameter model, as we did; the 7 billion one lost its way. A gateway model such as **fast** or **smart** works too, but then what the agent reads goes to that provider.
 
 ## 1. Ask your AI to give your agent the folder
 
@@ -34,7 +34,7 @@ Change the folder to yours. It does three things, and tells you what it's doing:
 
 ## 2. Ask it a question about your files
 
-Open your agent, on your computer or your phone. If it has been used a lot already, send `/new` first, for a clean start: an agent that has gone looking in the wrong place tends to keep doing it. Then ask:
+Open your agent, on your computer or your phone, and pick `private-smart` from the menu by the message box. If it has been used a lot already, send `/new` first, for a clean start: an agent that has gone looking in the wrong place tends to keep doing it. Then ask:
 
 > Look in my notes folder and tell me what time my dentist appointment is.
 
@@ -57,9 +57,9 @@ The file stays as it was. Agents sometimes say a thing worked when it didn't, so
 
 Honest limits: it reads text, not scans or photos, and it only sees that one folder. Add more folders, or other servers, the same way.
 
-Why your agent, not Claude's app? When you ask the agent, your files stay on your machine and only the lines it needs go to the model you chose. Claude's own app can reach your files too, through a connector, but then it reads them on Anthropic's side, so we don't recommend that for private notes.
+Why your agent, not Claude's app? When you ask your agent with the private model, your files and your question stay on your machines. Claude's own app can reach your files too, through a connector, but then it reads them on Anthropic's side, so we don't recommend that for private notes.
 
-Done with it all? [Take it all down](../take-it-all-down/) removes it cleanly.
+Next, [choosing between them](../choosing-between-them/): which questions go to the private model, and which don't. Done with it all? [Take it all down](../take-it-all-down/) removes it cleanly.
 
 <details>
 <summary>Prefer to do it by hand?</summary>

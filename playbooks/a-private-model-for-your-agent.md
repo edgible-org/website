@@ -25,7 +25,8 @@ Each chapter builds on the one before.
 | 2 | [Your private model](../your-private-model/) | An AI model on that computer, reachable only with a key |
 | 3 | [Private in your gateway](../private-in-your-gateway/) | `private` and `private-smart` in your AI gateway, with a budget and a spending record like any other |
 | 4 | [Private for your agent](../private-for-your-agent/) | Your agent offers the private model beside its everyday ones |
-| 5 | [Choosing between them](../choosing-between-them/) | Which questions go where, what the private model is good at, and what it isn't |
+| 5 | [Give your agent your own files](../give-your-agent-your-files/) | Your agent reads a folder of your own notes and documents, read-only, and the private model answers from them, so nothing leaves your machines |
+| 6 | [Choosing between them](../choosing-between-them/) | Which questions go where, what the private model is good at, and what it isn't |
 
 ## What you need
 
