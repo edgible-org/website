@@ -74,14 +74,15 @@
     .ico.sm { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--night-1); margin-right: 10px; vertical-align: middle; }
     .ico.sm svg { width: 22px; height: 22px; }
     /* The icons draw in the text colour, so give every navy tile a white one */
-    .ico, .flow use { color: #ffffff; }
+    .ico, .page-ico, .flow use { color: #ffffff; }
     /* A list item with an icon: no bullet or number (the map above has the numbers), the icon hangs in the margin
        and the text, even when it wraps, stays in its own column */
     li:has(.ico.sm) { list-style: none; position: relative; padding-left: 54px; margin: 18px 0; min-height: 34px; }
-    li:has(.ico.sm) > .ico.sm, li:has(.ico.sm) > strong > .ico.sm { position: absolute; left: 0; top: -2px; width: 36px; height: 36px; margin: 0; }
-    li:has(.ico.sm) .ico.sm svg { width: 26px; height: 26px; }
-    ul:has(> li > .ico.sm), ul:has(> li > strong > .ico.sm), li > ol:has(> li > .ico.sm) { padding-left: 0; }
-    li > ol:has(> li > .ico.sm) { margin: 14px 0 0; }
+    li .ico.sm { position: absolute; left: 0; top: -2px; width: 36px; height: 36px; margin: 0; }
+    li .ico.sm svg { width: 26px; height: 26px; }
+    ul:has(.ico.sm), ol:has(.ico.sm) { padding-left: 0; }
+    li:has(.ico.sm) > p { margin: 0; }
+    li > ol:has(.ico.sm) { margin: 14px 0 0; }
     li > ol > li:has(.ico.sm) { margin: 12px 0; }
     h2 .ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--night-1); margin-right: 12px; vertical-align: middle; flex: none; }
     h2 .ico svg { width: 30px; height: 30px; }

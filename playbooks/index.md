@@ -43,8 +43,6 @@ Start here:
 - **<span class="ico sm" aria-hidden="true"><svg><use href="../images/icons.svg#globe"/></svg></span>[Use your own domain](use-your-own-domain/):** give any app an address on a domain you own.
 - **<span class="ico sm" aria-hidden="true"><svg><use href="../images/icons.svg#clean"/></svg></span>[Take it all down](take-it-all-down/):** remove what these playbooks set up, cleanly, keeping your data or not.
 
-New:
-
 - **<span class="ico sm" aria-hidden="true"><svg><use href="../images/icons.svg#ai"/></svg></span>[Your own AI agent, from anywhere](your-own-ai-agent/):** your own agent on your machine, used from your phone, safely and with its costs under control.
   1. <span class="ico sm" aria-hidden="true"><svg><use href="../images/icons.svg#machine"/></svg></span>[Get Edgible running](get-edgible-running/)
   2. <span class="ico sm" aria-hidden="true"><svg><use href="../images/icons.svg#plug"/></svg></span>[Connect Claude to your Edgible](connect-claude/)
