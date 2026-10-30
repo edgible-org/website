@@ -1,9 +1,9 @@
 /* The header menu: the links sit in one line while they fit, and fold into a hamburger when they don't.
    Without script the links stay as they are (the .js class is set by a line in each page's head). */
 .menu-btn { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; margin-right: -10px; padding: 0; border: 0; border-radius: 10px; background: none; color: inherit; cursor: pointer; }
-.menu-btn:hover { background: rgba(255,255,255,.08); }
+.menu-btn:hover { background: var(--hover, rgba(255,255,255,.08)); }
 .menu-btn:focus-visible { outline: 2px solid #ffd21f; outline-offset: 2px; }
-.menu-btn span, .menu-btn span::before, .menu-btn span::after { display: block; width: 22px; height: 2px; border-radius: 2px; background: #e6eaff; transition: transform .15s, background .15s; }
+.menu-btn span, .menu-btn span::before, .menu-btn span::after { display: block; width: 22px; height: 2px; border-radius: 2px; background: var(--menu-ink, #e6eaff); transition: transform .15s, background .15s; }
 .menu-btn span { position: relative; }
 .menu-btn span::before, .menu-btn span::after { content: ""; position: absolute; left: 0; }
 .menu-btn span::before { top: -7px; }
@@ -15,15 +15,15 @@ header.bar.open .menu-btn span::after { transform: translateY(-7px) rotate(-45de
 /* Four links (the playbooks, proof, contact pages) fold below 720px; the home page has eight, so it folds below 1120px. */
 @media (max-width: 720px) {
   .js header.bar .menu-btn { display: inline-flex; }
-  .js header.bar nav.links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; padding: 4px 16px 12px; background: #111827; border-bottom: 1px solid rgba(255,255,255,.12); font-size: 17px; }
+  .js header.bar nav.links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; padding: 4px 16px 12px; background: var(--bar-solid, #111827); border-bottom: 1px solid var(--bar-line, rgba(255,255,255,.12)); font-size: 17px; }
   .js header.bar.open nav.links { display: flex; }
-  .js header.bar nav.links a { padding: 13px 4px; border-top: 1px solid rgba(255,255,255,.08); }
+  .js header.bar nav.links a { padding: 13px 4px; border-top: 1px solid var(--line-soft, rgba(255,255,255,.08)); }
   .js header.bar nav.links a:first-child { border-top: 0; }
 }
 @media (max-width: 1120px) {
   .js header.bar.wide .menu-btn { display: inline-flex; }
-  .js header.bar.wide nav.links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; padding: 4px 16px 12px; background: #111827; border-bottom: 1px solid rgba(255,255,255,.12); font-size: 17px; }
+  .js header.bar.wide nav.links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; padding: 4px 16px 12px; background: var(--bar-solid, #111827); border-bottom: 1px solid var(--bar-line, rgba(255,255,255,.12)); font-size: 17px; }
   .js header.bar.wide.open nav.links { display: flex; }
-  .js header.bar.wide nav.links a { padding: 13px 4px; border-top: 1px solid rgba(255,255,255,.08); }
+  .js header.bar.wide nav.links a { padding: 13px 4px; border-top: 1px solid var(--line-soft, rgba(255,255,255,.08)); }
   .js header.bar.wide nav.links a:first-child { border-top: 0; }
 }
