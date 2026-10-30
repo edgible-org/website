@@ -1,12 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-default-theme="light">
 <head>
+  <link rel="stylesheet" href="theme.css">
+  <script src="theme.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Page not found · Edgible</title>
   <meta name="description" content="This page is not here. Here is where to go next.">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#111827">
+  <meta name="theme-color" content="#f6f7fd">
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,22 +33,26 @@
       --heading: #ffffff;
       --ink: #e6eaff;
       --muted: #a7b1dc;
+      --muted-2: #7c86b8;
+      --on-yellow: #111827;
+      --accent-text: #ffd21f;
+      --bar-bg: rgba(17,24,39,.72);
       --radius: 14px;
       --wrap: 1120px;
     }
     * { box-sizing: border-box; }
     html { background: linear-gradient(135deg, var(--night-1) 0%, var(--night-2) 45%, var(--night-3) 100%) fixed; background-color: var(--night-1); }
     body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: transparent; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-    a { color: var(--yellow); }
+    a { color: var(--accent-text); }
     .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
 
-    header.bar { background: rgba(17,24,39,.72); border-bottom: 1px solid var(--line); }
+    header.bar { background: var(--bar-bg); border-bottom: 1px solid var(--line); }
     header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
     .logo img { display: block; height: 24px; width: auto; }
     header.bar .note { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 
     .btn { display: inline-block; padding: 13px 24px; border-radius: 999px; font-weight: 600; font-size: 17px; text-decoration: none; }
-    .btn.primary { background: var(--yellow); color: var(--bg); box-shadow: 0 6px 22px rgba(255,210,31,.25); }
+    .btn.primary { background: var(--yellow); color: var(--on-yellow); box-shadow: 0 6px 22px rgba(255,210,31,.25); }
 
     .hero { padding: 88px 0 72px; background: radial-gradient(ellipse at 70% 100%, rgba(99,102,241,.18), transparent 60%); }
     .eyebrow, .kicker { font-weight: 600; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 14px; }
@@ -54,7 +60,7 @@
     .kicker { color: var(--coral); }
     h1 { font-size: clamp(40px, 7vw, 80px); line-height: 1.04; letter-spacing: -.02em; margin: 0 0 24px; color: var(--heading); font-weight: 800; }
     h1 span { display: block; }
-    h1 span + span { color: var(--yellow); }
+    h1 span + span { color: var(--accent-text); }
     .lede { font-size: clamp(19px, 2.2vw, 22px); color: var(--muted); max-width: 760px; margin: 0 0 12px; }
     .lede strong { color: var(--heading); font-weight: 600; }
 
@@ -74,7 +80,7 @@
     h2 { font-size: clamp(30px, 4.2vw, 46px); line-height: 1.12; letter-spacing: -.015em; margin: 0 0 20px; color: var(--heading); font-weight: 700; }
     .intro { font-size: 21px; color: var(--muted); max-width: 760px; margin: 0 0 40px; }
     .prose p { font-size: 20px; color: var(--muted); max-width: 760px; margin: 0 0 20px; }
-    .prose strong { color: var(--yellow); font-weight: 500; }
+    .prose strong { color: var(--accent-text); font-weight: 500; }
 
     .ladder, .ways, .tiers, .beliefs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .beliefs.two { grid-template-columns: repeat(2, 1fr); gap: 36px; }
@@ -85,7 +91,7 @@
     .card ul { margin: 0; padding-left: 20px; color: var(--muted); }
     .card li { margin-bottom: 6px; }
     .card .eg { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); font-size: 15px; }
-    .card .tag { font-weight: 500; color: var(--yellow); margin: 0 0 14px; }
+    .card .tag { font-weight: 500; color: var(--accent-text); margin: 0 0 14px; }
     .sub { font-size: 22px; color: var(--heading); margin: 56px 0 8px; font-weight: 600; }
     .subnote { color: var(--muted); max-width: 720px; margin: 0 0 24px; }
     .hero-line { margin-top: 40px; padding: 22px 26px; border-left: 4px solid var(--yellow); background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; font-size: 22px; color: var(--heading); }
@@ -103,10 +109,6 @@
     .closing { background: radial-gradient(ellipse at 50% 0%, rgba(255,210,31,.10), transparent 60%), var(--bg-alt); border-top: 1px solid var(--line); }
     .closing p { color: var(--muted); font-size: 20px; max-width: 680px; margin: 0 0 32px; }
 
-    footer { padding: 32px 0; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); }
-    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-    footer a { color: var(--muted); }
-    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
 
 
     .lost { padding: 96px 0 64px; background: radial-gradient(ellipse at 70% 100%, rgba(99,102,241,.18), transparent 60%); }
@@ -115,11 +117,11 @@
     .lost .proof-links { margin-top: 0; }
     /* A news ticker along the bottom of the screen: a label, then the facts scrolling past. */
     .ticker { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; display: flex; align-items: stretch; height: 52px; background: #0b1020; border-top: 2px solid var(--yellow); box-shadow: 0 -8px 28px rgba(0,0,0,.35); }
-    .ticker .tag { flex: none; display: flex; align-items: center; padding: 0 20px; background: var(--yellow); color: var(--bg); font-weight: 800; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+    .ticker .tag { flex: none; display: flex; align-items: center; padding: 0 20px; background: var(--yellow); color: var(--on-yellow); font-weight: 800; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
     .ticker .window { flex: 1; overflow: hidden; display: flex; align-items: center; }
     .ticker .track { display: flex; flex: none; white-space: nowrap; will-change: transform; animation: tick var(--dur, 120s) linear infinite; }
     .ticker .window:hover .track, .ticker .window:focus-within .track { animation-play-state: paused; }
-    .ticker .item { display: inline-flex; align-items: center; font-size: 17px; color: var(--heading); }
+    .ticker .item { display: inline-flex; align-items: center; font-size: 17px; color: #ffffff; }
     .ticker .item::after { content: ""; width: 7px; height: 7px; margin: 0 28px; border-radius: 50%; background: var(--coral); flex: none; }
     .ticker .item a { color: var(--yellow); font-weight: 600; margin-left: 8px; }
     @keyframes tick { to { transform: translateX(-50%); } }
@@ -131,7 +133,7 @@
       .ticker .item { white-space: normal; font-size: 16px; }
       .ticker .track { white-space: normal; }
     }
-    footer { padding-bottom: 84px; }
+    body { padding-bottom: 52px; }
     @media (max-width: 860px) {
       .ticker .tag { padding: 0 12px; font-size: 12px; }
       .scale, .ladder, .ways, .tiers, .beliefs, .beliefs.two { grid-template-columns: 1fr; }
@@ -164,14 +166,6 @@
     </div>
   </section>
 </main>
-
-<footer>
-  <div class="wrap">
-    <span>© 2026 Edgible. Keep your data close.</span>
-    <a class="foot-logo" href="/"><img src="/images/edgible-symbol-white.png" alt="Edgible"></a>
-  </div>
-</footer>
-
 <div class="ticker" role="region" aria-label="Facts about self-hosting">
   <span class="tag">Breaking</span>
   <div class="window"><div class="track" id="track"><span class="item">The first website ran on a NeXT computer at CERN, set up by the web's inventor, Tim Berners-Lee. The web began self-hosted.</span></div></div>
