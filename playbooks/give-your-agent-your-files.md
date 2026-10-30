@@ -57,6 +57,8 @@ The file stays as it was. Agents sometimes say a thing worked when it didn't, so
 
 Honest limits: it reads text, not scans or photos, and it only sees that one folder. Add more folders, or other servers, the same way.
 
+Why your agent, not Claude's app? When you ask the agent, your files stay on your machine and only the lines it needs go to the model you chose. Claude's own app can reach your files too, through a connector, but then it reads them on Anthropic's side, so we don't recommend that for private notes.
+
 Done with it all? [Take it all down](../take-it-all-down/) removes it cleanly.
 
 <details>
