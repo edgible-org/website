@@ -2,13 +2,13 @@
 icon: map
 title: Choosing between them
 description: Which questions to send to your private model and which to the cloud, what the private model is good at, and what it isn't.
-prev: private-for-your-agent
+prev: give-your-agent-your-files
 next: take-it-all-down
 ---
 
 # Choosing between them
 
-*Chapter 5 of [A private model for your agent](../a-private-model-for-your-agent/). Draft: [tell us how it goes](mailto:stefano@edgible.com?subject=Playbook%20feedback).*
+*Chapter 6 of [A private model for your agent](../a-private-model-for-your-agent/). Draft: [tell us how it goes](mailto:stefano@edgible.com?subject=Playbook%20feedback).*
 
 You now have both. This last chapter is a rule of thumb, and an honest account of the trade.
 
