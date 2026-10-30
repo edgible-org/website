@@ -115,6 +115,7 @@
     .lost .proof-links { margin-top: 0; }
     .fact { margin-top: 48px; max-width: 640px; }
     .fact .card { gap: 0; }
+    .fact #fact a { color: var(--yellow); }
     .fact #fact { font-size: 20px; color: var(--heading); margin: 0 0 16px; min-height: 3.2em; }
     .fact button { align-self: flex-start; background: none; border: 0; padding: 0; color: var(--yellow); font: inherit; font-weight: 600; cursor: pointer; }
     .fact button:hover { text-decoration: underline; }
@@ -168,23 +169,36 @@
 <script>
   (function () {
     var facts = [
-      "The first website ran on a NeXT computer at CERN, set up by the web's inventor, Tim Berners-Lee. The web began self-hosted.",
-      "An old laptop in a cupboard makes a perfectly good server. It already has a screen, a battery and a keyboard for emergencies.",
-      "A self-hosted app keeps working when its maker changes the pricing, gets acquired or shuts down.",
-      "Linux, which now runs much of the internet, started as a hobby project. Self-hosting has always been where good things begin.",
-      "Your photos can't train someone else's AI if they never leave your house.",
-      "Self-hosting means no \u201cwe're updating our terms\u201d emails. You are the terms.",
-      "One small machine can run a website, a photo library and a password manager, all at the same time.",
-      "Gitea, WordPress and plenty of other well-loved apps are happy to live on a machine you own.",
-      "The cloud is someone else's computer. Self-hosting is the same idea, with the computer yours.",
-      "An app you host yourself moves with you: new machine, same app, same data."
+      { t: "The first website ran on a NeXT computer at CERN, set up by the web's inventor, Tim Berners-Lee. The web began self-hosted." },
+      { t: "An old laptop in a cupboard makes a perfectly good server. It already has a screen, a battery and a keyboard for emergencies." },
+      { t: "A self-hosted app keeps working when its maker changes the pricing, gets acquired or shuts down." },
+      { t: "Linux, which now runs much of the internet, started as a hobby project. Self-hosting has always been where good things begin." },
+      { t: "Your photos can't train someone else's AI if they never leave your house." },
+      { t: "Self-hosting means no \u201cwe're updating our terms\u201d emails. You are the terms." },
+      { t: "One small machine can run a website, a photo library and a password manager, all at the same time." },
+      { t: "Gitea, WordPress and plenty of other well-loved apps are happy to live on a machine you own." },
+      { t: "The cloud is someone else's computer. Self-hosting is the same idea, with the computer yours." },
+      { t: "An app you host yourself moves with you: new machine, same app, same data." },
+      { t: "Proud of an app you've built? Share it with the world as an Edgible card, so anyone, or any AI, can set it up.", href: "/add-your-app/", label: "Add your app" },
+      { t: "Don't know where to start? Tell your AI what you need. It finds a tested card and sets it up, and Edgible keeps it safe.", href: "https://cards.edgible.org", label: "Browse the cards" },
+      { t: "Every app you publish with Edgible gets its own secure web address, with no certificates to set up or renew." },
+      { t: "Your app can be public, private to your team, or behind a sign-in. You choose for each app." },
+      { t: "Edgible cards are tested on real machines, so what worked for someone else is what you get.", href: "/proof/", label: "See the proof" },
+      { t: "No spare computer? Try Edgible inside a virtual machine on your laptop. It's free, safe and disposable." }
     ];
     var el = document.getElementById("fact"), btn = document.getElementById("another"), last = -1;
     function pick() {
       var i;
       do { i = Math.floor(Math.random() * facts.length); } while (i === last);
       last = i;
-      el.textContent = facts[i];
+      el.textContent = facts[i].t;
+      if (facts[i].href) {
+        var a = document.createElement("a");
+        a.href = facts[i].href;
+        a.textContent = facts[i].label;
+        el.appendChild(document.createTextNode(" "));
+        el.appendChild(a);
+      }
     }
     pick();
     btn.hidden = false;
