@@ -27,3 +27,9 @@ header.bar.open .menu-btn span::after { transform: translateY(-7px) rotate(-45de
   .js header.bar.wide nav.links a { padding: 13px 4px; border-top: 1px solid var(--line-soft, rgba(255,255,255,.08)); }
   .js header.bar.wide nav.links a:first-child { border-top: 0; }
 }
+
+/* On a phone the footer is one short line and the symbol; the links stay in the header menu. */
+@media (max-width: 640px) {
+  footer .wrap { flex-wrap: nowrap; gap: 12px; }
+  footer .foot-right > span { display: none; }
+}
