@@ -111,6 +111,7 @@
     footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
     footer a { color: var(--muted); }
     footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+    @media (max-width: 640px) { footer .wrap { flex-wrap: nowrap; gap: 12px; } footer .foot-right > span { display: none; } }
 
     @media (max-width: 860px) {
       h1 span { padding: 10px 0; }
