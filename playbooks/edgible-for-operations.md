@@ -1,0 +1,36 @@
+---
+icon: backup
+title: Edgible for Operations
+description: Back it up, move it, upgrade it, and know when something is wrong, so it keeps running.
+---
+
+# Edgible for Operations
+
+Back it up, move it, upgrade it, and know when something's wrong, so it keeps running. One playbook so far, in progress: the first two chapters are ready, and the rest are on the way. Every playbook begins with [Get Edgible running](../get-edgible-running/).
+
+<figure class="flow">
+<svg viewBox="0 0 420 354" role="img" aria-labelledby="map-t map-d" xmlns="http://www.w3.org/2000/svg">
+<title id="map-t">Looking after it, in order</title>
+<desc id="map-d">One playbook, six chapters. The first two, backing up an app and restoring it and proving it, are ready. Moving, upgrading, knowing when something is wrong, and recovering when the machine dies are coming.</desc>
+<rect x="10" y="10" width="400" height="334" rx="16" class="frame"/>
+<text x="28" y="40" class="t">Looking after it</text>
+<a href="../back-up-an-app/"><rect x="24" y="54" width="372" height="40" rx="12" class="box"/><rect x="354" y="59" width="30" height="30" rx="8" fill="#111827"/><use href="../../images/icons.svg#backup" x="357" y="62" width="24" height="24"/><circle cx="48" cy="74" r="13" class="num"/><text x="48" y="80" class="numt" text-anchor="middle">1</text><text x="72" y="80" class="t b">Back up an app</text></a>
+<a href="../restore-and-prove-it/"><rect x="24" y="102" width="372" height="40" rx="12" class="box"/><rect x="354" y="107" width="30" height="30" rx="8" fill="#111827"/><use href="../../images/icons.svg#tested" x="357" y="110" width="24" height="24"/><circle cx="48" cy="122" r="13" class="num"/><text x="48" y="128" class="numt" text-anchor="middle">2</text><text x="72" y="128" class="t b">Restore it, and prove it</text></a>
+<g opacity=".6"><rect x="24" y="150" width="372" height="40" rx="12" class="box opt"/><rect x="354" y="155" width="30" height="30" rx="8" fill="#111827"/><use href="../../images/icons.svg#machine" x="357" y="158" width="24" height="24"/><circle cx="48" cy="170" r="13" class="num"/><text x="48" y="176" class="numt" text-anchor="middle">3</text><text x="72" y="176" class="t b">Move an app to another machine</text></g>
+<g opacity=".6"><rect x="24" y="198" width="372" height="40" rx="12" class="box opt"/><rect x="354" y="203" width="30" height="30" rx="8" fill="#111827"/><use href="../../images/icons.svg#bolt" x="357" y="206" width="24" height="24"/><circle cx="48" cy="218" r="13" class="num"/><text x="48" y="224" class="numt" text-anchor="middle">4</text><text x="72" y="224" class="t b">Upgrade an app safely</text></g>
+<g opacity=".6"><rect x="24" y="246" width="372" height="40" rx="12" class="box opt"/><rect x="354" y="251" width="30" height="30" rx="8" fill="#111827"/><use href="../../images/icons.svg#eye" x="357" y="254" width="24" height="24"/><circle cx="48" cy="266" r="13" class="num"/><text x="48" y="272" class="numt" text-anchor="middle">5</text><text x="72" y="272" class="t b">Know when something is wrong</text></g>
+<g opacity=".6"><rect x="24" y="294" width="372" height="40" rx="12" class="box opt"/><rect x="354" y="299" width="30" height="30" rx="8" fill="#111827"/><use href="../../images/icons.svg#lock" x="357" y="302" width="24" height="24"/><circle cx="48" cy="314" r="13" class="num"/><text x="48" y="320" class="numt" text-anchor="middle">6</text><text x="72" y="320" class="t b">When the machine dies</text></g>
+</svg>
+</figure>
+
+The chapters:
+
+- **<span class="ico sm" aria-hidden="true"><svg><use href="../../images/icons.svg#backup"/></svg></span>[Looking after it](../looking-after-it/):** the unglamorous essentials of running your own apps, backed up, restored and proved.
+  1. <span class="ico sm" aria-hidden="true"><svg><use href="../../images/icons.svg#backup"/></svg></span>[Back up an app](../back-up-an-app/)
+  2. <span class="ico sm" aria-hidden="true"><svg><use href="../../images/icons.svg#tested"/></svg></span>[Restore it, and prove it](../restore-and-prove-it/)
+  3. Move an app to another machine: coming
+  4. Upgrade an app safely: coming
+  5. Know when something is wrong: coming
+  6. When the machine dies: coming
+
+New here? Start at [all the playbooks](../), or go straight to [Get Edgible running](../get-edgible-running/).
