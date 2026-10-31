@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>document.documentElement.className += " js";</script>
+  <link rel="stylesheet" href="../menu.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact · Edgible</title>
+  <meta name="description" content="Write to the Edgible team: small businesses, clubs, families, investors, press and anyone who wants help.">
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    /* The main page's typeface, colours, top bar and footer (site/index.html), with styles for reading. */
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    /* Playbooks are for doing, so they read on a light page; the dark top bar keeps them Edgible's. */
+    :root {
+      --night-1: #111827;
+      --line: #e3e6ef;
+      --paper: #fbfaf7;
+      --surface: #f1f2f7;
+      --yellow: #ffd21f;
+      --prompt: #fff8d6;
+      --link: #2e4a9e;
+      --heading: #111827;
+      --ink: #2b3245;
+      --muted: #5d6680;
+      --radius: 14px;
+      --wrap: 1120px;
+      --read: 760px;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--link); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    header.bar { position: sticky; top: 0; z-index: 10; background: var(--night-1); border-bottom: 1px solid rgba(255,255,255,.12); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    nav.links { display: flex; gap: 24px; font-weight: 500; font-size: 16px; }
+    nav.links a { text-decoration: none; color: #a7b1dc; }
+    nav.links a:hover { color: #ffffff; }
+
+    main { max-width: var(--read); margin: 0 auto; padding: 56px 24px 88px; }
+    h1, h2, h3 { color: var(--heading); line-height: 1.25; font-weight: 800; }
+    h1 { font-size: 40px; margin: 0 0 16px; }
+    h2 { font-size: 26px; margin: 48px 0 12px; }
+    h3 { font-size: 20px; margin: 32px 0 8px; }
+    p, li { max-width: 70ch; }
+    strong { color: var(--heading); }
+    /* A quote is something to say to your AI, or a box such as What you need. */
+    blockquote { margin: 20px 0; padding: 16px 20px; background: var(--prompt); border-left: 4px solid var(--yellow); border-radius: 0 var(--radius) var(--radius) 0; color: var(--heading); }
+    blockquote p { margin: 0; }
+    blockquote p + p, blockquote ul { margin-top: 10px; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; background: var(--surface); padding: 2px 6px; border-radius: 6px; }
+    pre { background: var(--night-1); color: #e6eaff; border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; }
+    pre code { background: none; padding: 0; color: inherit; }
+    details { margin: 24px 0; padding: 12px 18px; background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); }
+    summary { cursor: pointer; color: var(--heading); font-weight: 700; }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 16px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--heading); }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+    /* The site's icons are drawn light on dark, so on these pages each sits on a navy tile. */
+    h2 .ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--night-1); margin-right: 12px; vertical-align: middle; flex: none; }
+    h2 .ico svg { width: 30px; height: 30px; }
+    h2:has(.ico) { display: flex; align-items: center; }
+
+    /* Previous and Next, at the end of each chapter. */
+    nav.chapters { display: flex; gap: 14px; margin-top: 56px; flex-wrap: wrap; }
+    nav.chapters a { flex: 1 1 240px; display: block; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; text-decoration: none; color: var(--heading); font-weight: 700; }
+    nav.chapters a:hover { border-color: var(--link); }
+    nav.chapters a span { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 4px; }
+    nav.chapters a.next { text-align: right; margin-left: auto; }
+    footer { padding: 32px 0; font-size: 14px; color: #a7b1dc; background: var(--night-1); }
+    footer a { color: #a7b1dc; }
+    footer a:hover { color: #ffffff; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer .foot-right { display: flex; align-items: center; gap: 20px; }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      main { padding: 40px 16px 64px; }
+      nav.links { gap: 16px; font-size: 15px; }
+      h1 { font-size: 32px; }
+      table { display: block; overflow-x: auto; }
+    }
+  
+    /* The contact form. */
+    form { display: grid; gap: 18px; margin-top: 28px; }
+    label { display: grid; gap: 6px; font-weight: 700; color: var(--heading); font-size: 16px; }
+    input, select, textarea { font: inherit; font-weight: 400; color: var(--ink); background: #ffffff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; width: 100%; }
+    textarea { min-height: 170px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--link); outline-offset: 1px; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    button { justify-self: start; font: inherit; font-weight: 800; color: var(--heading); background: var(--yellow); border: 0; border-radius: 999px; padding: 12px 28px; cursor: pointer; }
+    button:disabled { opacity: .6; cursor: wait; }
+    .status { margin: 0; padding: 14px 18px; border-radius: var(--radius); display: none; }
+    .status.ok { display: block; background: #e8f5ec; color: #14532d; }
+    .status.err { display: block; background: #fdeceb; color: #7f1d1d; }
+    .alt { color: var(--muted); font-size: 16px; }
+  </style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../"><img src="../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="links" id="site-nav">
+      <a href="../playbooks/">Playbooks</a>
+      <a href="https://cards.edgible.org">Cards</a>
+      <a href="../proof/">Proof</a>
+      <a href="./" aria-current="page">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <h1>Talk to us</h1>
+  <p>Tell us what you are trying to run, or what you would like to ask. A person reads every message, and we usually reply within a few days.</p>
+
+  <form id="contact" method="post" action="#" novalidate>
+    <label>Your name
+      <input name="name" autocomplete="name" required maxlength="120">
+    </label>
+    <label>Your email
+      <input name="email" type="email" autocomplete="email" required maxlength="254">
+    </label>
+    <label>What is it about?
+      <select name="topic" required>
+        <option value="" disabled selected>Choose one</option>
+        <option>Small business or club</option>
+        <option>Family or home</option>
+        <option>Investing or partnering</option>
+        <option>Press</option>
+        <option>A playbook or card</option>
+        <option>Help with Edgible</option>
+        <option>Something else</option>
+      </select>
+    </label>
+    <label>Your message
+      <textarea name="message" required maxlength="5000"></textarea>
+    </label>
+    <label class="hp" aria-hidden="true">Leave this empty
+      <input name="website" tabindex="-1" autocomplete="off">
+    </label>
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAFmGSijXQghKVSqo" data-action="contact"></div>
+    <button type="submit">Send message</button>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </form>
+
+  <noscript><p class="alt">The form needs JavaScript. You can also write to <a href="mailto:contact@edgible.com">contact@edgible.com</a>.</p></noscript>
+  <p class="alt">Found a bug in a card, or want to add one? You can also <a href="https://github.com/edgible-org/cards/issues">open an issue on GitHub</a>.</p>
+  <p class="alt">Prefer email? Write to <a href="mailto:contact@edgible.com?subject=Hello%20Edgible">contact@edgible.com</a>.</p>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Edgible. Keep your data close.</span>
+    <div class="foot-right">
+      <span><a href="https://cards.edgible.org">Cards</a> · <a href="../llms.txt">For AI assistants</a></span>
+      <a class="foot-logo" href="../"><img src="../images/edgible-symbol-white.png" alt="Edgible"></a>
+    </div>
+  </div>
+</footer>
+<script>
+  // The Worker in worker/ receives the form.
+  const ENDPOINT = "https://edgible-contact.stefanopicozzi.workers.dev";
+  const form = document.getElementById("contact");
+  const status = document.getElementById("status");
+  const say = (kind, text) => { status.className = "status " + kind; status.textContent = text; };
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const button = form.querySelector("button");
+    button.disabled = true;
+    say("", "");
+    try {
+      const res = await fetch(ENDPOINT, { method: "POST", body: new FormData(form) });
+      const body = await res.json().catch(() => ({}));
+      if (res.ok && body.ok) {
+        form.reset();
+        if (window.turnstile) turnstile.reset();
+        say("ok", "Thank you. Your message is on its way, and we will reply to the email you gave.");
+      } else {
+        if (window.turnstile) turnstile.reset();
+        say("err", body.error || "Something went wrong. Please email contact@edgible.com instead.");
+      }
+    } catch {
+      say("err", "We could not reach the server. Please email contact@edgible.com instead.");
+    }
+    button.disabled = false;
+  });
+</script>
+<script src="../menu.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>document.documentElement.className += " js";</script>
+  <link rel="stylesheet" href="../../menu.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Getting a machine · Edgible</title>
+  <meta name="description" content="Where to run Edgible if you have no spare computer: a virtual machine on your own computer, or a small cloud server, with your AI assistant doing the setup.">
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="alternate" type="text/markdown" title="This page as Markdown" href="../getting-a-machine.md">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* The main page's typeface, colours, top bar and footer (site/index.html), with styles for reading. */
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    /* Playbooks are for doing, so they read on a light page; the dark top bar keeps them Edgible's. */
+    :root {
+      --night-1: #111827;
+      --line: #e3e6ef;
+      --paper: #fbfaf7;
+      --surface: #f1f2f7;
+      --yellow: #ffd21f;
+      --prompt: #fff8d6;
+      --link: #2e4a9e;
+      --heading: #111827;
+      --ink: #2b3245;
+      --muted: #5d6680;
+      --radius: 14px;
+      --wrap: 1120px;
+      --read: 760px;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--link); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    header.bar { position: sticky; top: 0; z-index: 10; background: var(--night-1); border-bottom: 1px solid rgba(255,255,255,.12); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    nav.links { display: flex; gap: 24px; font-weight: 500; font-size: 16px; }
+    nav.links a { text-decoration: none; color: #a7b1dc; }
+    nav.links a:hover { color: #ffffff; }
+
+    main { max-width: var(--read); margin: 0 auto; padding: 56px 24px 88px; }
+    h1, h2, h3 { color: var(--heading); line-height: 1.25; font-weight: 800; }
+    h1 { font-size: 40px; margin: 0 0 16px; }
+    h2 { font-size: 26px; margin: 48px 0 12px; }
+    h3 { font-size: 20px; margin: 32px 0 8px; }
+    p, li { max-width: 70ch; }
+    strong { color: var(--heading); }
+    /* A quote is something to say to your AI, or a box such as What you need. */
+    blockquote { margin: 20px 0; padding: 16px 20px; background: var(--prompt); border-left: 4px solid var(--yellow); border-radius: 0 var(--radius) var(--radius) 0; color: var(--heading); }
+    blockquote p { margin: 0; }
+    blockquote p + p, blockquote ul { margin-top: 10px; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; background: var(--surface); padding: 2px 6px; border-radius: 6px; }
+    pre { background: var(--night-1); color: #e6eaff; border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; }
+    pre code { background: none; padding: 0; color: inherit; }
+    details { margin: 24px 0; padding: 12px 18px; background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); }
+    summary { cursor: pointer; color: var(--heading); font-weight: 700; }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 16px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--heading); }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+    /* The site's icons are drawn light on dark, so on these pages each sits on a navy tile. */
+    /* A page's icon: a navy tile above its title; a small one beside each entry on the landing page. */
+    .page-ico { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px; background: var(--night-1); color: #ffffff; margin-bottom: 18px; }
+    .page-ico svg { width: 42px; height: 42px; }
+    .ico.sm { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--night-1); margin-right: 10px; vertical-align: middle; }
+    .ico.sm svg { width: 22px; height: 22px; }
+    /* The icons draw in the text colour, so give every navy tile a white one */
+    .ico, .page-ico, .flow use { color: #ffffff; }
+    /* A list item with an icon: no bullet or number (the map above has the numbers), the icon hangs in the margin
+       and the text, even when it wraps, stays in its own column */
+    li:has(.ico.sm) { list-style: none; position: relative; padding-left: 54px; margin: 18px 0; min-height: 34px; }
+    li .ico.sm { position: absolute; left: 0; top: -2px; width: 36px; height: 36px; margin: 0; }
+    li .ico.sm svg { width: 26px; height: 26px; }
+    ul:has(.ico.sm), ol:has(.ico.sm) { padding-left: 0; }
+    li:has(.ico.sm) > p { margin: 0; }
+    li > ol:has(.ico.sm) { margin: 14px 0 0; }
+    li > ol > li:has(.ico.sm) { margin: 12px 0; }
+    h2 .ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--night-1); margin-right: 12px; vertical-align: middle; flex: none; }
+    h2 .ico svg { width: 30px; height: 30px; }
+    h2:has(.ico) { display: flex; align-items: center; }
+
+    /* Previous and Next, at the end of each chapter. */
+    nav.chapters { display: flex; gap: 14px; margin-top: 56px; flex-wrap: wrap; }
+    nav.chapters a { flex: 1 1 240px; display: block; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; text-decoration: none; color: var(--heading); font-weight: 700; }
+    nav.chapters a:hover { border-color: var(--link); }
+    nav.chapters a span { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 4px; }
+    nav.chapters a.next { text-align: right; margin-left: auto; }
+    footer { padding: 32px 0; font-size: 14px; color: #a7b1dc; background: var(--night-1); }
+    footer a { color: #a7b1dc; }
+    footer a:hover { color: #ffffff; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer .foot-right { display: flex; align-items: center; gap: 20px; }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      main { padding: 40px 16px 64px; }
+      nav.links { gap: 16px; font-size: 15px; }
+      h1 { font-size: 32px; }
+      table { display: block; overflow-x: auto; }
+    }
+    /* The route through the playbooks, drawn. */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 28px 0 8px; }
+    .path { display: block; padding: 20px 22px 18px; border: 1.5px solid var(--line); border-radius: var(--radius); background: #ffffff; color: var(--ink); text-decoration: none; }
+    a.path:hover, a.path:focus { border-color: var(--link); }
+    .path h2 { margin: 14px 0 6px; font-size: 22px; }
+    .path p { margin: 0 0 12px; color: var(--ink); }
+    .path .go { font-weight: 700; color: var(--link); font-size: 15px; }
+    .path.soon { background: transparent; border-style: dashed; }
+    .path.soon h2, .path.soon p { color: var(--muted); }
+    .path.soon .go { color: var(--muted); }
+    .path svg { width: 100%; max-width: 220px; height: auto; display: block; }
+    .path .mf { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .path .md { fill: var(--yellow); }
+    .path .dash { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    @media (max-width: 640px) { .paths { grid-template-columns: 1fr; } }
+    figure.flow { margin: 28px auto; max-width: 460px; }
+    figure.flow svg { width: 100%; height: auto; display: block; font-family: inherit; }
+    .flow a { cursor: pointer; }
+    .flow .frame { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .flow .box { fill: #ffffff; stroke: var(--line); stroke-width: 1.5; }
+    .flow .box.opt { stroke-dasharray: 5 4; stroke: var(--muted); }
+    .flow a:hover .box, .flow a:focus .box { stroke: var(--link); }
+    .flow .num { fill: var(--yellow); }
+    .flow .numt { fill: var(--heading); font-weight: 800; font-size: 14px; }
+    .flow .t { fill: var(--heading); font-weight: 800; font-size: 17px; }
+    .flow .t.b { font-size: 15px; }
+    .flow .s { fill: var(--muted); font-size: 13.5px; }
+    .flow .s2 { fill: var(--heading); font-weight: 700; font-size: 14px; }
+    .flow .arr { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../../"><img src="../../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="links" id="site-nav">
+      <a href="../../playbooks/">Playbooks</a>
+      <a href="https://cards.edgible.org">Cards</a>
+      <a href="../../proof/">Proof</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+<span class="page-ico" aria-hidden="true"><svg><use href="../../images/icons.svg#cloud"/></svg></span>
+<h1>Getting a machine</h1>
+<p>Edgible runs on a computer you control. If you have a spare one, use that. If not, here are the other ways, and your AI assistant can do most of the work for each.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Good for</th>
+<th>Stays on</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>A spare computer</strong></td>
+<td>Anything</td>
+<td>If you leave it on</td>
+<td>Free</td>
+</tr>
+<tr>
+<td><strong>A virtual machine on your own computer</strong></td>
+<td>Trying Edgible, learning, testing</td>
+<td>Only while your computer is on and awake</td>
+<td>Free</td>
+</tr>
+<tr>
+<td><strong>A small cloud server</strong></td>
+<td>A website or apps other people rely on</td>
+<td>Always</td>
+<td>A few dollars a month and up</td>
+</tr>
+</tbody></table>
+<h2>What Edgible needs</h2>
+<p>Whichever you choose, tell your AI these, so it gets them right:</p>
+<ul>
+<li><strong>Ubuntu 24.04 or 26.04,</strong> or a Mac. Not WSL on Windows: Edgible can&#39;t publish apps from there yet.</li>
+<li><strong>Memory:</strong> 2 GB for a website, 4 GB for an AI gateway, 8 GB for your own AI agent with its gateway.</li>
+<li><strong>Disk:</strong> 20 to 30 GB free.</li>
+<li><strong>Internet out, and no ports in.</strong> Edgible connects out, so there&#39;s nothing to open in a firewall or router. If your AI offers to open a port for Edgible, say no.</li>
+<li><strong>On when you need it.</strong> For apps other people use, a machine that stays on.</li>
+</ul>
+<h2>A virtual machine on your own computer</h2>
+<p>A virtual machine is a whole computer running inside yours. We use Multipass, Canonical&#39;s free tool for Ubuntu virtual machines, on a Mac, Windows or Linux. In Claude Code on your computer, say:</p>
+<blockquote>
+<p>Create an Ubuntu 26.04 virtual machine with Multipass, named edgible-vm, with 2 CPUs, 8 GB memory and 30 GB disk. Install Multipass first if it isn&#39;t here. Don&#39;t open any ports.</p>
+</blockquote>
+<p>It takes a few minutes. Then, in <a href="../get-edgible-running/">Get Edgible running</a>, Claude Code stays on your computer and sets up the virtual machine from there. Say this in place of step 3:</p>
+<blockquote>
+<p>Set up Edgible on the Multipass virtual machine named edgible-vm, so I can run my own apps there.</p>
+</blockquote>
+<p>And in step 4:</p>
+<blockquote>
+<p>Is Edgible running on the edgible-vm?</p>
+</blockquote>
+<p>The virtual machine runs while your computer is on and awake. For anything other people rely on, choose a spare computer or a cloud server instead.</p>
+<p><strong>One thing to know about its clock.</strong> When your computer sleeps, the virtual machine stops with it, and can wake hours behind. Edgible then refuses the machine&#39;s requests without saying why: an app waits for ever for its certificate, or a sign-in code is rejected. Your AI sets the machine&#39;s clock to correct itself when it makes it, so this should be rare. If it ever happens, say:</p>
+<blockquote>
+<p>Check the clock on edgible-vm.</p>
+</blockquote>
+<p>It&#39;s a quick fix, and nothing is lost.</p>
+<h2>A small cloud server</h2>
+<p>A server you rent by the month, from Hetzner, DigitalOcean or AWS Lightsail for example. You make the account and pay; your AI walks you through the rest:</p>
+<blockquote>
+<p>Help me create a small Ubuntu 26.04 server at Hetzner with 8 GB memory. Sign-in with an SSH key only, and no inbound ports except SSH. I&#39;ll install Edgible on it.</p>
+</blockquote>
+<p>Then, in <a href="../get-edgible-running/">Get Edgible running</a>, say this in place of step 3, with your server&#39;s address:</p>
+<blockquote>
+<p>Set up Edgible on my server, which I reach with ssh <a href="mailto:root@203.0.113.10">root@203.0.113.10</a>, so I can run my own apps there.</p>
+</blockquote>
+<p>And in step 4, <em>&quot;Is Edgible running on my server?&quot;</em></p>
+<h2>A spare computer</h2>
+<p>An old laptop or desktop works well. A Mac can run Edgible as it is: just set it not to sleep. A PC is best wiped and given Ubuntu:</p>
+<blockquote>
+<p>Help me put Ubuntu 26.04 on my old PC, so it can run Edgible all the time. I have a USB stick.</p>
+</blockquote>
+<p>Then follow <a href="../get-edgible-running/">Get Edgible running</a> on that computer, or from your own, as above.</p>
+<h2>What you&#39;ve just done</h2>
+<p>You have a machine for Edgible, without buying anything you didn&#39;t need, and your AI did the fiddly parts.</p>
+<ul>
+<li><strong>A virtual machine</strong> is a whole Ubuntu server, free, inside your own computer, and nothing on your computer itself changed. Not sure about it? Say <em>&quot;Delete the edgible-vm&quot;</em>, and it&#39;s gone.</li>
+<li><strong>A cloud server or a spare computer</strong> stays on, so it&#39;s ready for apps other people rely on.</li>
+<li><strong>Either way, you can change your mind.</strong> Start in a virtual machine, and when other people come to rely on your apps, your AI can move them to a machine that stays on, data and all.</li>
+</ul>
+<nav class="chapters"><a class="next" href="../get-edgible-running/"><span>Next →</span>Get Edgible running</a></nav>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Edgible. Keep your data close.</span>
+    <div class="foot-right">
+      <span><a href="https://cards.edgible.org">Cards</a> · <a href="../../contact/">Contact</a> · <a href="../../llms.txt">For AI assistants</a> · <a href="../getting-a-machine.md">This page as Markdown</a></span>
+      <a class="foot-logo" href="../../"><img src="../../images/edgible-symbol-white.png" alt="Edgible"></a>
+    </div>
+  </div>
+</footer>
+<script src="../../menu.js" defer></script>
+</body>
+</html>

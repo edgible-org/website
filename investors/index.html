@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../theme.css">
+  <script src="../theme.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Edgible: A billion agents. A trillion apps.</title>
+  <meta name="description" content="Why Edgible matters as agents and bespoke apps become how everyone uses computing, and how we plan to earn.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    :root {
+      --night-1: #111827;
+      --night-2: #1e293b;
+      --night-3: #312e81;
+      --bg: var(--night-1);
+      --bg-alt: rgba(255,255,255,.03);
+      --surface: rgba(255,255,255,.05);
+      --line: rgba(255,255,255,.12);
+      --blue-mid: #2e4a9e;
+      --yellow: #ffd21f;
+      --coral: #ff7a59;
+      --teal: #4fc3a8;
+      --heading: #ffffff;
+      --ink: #e6eaff;
+      --muted: #a7b1dc;
+      --muted-2: #7c86b8;
+      --on-yellow: #111827;
+      --accent-text: #ffd21f;
+      --bar-bg: rgba(17,24,39,.72);
+      --radius: 14px;
+      --wrap: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { background: linear-gradient(135deg, var(--night-1) 0%, var(--night-2) 45%, var(--night-3) 100%) fixed; background-color: var(--night-1); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: transparent; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-text); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    header.bar { background: var(--bar-bg); border-bottom: 1px solid var(--line); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    header.bar .note { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+    .btn { display: inline-block; padding: 13px 24px; border-radius: 999px; font-weight: 600; font-size: 17px; text-decoration: none; }
+    .btn.primary { background: var(--yellow); color: var(--on-yellow); box-shadow: 0 6px 22px rgba(255,210,31,.25); }
+
+    .hero { overflow: hidden; padding: 88px 0 72px; background: radial-gradient(ellipse at 70% 100%, rgba(99,102,241,.18), transparent 60%); }
+    .eyebrow, .kicker { font-weight: 600; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 14px; }
+    .eyebrow { color: var(--teal); }
+    .kicker { color: var(--coral); }
+    h1 { font-size: clamp(40px, 7vw, 80px); line-height: 1.04; letter-spacing: -.02em; margin: 0 0 24px; color: var(--heading); font-weight: 800; }
+    /* The headline is the graphic: each line sits on its own field of tiny icons, robots for agents and app tiles for apps, the second far denser than the first. */
+    h1 span { display: block; position: relative; padding: 4px 0; }
+    h1 span::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; right: -24px; -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,.1) 0%, rgba(0,0,0,.25) 45%, #000 100%); mask-image: linear-gradient(to right, rgba(0,0,0,.1) 0%, rgba(0,0,0,.25) 45%, #000 100%); }
+    h1 .agents::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg transform='translate(2 3) scale(0.95)' fill='none' stroke='%234fc3a8' stroke-width='1.6' stroke-linecap='round'%3E%3Crect x='3' y='8' width='14' height='10' rx='3'/%3E%3Cpath d='M10 8V4'/%3E%3Ccircle cx='10' cy='3' r='1.2' fill='%234fc3a8' stroke='none'/%3E%3Ccircle cx='7.3' cy='13' r='1.1' fill='%234fc3a8' stroke='none'/%3E%3Ccircle cx='12.7' cy='13' r='1.1' fill='%234fc3a8' stroke='none'/%3E%3Cpath d='M1 12v2M19 12v2'/%3E%3C/g%3E%3Cg transform='translate(30 31) scale(0.95)' fill='none' stroke='%234fc3a8' stroke-width='1.6' stroke-linecap='round'%3E%3Crect x='3' y='8' width='14' height='10' rx='3'/%3E%3Cpath d='M10 8V4'/%3E%3Ccircle cx='10' cy='3' r='1.2' fill='%234fc3a8' stroke='none'/%3E%3Ccircle cx='7.3' cy='13' r='1.1' fill='%234fc3a8' stroke='none'/%3E%3Ccircle cx='12.7' cy='13' r='1.1' fill='%234fc3a8' stroke='none'/%3E%3Cpath d='M1 12v2M19 12v2'/%3E%3C/g%3E%3C/svg%3E"); background-size: 56px 56px; }
+    h1 .apps::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Cg transform='translate(3 3)' fill='none' stroke='%23ffd21f' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='.65' y='.65' width='14.7' height='14.7' rx='4'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%23ffd21f' stroke='none'/%3E%3C/g%3E%3Cg transform='translate(25 3)' fill='none' stroke='%23ffd21f' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='.65' y='.65' width='14.7' height='14.7' rx='4'/%3E%3Cg fill='%23ffd21f' stroke='none'%3E%3Crect x='4' y='4' width='3.2' height='3.2' rx='.8'/%3E%3Crect x='8.8' y='4' width='3.2' height='3.2' rx='.8'/%3E%3Crect x='4' y='8.8' width='3.2' height='3.2' rx='.8'/%3E%3Crect x='8.8' y='8.8' width='3.2' height='3.2' rx='.8'/%3E%3C/g%3E%3C/g%3E%3Cg transform='translate(3 25)' fill='none' stroke='%23ffd21f' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='.65' y='.65' width='14.7' height='14.7' rx='4'/%3E%3Cpath d='M4.5 6h7M4.5 10h4.5'/%3E%3C/g%3E%3Cg transform='translate(25 25)' fill='none' stroke='%23ffd21f' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='.65' y='.65' width='14.7' height='14.7' rx='4'/%3E%3Cpath d='M5 8.5l2 2 4-4.5'/%3E%3C/g%3E%3C/svg%3E"); background-size: 44px 44px; }
+    h1 { position: relative; z-index: 0; }
+    .lede { font-size: clamp(19px, 2.2vw, 22px); color: var(--muted); max-width: 760px; margin: 0 0 12px; }
+    .lede strong { color: var(--heading); font-weight: 600; }
+
+    h1 .fn-mark { position: absolute; margin-left: 4px; font-size: .5em; font-weight: 600; line-height: 1; color: var(--ink); text-decoration: none; }
+    h1 .fn-mark:hover { color: var(--heading); }
+    .footnote { padding: 0 0 40px; }
+    .footnote p { margin: 0; max-width: 760px; font-size: 13px; line-height: 1.5; color: var(--muted); opacity: .75; }
+
+    section { padding: 96px 0; }
+    section.alt { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    h2 { font-size: clamp(30px, 4.2vw, 46px); line-height: 1.12; letter-spacing: -.015em; margin: 0 0 20px; color: var(--heading); font-weight: 700; }
+    .intro { font-size: 21px; color: var(--muted); max-width: 760px; margin: 0 0 40px; }
+    .prose p { font-size: 20px; color: var(--muted); max-width: 760px; margin: 0 0 20px; }
+    .prose strong { color: var(--accent-text); font-weight: 500; }
+
+    .ladder, .ways, .tiers, .beliefs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .beliefs.two { grid-template-columns: repeat(2, 1fr); gap: 36px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 26px; display: flex; flex-direction: column; }
+    .card .label { font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+    .card h3 { margin: 0 0 10px; font-size: 26px; color: var(--heading); line-height: 1.2; font-weight: 700; }
+    .card p { margin: 0 0 12px; color: var(--muted); }
+    .card ul { margin: 0; padding-left: 20px; color: var(--muted); }
+    .card li { margin-bottom: 6px; }
+    .card .eg { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); font-size: 15px; }
+    .card .tag { font-weight: 500; color: var(--accent-text); margin: 0 0 14px; }
+    .sub { font-size: 22px; color: var(--heading); margin: 56px 0 8px; font-weight: 600; }
+    .subnote { color: var(--muted); max-width: 720px; margin: 0 0 24px; }
+    .hero-line { margin-top: 40px; padding: 22px 26px; border-left: 4px solid var(--yellow); background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; font-size: 22px; color: var(--heading); }
+    .hero-line span { display: block; font-size: 15px; color: var(--muted); margin-top: 6px; }
+
+    .belief { border-top: 2px solid var(--yellow); padding-top: 22px; }
+    .belief:nth-child(2) { border-top-color: var(--teal); }
+    .belief h3 { margin: 0 0 10px; font-size: 24px; color: var(--heading); }
+    .belief p { margin: 0 0 10px; color: var(--muted); font-size: 18px; }
+
+    .proof-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .proof-links a { text-decoration: none; padding: 11px 20px; border: 2px solid var(--blue-mid); border-radius: 999px; color: var(--heading); font-weight: 600; }
+    .proof-links a:hover { border-color: var(--muted); }
+
+    .closing { background: radial-gradient(ellipse at 50% 0%, rgba(255,210,31,.10), transparent 60%), var(--bg-alt); border-top: 1px solid var(--line); }
+    .closing p { color: var(--muted); font-size: 20px; max-width: 680px; margin: 0 0 32px; }
+
+    footer { padding: 14px 0; font-size: 14px; color: var(--muted); background: var(--bar-bg); border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer a { color: var(--muted); }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+    @media (max-width: 640px) { footer .wrap { flex-wrap: nowrap; gap: 12px; } footer .foot-right > span { display: none; } }
+
+    @media (max-width: 860px) {
+      h1 span { padding: 10px 0; }
+      h1 span::before { -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,.14) 0%, #000 78%); mask-image: linear-gradient(to right, rgba(0,0,0,.14) 0%, #000 78%); }
+      .ladder, .ways, .tiers, .beliefs, .beliefs.two { grid-template-columns: 1fr; }
+      section { padding: 72px 0; }
+      .hero { padding: 64px 0 56px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../"><img src="../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+    <span class="note">For investors</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <p class="eyebrow">Why Edgible, why now</p>
+      <h1 id="hero-title"><span class="agents">A billion agents.</span><span class="apps">A trillion apps.<a class="fn-mark" href="#footnote" aria-label="See the note at the foot of the page">*</a></span></h1>
+      <p class="lede">We are entering a world where the way people and companies use computing changes for good. Software stops being something you buy and starts being something you ask for: <strong>highly customised, bespoke, targeted apps, built for "free" by an AI, for one person, one team or one afternoon.</strong></p>
+      <p class="lede">Every one of those apps, and every agent that uses them, works only by knowing us: our files, our habits, our clients, our children. The question that decides everything is where all of that lives. Edgible is the answer that keeps it with you.</p>
+
+    </div>
+  </section>
+
+  <section class="alt" aria-labelledby="world-title">
+    <div class="wrap">
+      <p class="kicker">The world we're entering</p>
+      <h2 id="world-title">The easy place to run it all is someone else's cloud.</h2>
+      <div class="prose">
+        <p>When software costs almost nothing to make, the scarce thing is trust. <strong>Agents only work well when they know us</strong>, and today the convenient way to run them is on a big platform's cloud, where every agent's memory, every app's records and every question we ask becomes data held, and often used, by someone else.</p>
+        <p>People and companies will want the other option: the same convenience, with the data on machines they control. That option has to be safe, easy and looked after, or it will stay a hobby. That is the market we are building for.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="matters-title">
+    <div class="wrap">
+      <p class="kicker">Why what we do matters</p>
+      <h2 id="matters-title">Why. How. What.</h2>
+      <p class="intro">Three lines that explain Edgible in the time it takes to say them. Each is expanded in conversation.</p>
+      <div class="ladder">
+        <div class="card">
+          <p class="label">Why</p>
+          <h3>Keep your data close</h3>
+          <p>The more an agent knows about us, the more useful it is. That data should stay close to us, not in someone else's cloud.</p>
+        </div>
+        <div class="card">
+          <p class="label">How</p>
+          <h3>Host your own way</h3>
+          <p>On a spare computer, a home server, a small cloud machine, in whatever way suits you. Edgible makes any of them safely reachable.</p>
+        </div>
+        <div class="card">
+          <p class="label">What</p>
+          <h3>Self-hosted private AI</h3>
+          <p>Your agents, models and apps on your own machines, with an AI that sets them up and Edgible that keeps them safe.</p>
+        </div>
+      </div>
+      <p class="hero-line">Your data's coming home.<span>Our headline: the moment it stops living in someone else's cloud.</span></p>
+    </div>
+  </section>
+
+  <section class="alt" aria-labelledby="ways-title">
+    <div class="wrap">
+      <p class="kicker">How people use it</p>
+      <h2 id="ways-title">Three ways in.</h2>
+      <p class="intro">Some apps you keep for years. Some you need for a few weeks. Some jobs you want done and gone. Your data stays home every time.</p>
+      <div class="ways">
+        <div class="card">
+          <p class="label">Stays for years</p>
+          <h3>The keeper</h3>
+          <p class="tag">A safe home</p>
+          <p>The apps you live with. Set up once, used every day, and easy to hand over when someone steps down.</p>
+          <p class="eg">The tennis club's court bookings, the family's photos, a firm's knowledge base.</p>
+        </div>
+        <div class="card">
+          <p class="label">Stays for weeks</p>
+          <h3>The guest</h3>
+          <p class="tag">A guest room, with a check-out date</p>
+          <p>Apps with a job to do and an end in sight. Run one for as long as it's needed, then keep what matters and clear out the rest.</p>
+          <p class="eg">Sign-ups for a weekend tournament, a wedding's shared photos, a data room for an audit.</p>
+        </div>
+        <div class="card">
+          <p class="label">Stays for minutes</p>
+          <h3>The job</h3>
+          <p class="tag">A clean room</p>
+          <p>Soon, one-off work over sensitive files, done on your own machine. Data in, results out, and nothing left behind.</p>
+          <p class="eg">Ask your AI to go through a folder of client files, and leave no trace.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="built-title">
+    <div class="wrap">
+      <p class="kicker">What exists today</p>
+      <h2 id="built-title">An open catalog that runs on Edgible itself.</h2>
+      <div class="prose">
+        <p>We built the front door in the open. A growing library of tested, self-hosted apps (cards), the card-kit that tests and publishes them, and an AI skill that turns a person's need into a running app. All of it is free and public, and every app in it ends with the same step: publish with Edgible.</p>
+        <p>That makes the open catalog our engine for demand, and a steady source of what to build next.</p>
+      </div>
+      <div class="proof-links">
+        <a href="https://cards.edgible.org">Browse the cards</a>
+        <a href="../proof/">See the proof</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" aria-labelledby="earn-title">
+    <div class="wrap">
+      <p class="kicker">How we earn</p>
+      <h2 id="earn-title">Free to start. Paid for peace of mind.</h2>
+      <p class="intro">A standard freemium model. The apps stay free; we charge for looking after them.</p>
+      <div class="tiers">
+        <div class="card">
+          <p class="label">Free</p>
+          <h3>Get going</h3>
+          <ul>
+            <li>The open catalog and the AI-guided setup</li>
+            <li>A starter allowance of apps on your own machine</li>
+            <li>Try it safely, then move to a machine that stays on</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="label">Individuals</p>
+          <h3>Looked after</h3>
+          <ul>
+            <li>Managed backups with restore drills</li>
+            <li>Monitoring, security checks and update notices</li>
+            <li>More apps and more machines</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="label">Teams</p>
+          <h3>Handed over</h3>
+          <ul>
+            <li>Shared access and handover when someone steps down</li>
+            <li>Managed off-site storage and one-click restore</li>
+            <li>Support for clubs, small firms and clinics</li>
+          </ul>
+        </div>
+      </div>
+      <p class="subnote" style="margin-top:24px">Tiers and what sits in each are a direction, not a price list. The people who pay most are the less technical ones AI is bringing in, who value reliability over tinkering.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="team-title">
+    <div class="wrap">
+      <p class="kicker">Meet the Edgibles</p>
+      <h2 id="team-title">Who's building this.</h2>
+      <div class="beliefs two">
+        <div class="belief">
+          <h3><a href="https://www.linkedin.com/in/stefanopicozzi" target="_blank" rel="noopener noreferrer">Stefano Picozzi</a></h3>
+          <p><strong>Co-founder.</strong> Twenty years in senior technical and leadership roles at Netscape, BEA Systems (Oracle) and Red Hat. CTO of a startup that built and launched an NDIS plan management platform. MBA and an honours degree in mathematical statistics from the University of Adelaide, with postgraduate study in information technology, neuroleadership and behavioural economics.</p>
+        </div>
+        <div class="belief">
+          <h3>Jackson Hirst</h3>
+          <p><strong>Co-founder.</strong> Cloud-native ML and data application engineer. Google Cloud Certified Professional Data Engineer. A career in pressurised startups. Bachelor of Advanced Computing and Bachelor of Commerce.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" aria-labelledby="close-title">
+    <div class="wrap">
+      <h2 id="close-title">Let's talk.</h2>
+      <p>If you invest in what comes after the cloud-first era, we would like to hear from you.</p>
+      <a class="btn primary" href="../contact/">Get in touch</a>
+    </div>
+  </section>
+  <div class="footnote" id="footnote">
+    <div class="wrap">
+      <p>* Where we see computing heading, not a count of today. Most of these apps will be used once and thrown away; the ones worth keeping are the ones that hold our data.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Edgible. Keep your data close.</span>
+    <a class="foot-logo" href="../"><img src="../images/edgible-symbol-white.png" alt="Edgible"></a>
+  </div>
+</footer>
+
+</body>
+</html>
