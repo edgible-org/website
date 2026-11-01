@@ -44,10 +44,11 @@ On the new machine, note where the folder now is. That is what you tell your ass
 
 Your assistant checks every file, loads the data, starts the app, and compares the fingerprint with the backup's: "3 pages, same as the backup: pass". The old machine is still serving the real app, so nothing has changed for anyone yet.
 
-Two things to expect when the machines are different:
+Three things to expect when the machines are different:
 
 - **The processor can differ.** Our Mac has an Apple chip and the Windows laptop an Intel-style one. The wiki ran on both, because its image supports both. Your assistant checks this when it starts the app, and tells you if an app won't run on the new machine.
 - **The app's settings name the old machine.** Your assistant changes the device name in the settings to the new one before publishing.
+- **Your logins and keys come across unchanged,** so people stay signed in and nothing needs resetting. If you think the old machine or the backup may have been exposed, tell your assistant, and it can replace the app's keys instead; people then sign in again. We haven't tried that part.
 
 ## 4. Switch
 
