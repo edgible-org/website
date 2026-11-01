@@ -98,6 +98,8 @@
     .belief { border-top: 2px solid var(--yellow); padding-top: 22px; }
     .belief:nth-child(2) { border-top-color: var(--teal); }
     .belief h3 { margin: 0 0 10px; font-size: 24px; color: var(--heading); }
+    /* The founders' photos: round, in black and white */
+    .belief .photo { display: block; width: 96px; height: 96px; margin: 0 0 16px; border-radius: 50%; object-fit: cover; filter: grayscale(1); box-shadow: 0 0 0 1px var(--line); }
     /* A link that opens in a new tab ends with an arrow out of the box, which a screen reader skips */
     a[target="_blank"]::after { content: "\2197" / ""; margin-left: .25em; font-size: .7em; text-decoration: none; display: inline-block; }
     .belief p { margin: 0 0 10px; color: var(--muted); font-size: 18px; }
@@ -271,10 +273,12 @@
       <h2 id="team-title">Who's building this.</h2>
       <div class="beliefs two">
         <div class="belief">
+          <img class="photo" src="../images/stefano-picozzi.jpg" alt="Stefano Picozzi" width="96" height="96">
           <h3><a href="https://www.linkedin.com/in/stefanopicozzi" target="_blank" rel="noopener noreferrer" aria-label="Stefano Picozzi on LinkedIn (opens in a new tab)">Stefano Picozzi</a></h3>
           <p><strong>Co-founder and CEO.</strong> Twenty years in senior technical and leadership roles at Netscape, BEA Systems (Oracle) and Red Hat, then CTO of a startup that is now an established business. MBA and an honours degree in mathematical statistics from the University of Adelaide, with postgraduate study in information technology and behavioural economics.</p>
         </div>
         <div class="belief">
+          <img class="photo" src="../images/jackson-hirst.jpg" alt="Jackson Hirst" width="96" height="96">
           <h3><a href="https://www.linkedin.com/in/jackson-hirst-b472a2169/" target="_blank" rel="noopener noreferrer" aria-label="Jackson Hirst on LinkedIn (opens in a new tab)">Jackson Hirst</a></h3>
           <p><strong>Co-founder and CTO.</strong> Cloud engineer at a circular-economy plastics recycling startup, and a Google Cloud Certified Professional Data Engineer. Startup programs at the University of Sydney (Incubate ProtoX) and the University of Adelaide (ThinkLab). A sugar cane farmer, he also builds agtech to optimise how a farm is run. Bachelor of Advanced Computing and Bachelor of Commerce.</p>
         </div>
