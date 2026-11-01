@@ -68,9 +68,10 @@
     th { color: var(--heading); }
     hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
     /* The site's icons are drawn light on dark, so on these pages each sits on a navy tile. */
-    /* A page's icon: a navy tile above its title; a small one beside each entry on the landing page. */
-    .page-ico { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px; background: var(--night-1); color: #ffffff; margin-bottom: 18px; }
-    .page-ico svg { width: 42px; height: 42px; }
+    /* A page's icon: a navy tile beside its title; a small one beside each entry on the landing page. */
+    .page-ico { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 48px; height: 48px; border-radius: 12px; background: var(--night-1); color: #ffffff; }
+    .page-ico svg { width: 36px; height: 36px; }
+    h1.with-ico { display: flex; align-items: center; gap: 16px; }
     .ico.sm { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--night-1); margin-right: 10px; vertical-align: middle; }
     .ico.sm svg { width: 22px; height: 22px; }
     /* The icons draw in the text colour, so give every navy tile a white one */

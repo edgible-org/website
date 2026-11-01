@@ -39,10 +39,14 @@ function nav(meta, file) {
   const html = link(meta.prev, 'prev') + link(meta.next, 'next');
   return html ? `<nav class="chapters">${html}</nav>` : '';
 }
-// icon: names a symbol in site/images/icons.svg, drawn on a navy tile above the title.
+// icon: names a symbol in site/images/icons.svg, drawn on a navy tile beside the title.
 function pageIcon(meta, slug) {
   if (!meta.icon) return '';
-  return `<span class="page-ico" aria-hidden="true"><svg><use href="${slug ? '../../' : '../'}images/icons.svg#${escape(meta.icon)}"/></svg></span>\n`;
+  return `<span class="page-ico" aria-hidden="true"><svg><use href="${slug ? '../../' : '../'}images/icons.svg#${escape(meta.icon)}"/></svg></span>`;
+}
+// The icon goes inside the page's first heading, so the two sit on one line.
+function withIcon(html, icon) {
+  return icon ? html.replace(/<h1([^>]*)>/, (_, attrs) => `<h1${attrs} class="with-ico">${icon}<span>`).replace('</h1>', '</span></h1>') : html;
 }
 
 for (const file of pages) {
@@ -56,7 +60,7 @@ for (const file of pages) {
     .replaceAll('{{description}}', escape(meta.description || ''))
     .replaceAll('{{root}}', slug ? '../../' : '../')
     .replaceAll('{{source}}', slug ? `../${file}` : 'index.md')
-    .replace('{{content}}', pageIcon(meta, slug) + marked.parse(body) + (slug ? nav(meta, file) : ''));
+    .replace('{{content}}', withIcon(marked.parse(body), pageIcon(meta, slug)) + (slug ? nav(meta, file) : ''));
   writeFileSync(join(out, 'index.html'), html);
   writeFileSync(join(dist, 'playbooks', file), source);
 }
