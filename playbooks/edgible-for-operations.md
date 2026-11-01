@@ -8,6 +8,8 @@ description: Back it up, move it, upgrade it, and know when something is wrong, 
 
 Back it up, move it, upgrade it, and know when something's wrong, so it keeps running. One playbook so far, in progress: the first three chapters are ready, and the rest are on the way. Every playbook begins with [Get Edgible running](../get-edgible-running/).
 
+**These playbooks are for apps that run from an Edgible card,** and work best with a card that says where its data lives. If you built the app yourself, the ideas still apply, but the tools don't, and we haven't tried these steps on a hand-built app.
+
 <figure class="flow">
 <svg viewBox="0 0 420 354" role="img" aria-labelledby="map-t map-d" xmlns="http://www.w3.org/2000/svg">
 <title id="map-t">Looking after it, in order</title>

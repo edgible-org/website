@@ -8,6 +8,8 @@ description: Step-by-step guides to running your own apps and AI with Edgible, w
 
 Each playbook takes you from nothing to something working, one short chapter at a time. Your AI assistant does the technical parts: you mostly tell it what you want.
 
+The playbooks use Edgible cards: ready-made, tested apps that your assistant sets up for you. An app you built yourself can still be published with Edgible, but the steps here were written and tested for cards.
+
 Pick a path. Both start with [Get Edgible running](get-edgible-running/).
 
 <div class="paths">

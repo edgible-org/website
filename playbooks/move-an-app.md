@@ -13,6 +13,7 @@ Sooner or later an app outgrows its machine, or the machine goes. A move is a re
 
 > **What you need**
 >
+> - An app that runs from an Edgible card, one whose card says where its data lives (see [Looking after it](../looking-after-it/)).
 > - [Chapters 1 and 2](../back-up-an-app/) done, so you know a backup of this app restores.
 > - The new machine, set up as in [Get Edgible running](../get-edgible-running/) and showing as online in Edgible. Your assistant can set it up.
 > - Your AI assistant on the old machine, and on the new one. We ran it that way, with you passing the file between them.
