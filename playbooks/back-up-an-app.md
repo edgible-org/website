@@ -27,6 +27,8 @@ It starts with a **dry run**: it tells you what it would copy, which parts of th
 
 For a small app the stop is a few seconds. The app starts again by itself, and the assistant checks that it is healthy.
 
+By default the backup goes in a folder next to the app. To put it somewhere else, say so: "Back up my team wiki to my external drive." That works for any folder your machine can see.
+
 ## 2. See what you've got
 
 When it's done, your assistant tells you where the backup is: a folder next to the app, named with the date and time. In it:
@@ -39,11 +41,14 @@ Apps that can be copied while they run, such as ones with a database, don't stop
 
 ## 3. Keep a copy somewhere else
 
-The backup is on the same machine as the app. If the machine is lost, so is the backup. Your assistant says so, and you should listen:
+The backup is on the same machine as the app unless you chose otherwise. If that machine is lost, so is the backup. Your assistant says so, and you should listen.
 
-> Copy that backup to somewhere else too.
+A copy somewhere else, on an external drive or another storage service, is a good idea. That part is up to you: **Edgible writes the backup into a folder you choose, and moving that folder elsewhere is something your AI can help with.**
 
-An external drive, another computer, or cloud storage you trust. Because the backup holds your app's keys, keep that copy private.
+> Copy that backup folder to somewhere else too.
+
+- **Copy the whole folder.** A restore checks every file in it, and a damaged or incomplete copy is caught before anything changes.
+- **Keep it private.** The backup holds your app's settings and keys.
 
 ## What you've just done
 
