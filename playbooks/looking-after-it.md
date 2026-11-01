@@ -23,7 +23,7 @@ Running your own apps means you are the one who looks after them. That's not har
 | 1 | [Back up an app](../back-up-an-app/) | A backup of an app and its data, and a plain account of what stopped and for how long |
 | 2 | [Restore it, and prove it](../restore-and-prove-it/) | A copy restored from the backup, checked against it, and the way back if you ever need one |
 | 3 | [Move an app to another machine](../move-an-app/) | An app and its data on a different machine, checked against a fingerprint, with the old copy kept until you're sure |
-| 4 | Upgrade an app safely | *Coming* |
+| 4 | Upgrade an app safely | *Coming*; for now, back up first and ask your AI what the upgrade changes (see [Edgible for Operations](../edgible-for-operations/#upgrading-for-now)) |
 | 5 | Know when something is wrong | *Coming* |
 | 6 | When the machine dies | *Coming* |
 

@@ -31,8 +31,18 @@ The chapters:
   1. <span class="ico sm" aria-hidden="true"><svg><use href="../../images/icons.svg#backup"/></svg></span>[Back up an app](../back-up-an-app/)
   2. <span class="ico sm" aria-hidden="true"><svg><use href="../../images/icons.svg#tested"/></svg></span>[Restore it, and prove it](../restore-and-prove-it/)
   3. <span class="ico sm" aria-hidden="true"><svg><use href="../../images/icons.svg#machine"/></svg></span>[Move an app to another machine](../move-an-app/)
-  4. Upgrade an app safely: coming
+  4. Upgrade an app safely: coming; for now, see [Upgrading, for now](#upgrading-for-now)
   5. Know when something is wrong: coming
   6. When the machine dies: coming
+
+<h2 id="upgrading-for-now">Upgrading, for now</h2>
+
+Every app is different, and we can't predict what an upgrade will ask of yours, so there's no fixed chapter yet. Until there is, the approach is simple, and your AI assistant can do most of it:
+
+1. **Back it up first.** [Chapter 1](../back-up-an-app/). Its fingerprint then tells you whether your data came through.
+2. **Ask your AI what the upgrade changes.** For example: "What changes if I upgrade my team wiki to the newest version? Anything that could hurt my data?" It can compare the old and new card and tell you in plain words, such as new settings, new image versions, or a database moving to a new major version.
+3. **Let it recommend a path,** and ask before it acts. That may be the app's usual upgrade, or something specific to the app, such as a database's own upgrade tool. A safe way to try an upgrade is to restore your backup as a copy beside the app and upgrade the copy first ([chapters 2 and 3](../restore-and-prove-it/)). If the copy breaks, your real app is untouched, and if it works, you can switch. An upgrade can change how your data is stored, and on a copy that costs you nothing.
+
+If the AI isn't sure, it should say so and stop, not guess. We haven't run upgrades end to end in these playbooks, and we may never write one fixed recipe, because apps differ too much.
 
 New here? Start at [all the playbooks](../), or go straight to [Get Edgible running](../get-edgible-running/).
