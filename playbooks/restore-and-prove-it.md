@@ -18,6 +18,8 @@ A backup you've never restored is a hope. This chapter turns it into a fact: you
 
 ## 1. Restore a copy, beside the real thing
 
+If your backup lives somewhere else, bring the whole folder back to this machine first.
+
 > Restore my team wiki's latest backup as a copy beside it, and tell me if it matches.
 
 Your assistant:
