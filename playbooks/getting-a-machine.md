@@ -19,7 +19,7 @@ Edgible runs on a computer you control. If you have a spare one, use that. If no
 
 Whichever you choose, tell your AI these, so it gets them right:
 
-- **Ubuntu 24.04 or 26.04,** or a Mac. Not WSL on Windows: Edgible can't publish apps from there yet.
+- **Ubuntu 24.04 or 26.04,** or a Mac. On Windows, Ubuntu 26.04 in WSL2 works, but WSL stops when nothing is using it, so it needs a small scheduled task to stay up, and it stops when Windows sleeps. Your AI sets this up and asks first.
 - **Memory:** 2 GB for a website, 4 GB for an AI gateway, 8 GB for your own AI agent with its gateway.
 - **Disk:** 20 to 30 GB free.
 - **Internet out, and no ports in.** Edgible connects out, so there's nothing to open in a firewall or router. If your AI offers to open a port for Edgible, say no.
