@@ -41,7 +41,7 @@ Every app is different, and we can't predict what an upgrade will ask of yours, 
 
 1. **Back it up first.** [Chapter 1](../back-up-an-app/). Its fingerprint then tells you whether your data came through.
 2. **Ask your AI what the upgrade changes.** For example: "What changes if I upgrade my team wiki to the newest version? Anything that could hurt my data?" It can compare the old and new card and tell you in plain words, such as new settings, new image versions, or a database moving to a new major version.
-3. **Let it recommend a path,** and ask before it acts. That may be the app's usual upgrade, a restore of your backup as a copy that you upgrade and check before switching ([chapters 2 and 3](../restore-and-prove-it/)), or something specific to the app, such as a database's own upgrade tool.
+3. **Let it recommend a path,** and ask before it acts. That may be the app's usual upgrade, or something specific to the app, such as a database's own upgrade tool. A safe way to try an upgrade is to restore your backup as a copy beside the app and upgrade the copy first ([chapters 2 and 3](../restore-and-prove-it/)). If the copy breaks, your real app is untouched, and if it works, you can switch. An upgrade can change how your data is stored, and on a copy that costs you nothing.
 
 If the AI isn't sure, it should say so and stop, not guess. We haven't run upgrades end to end in these playbooks, and we may never write one fixed recipe, because apps differ too much.
 
