@@ -56,7 +56,7 @@ When you've looked at the copy, ask your assistant to remove it:
 - **You can get back from a mistake,** with a safety backup taken first.
 - **You've seen how to compare** an app with a backup at any time.
 
-Restoring onto a different machine is what a move does. That's coming next in this playbook.
+Restoring onto a different machine is what a move does. That's [the next chapter](../move-an-app/).
 
 <details>
 <summary>Prefer to do it by hand?</summary>

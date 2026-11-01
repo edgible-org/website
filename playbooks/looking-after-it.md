@@ -13,7 +13,8 @@ Running your own apps means you are the one who looks after them. That's not har
 
 - **Back it up,** so a dead disk or a mistake doesn't lose anything.
 - **Restore it, and prove it worked.** A backup you haven't restored is a hope. You'll restore one beside the running app and check that it holds the same data.
-- **Soon:** move an app to another machine, upgrade it safely, know when something is wrong, and what to do when the machine dies.
+- **Move an app to another machine,** even a different kind of computer, and check nothing was lost.
+- **Soon:** upgrade it safely, know when something is wrong, and what to do when the machine dies.
 
 ## The road map
 
@@ -21,7 +22,7 @@ Running your own apps means you are the one who looks after them. That's not har
 | --- | --- | --- |
 | 1 | [Back up an app](../back-up-an-app/) | A backup of an app and its data, and a plain account of what stopped and for how long |
 | 2 | [Restore it, and prove it](../restore-and-prove-it/) | A copy restored from the backup, checked against it, and the way back if you ever need one |
-| 3 | Move an app to another machine | *Coming* |
+| 3 | [Move an app to another machine](../move-an-app/) | An app and its data on a different machine, checked against a fingerprint, with the old copy kept until you're sure |
 | 4 | Upgrade an app safely | *Coming* |
 | 5 | Know when something is wrong | *Coming* |
 | 6 | When the machine dies | *Coming* |
