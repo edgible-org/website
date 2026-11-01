@@ -35,7 +35,7 @@ The chapters:
   5. Know when something is wrong: coming
   6. When the machine dies: coming
 
-## Upgrading, for now
+<h2 id="upgrading-for-now">Upgrading, for now</h2>
 
 Every app is different, and we can't predict what an upgrade will ask of yours, so there's no fixed chapter yet. Until there is, the approach is simple, and your AI assistant can do most of it:
 
