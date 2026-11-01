@@ -16,7 +16,7 @@ Sooner or later an app outgrows its machine, or the machine goes. A move is a re
 > - [Chapters 1 and 2](../back-up-an-app/) done, so you know a backup of this app restores.
 > - The new machine, set up as in [Get Edgible running](../get-edgible-running/) and showing as online in Edgible. Your assistant can set it up.
 > - Your AI assistant on the old machine, and on the new one. We ran it that way, with you passing the file between them.
-> - A way to carry the backup across (step 2).
+> - A way to get the backup folder from the old machine to the new one (step 2). That part is yours.
 
 ## 1. Back up on the old machine
 
@@ -24,19 +24,22 @@ Sooner or later an app outgrows its machine, or the machine goes. A move is a re
 
 It's the same backup as in [chapter 1](../back-up-an-app/). Your assistant tells you what stops and for how long, and waits for your yes. In our run, a small wiki stopped for **8 seconds**. It then reports a fingerprint of the data, for us "3 pages", which the new machine will have to match.
 
-Ask for a single file you can carry:
+Ask your assistant where it put the backup, and note the full path of the folder. If you want it somewhere particular, such as an external drive, say so before it starts.
 
-> Pack that backup into one file I can copy, and give me its checksum.
+## 2. Make the backup visible to the new machine
 
-## 2. Carry it to the new machine
+Moving the backup between computers is up to you. Edgible writes it into a folder, and reads it back from a folder. How the folder gets from one machine to the other is your choice, and your assistant can help if you ask: an external drive, a shared network folder, or any way you already move files. Two rules:
 
-The backup holds the app's settings and its passwords and keys, so treat it like a password. Don't email it and don't put it in a shared chat or a public folder. A USB stick is the simplest and safest way. If both computers are on the same network, your assistant can also share the one file for a few minutes and shut the share down as soon as the other machine has it. We did that, and checked the checksum on the other side: it matched exactly.
+- **Bring the whole folder.** It has a list of every file in it, and a restore checks them all. A damaged or incomplete copy is caught before anything changes.
+- **Keep it private.** The backup holds the app's settings and its passwords and keys, so don't put it anywhere other people can read it.
 
-> Copy that file to my new machine, and check that it arrived whole.
+On the new machine, note where the folder now is. That is what you tell your assistant in the next step.
+
+*What we did:* the Mac and the Windows laptop were on the same network, so we packed the folder into one file, shared it for a few minutes, fetched it on the other side, checked it was identical, and shut the share down. Do whatever suits you.
 
 ## 3. Restore it on the new machine
 
-> Restore that backup on this machine as my team wiki, and tell me if it matches.
+> Restore the backup in this folder on this machine as my team wiki, and tell me if it matches.
 
 Your assistant checks every file, loads the data, starts the app, and compares the fingerprint with the backup's: "3 pages, same as the backup: pass". The old machine is still serving the real app, so nothing has changed for anyone yet.
 
@@ -81,16 +84,14 @@ card-kit's `backup-card`, `restore-card` and `verify-card`, from the Edgible ski
 ```bash
 python3 backup-card.py ~/otter-wiki --dry-run
 python3 backup-card.py ~/otter-wiki                       # writes ~/otter-wiki-backups/<stamp>/
-tar -czf otter-wiki-backup.tgz -C ~/otter-wiki-backups <stamp>
-shasum -a 256 otter-wiki-backup.tgz                       # sha256sum on Linux
+# or: python3 backup-card.py ~/otter-wiki --to /path/to/a/folder
 ```
 
-On the new machine, after the file arrives and the checksum matches:
+Get that whole folder to the new machine however you like. Then, there:
 
 ```bash
-mkdir in && tar -xzf otter-wiki-backup.tgz -C in
-python3 restore-card.py in/<stamp> ~/otter-wiki --dry-run
-python3 restore-card.py in/<stamp> ~/otter-wiki --yes
+python3 restore-card.py <path to the backup folder> ~/otter-wiki --dry-run
+python3 restore-card.py <path to the backup folder> ~/otter-wiki --yes
 sed -i 's/^DEVICE=.*/DEVICE=<new device name>/' ~/otter-wiki/card.env
 ```
 
@@ -98,7 +99,7 @@ Then publish with the card's README (the Publish step), after `edgible app delet
 
 Snags we hit, so you don't have to:
 
-- **A backup packed on a Mac** includes hidden `._` files. Delete them from the unpacked copy (`find in -name '._*' -delete`) before restoring, or pack with `COPYFILE_DISABLE=1 tar …`.
+- **A folder packed on a Mac** (for example with `tar`) includes hidden `._` files. Delete them from the unpacked copy (`find <folder> -name '._*' -delete`) before restoring, or pack with `COPYFILE_DISABLE=1 tar …`.
 - **Run the restore as your own user** when you can, not with `sudo`. If you used `sudo`, run `sudo chown -R "$USER": ~/otter-wiki` afterwards, or the Publish step can't read `card.env`.
 
 </details>
