@@ -1,10 +1,10 @@
 ---
 icon: recipe
-title: Playbooks
+title: AI Playbooks
 description: Step-by-step guides to running your own apps and AI with Edgible, written for you and your AI assistant.
 ---
 
-# Playbooks
+# AI Playbooks
 
 Each playbook takes you from nothing to something working, one short chapter at a time. Your AI assistant does the technical parts: you mostly tell it what you want.
 
