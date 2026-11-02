@@ -2,12 +2,9 @@
   "name": "edgible-website",
   "private": true,
   "type": "module",
-  "description": "www.edgible.ai: the page and the playbooks",
+  "description": "www.edgible.ai: the main page, and redirects for the playbooks, which moved to cards.edgible.org",
   "scripts": {
     "build": "node build/build.mjs",
     "preview": "node build/build.mjs && python3 -m http.server 8787 --bind 127.0.0.1 -d dist"
-  },
-  "dependencies": {
-    "marked": "18.1.1"
   }
 }
