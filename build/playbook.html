@@ -110,10 +110,10 @@
       table { display: block; overflow-x: auto; }
     }
     /* The route through the playbooks, drawn. */
-    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 28px 0 8px; }
+    .paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; margin: 28px 0 8px; }
     .path { display: block; padding: 20px 22px 18px; border: 1.5px solid var(--line); border-radius: var(--radius); background: #ffffff; color: var(--ink); text-decoration: none; }
     a.path:hover, a.path:focus { border-color: var(--link); }
-    .path h2 { margin: 14px 0 6px; font-size: 22px; }
+    .path h2 { margin: 14px 0 6px; font-size: 20px; }
     .path p { margin: 0 0 12px; color: var(--ink); }
     .path .go { font-weight: 700; color: var(--link); font-size: 15px; }
     .path.soon { background: transparent; border-style: dashed; }
