@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>document.documentElement.className += " js";</script>
+  <link rel="stylesheet" href="../../menu.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Choosing between them · Edgible</title>
+  <meta name="description" content="Which questions to send to your private model and which to the cloud, what the private model is good at, and what it isn't.">
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="alternate" type="text/markdown" title="This page as Markdown" href="../choosing-between-them.md">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* The main page's typeface, colours, top bar and footer (site/index.html), with styles for reading. */
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    /* Playbooks are for doing, so they read on a light page; the dark top bar keeps them Edgible's. */
+    :root {
+      --night-1: #111827;
+      --line: #e3e6ef;
+      --paper: #fbfaf7;
+      --surface: #f1f2f7;
+      --yellow: #ffd21f;
+      --prompt: #fff8d6;
+      --link: #2e4a9e;
+      --heading: #111827;
+      --ink: #2b3245;
+      --muted: #5d6680;
+      --radius: 14px;
+      --wrap: 1120px;
+      --read: 760px;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--link); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    header.bar { position: sticky; top: 0; z-index: 10; background: var(--night-1); border-bottom: 1px solid rgba(255,255,255,.12); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    nav.links { display: flex; gap: 24px; font-weight: 500; font-size: 16px; }
+    nav.links a { text-decoration: none; color: #a7b1dc; }
+    nav.links a:hover { color: #ffffff; }
+
+    main { max-width: var(--read); margin: 0 auto; padding: 56px 24px 88px; }
+    h1, h2, h3 { color: var(--heading); line-height: 1.25; font-weight: 800; }
+    h1 { font-size: 40px; margin: 0 0 16px; }
+    h2 { font-size: 26px; margin: 48px 0 12px; }
+    h3 { font-size: 20px; margin: 32px 0 8px; }
+    p, li { max-width: 70ch; }
+    strong { color: var(--heading); }
+    /* A quote is something to say to your AI, or a box such as What you need. */
+    blockquote { margin: 20px 0; padding: 16px 20px; background: var(--prompt); border-left: 4px solid var(--yellow); border-radius: 0 var(--radius) var(--radius) 0; color: var(--heading); }
+    blockquote p { margin: 0; }
+    blockquote p + p, blockquote ul { margin-top: 10px; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; background: var(--surface); padding: 2px 6px; border-radius: 6px; }
+    pre { background: var(--night-1); color: #e6eaff; border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; }
+    pre code { background: none; padding: 0; color: inherit; }
+    details { margin: 24px 0; padding: 12px 18px; background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); }
+    summary { cursor: pointer; color: var(--heading); font-weight: 700; }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 16px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--heading); }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+    /* The site's icons are drawn light on dark, so on these pages each sits on a navy tile. */
+    /* A page's icon: a navy tile beside its title; a small one beside each entry on the landing page. */
+    .page-ico { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 48px; height: 48px; border-radius: 12px; background: var(--night-1); color: #ffffff; }
+    .page-ico svg { width: 36px; height: 36px; }
+    h1.with-ico { display: flex; align-items: center; gap: 16px; }
+    .ico.sm { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--night-1); margin-right: 10px; vertical-align: middle; }
+    .ico.sm svg { width: 22px; height: 22px; }
+    /* The icons draw in the text colour, so give every navy tile a white one */
+    .ico, .page-ico, .flow use { color: #ffffff; }
+    /* A list item with an icon: no bullet or number (the map above has the numbers), the icon hangs in the margin
+       and the text, even when it wraps, stays in its own column */
+    li:has(.ico.sm) { list-style: none; position: relative; padding-left: 54px; margin: 18px 0; min-height: 34px; }
+    li .ico.sm { position: absolute; left: 0; top: -2px; width: 36px; height: 36px; margin: 0; }
+    li .ico.sm svg { width: 26px; height: 26px; }
+    ul:has(.ico.sm), ol:has(.ico.sm) { padding-left: 0; }
+    li:has(.ico.sm) > p { margin: 0; }
+    li > ol:has(.ico.sm) { margin: 14px 0 0; }
+    li > ol > li:has(.ico.sm) { margin: 12px 0; }
+    h2 .ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--night-1); margin-right: 12px; vertical-align: middle; flex: none; }
+    h2 .ico svg { width: 30px; height: 30px; }
+    h2:has(.ico) { display: flex; align-items: center; }
+
+    /* Previous and Next, at the end of each chapter. */
+    nav.chapters { display: flex; gap: 14px; margin-top: 56px; flex-wrap: wrap; }
+    nav.chapters a { flex: 1 1 240px; display: block; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; text-decoration: none; color: var(--heading); font-weight: 700; }
+    nav.chapters a:hover { border-color: var(--link); }
+    nav.chapters a span { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 4px; }
+    nav.chapters a.next { text-align: right; margin-left: auto; }
+    footer { padding: 14px 0; font-size: 14px; color: #a7b1dc; background: var(--night-1); }
+    footer a { color: #a7b1dc; }
+    footer a:hover { color: #ffffff; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer .foot-right { display: flex; align-items: center; gap: 20px; }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      main { padding: 40px 16px 64px; }
+      nav.links { gap: 16px; font-size: 15px; }
+      h1 { font-size: 32px; }
+      table { display: block; overflow-x: auto; }
+    }
+    /* The route through the playbooks, drawn. */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 28px 0 8px; }
+    .path { display: block; padding: 20px 22px 18px; border: 1.5px solid var(--line); border-radius: var(--radius); background: #ffffff; color: var(--ink); text-decoration: none; }
+    a.path:hover, a.path:focus { border-color: var(--link); }
+    .path h2 { margin: 14px 0 6px; font-size: 22px; }
+    .path p { margin: 0 0 12px; color: var(--ink); }
+    .path .go { font-weight: 700; color: var(--link); font-size: 15px; }
+    .path.soon { background: transparent; border-style: dashed; }
+    .path.soon h2, .path.soon p { color: var(--muted); }
+    .path.soon .go { color: var(--muted); }
+    .path svg { width: 100%; max-width: 220px; height: auto; display: block; }
+    .path .mf { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .path .md { fill: var(--yellow); }
+    .path .rb { fill: none; stroke: #8a6a00; stroke-width: 1.5; stroke-linecap: round; }
+    .path .eye { fill: var(--ink); }
+    .path .og { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .path .og.soon { stroke: var(--muted); }
+    .path .dash { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    @media (max-width: 640px) { .paths { grid-template-columns: 1fr; } }
+    figure.flow { margin: 28px auto; max-width: 460px; }
+    figure.flow svg { width: 100%; height: auto; display: block; font-family: inherit; }
+    .flow a { cursor: pointer; }
+    .flow .frame { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .flow .box { fill: #ffffff; stroke: var(--line); stroke-width: 1.5; }
+    .flow .box.opt { stroke-dasharray: 5 4; stroke: var(--muted); }
+    .flow a:hover .box, .flow a:focus .box { stroke: var(--link); }
+    .flow .num { fill: var(--yellow); }
+    .flow .numt { fill: var(--heading); font-weight: 800; font-size: 14px; }
+    .flow .t { fill: var(--heading); font-weight: 800; font-size: 17px; }
+    .flow .t.b { font-size: 15px; }
+    .flow .s { fill: var(--muted); font-size: 13.5px; }
+    .flow .s2 { fill: var(--heading); font-weight: 700; font-size: 14px; }
+    .flow .arr { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../../"><img src="../../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="links" id="site-nav">
+      <a href="../../playbooks/">Playbooks</a>
+      <a href="https://cards.edgible.org">Cards</a>
+      <a href="../../proof/">Proof</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+<h1 class="with-ico"><span class="page-ico" aria-hidden="true"><svg><use href="../../images/icons.svg#map"/></svg></span><span>Choosing between them</span></h1>
+<p><em>Chapter 6 of <a href="../a-private-model-for-your-agent/">A private model for your agent</a>. Draft: <a href="mailto:stefano@edgible.com?subject=Playbook%20feedback">tell us how it goes</a>.</em></p>
+<p>You now have both. This last chapter is a rule of thumb, and an honest account of the trade.</p>
+<h2>The rule of thumb</h2>
+<p>Ask yourself one question first: <strong>would I mind if this left my computer?</strong> If so, use <strong>private</strong>. If not, use whatever&#39;s best for the job.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Use</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Summarise or reword text you paste in</td>
+<td>private</td>
+<td>Small models do this well, and the text stays home</td>
+</tr>
+<tr>
+<td>Draft an email, a note, a plan</td>
+<td>private, or fast</td>
+<td>Both are fine; private if the content is personal</td>
+</tr>
+<tr>
+<td>Questions about a document you paste in</td>
+<td>private-smart</td>
+<td>More room to follow a long text</td>
+</tr>
+<tr>
+<td>Anything involving a client, a patient, a contract, your health or money</td>
+<td>private-smart</td>
+<td>This is what it&#39;s for</td>
+</tr>
+<tr>
+<td>Quick everyday questions</td>
+<td>fast</td>
+<td>Quickest and a fraction of a cent</td>
+</tr>
+<tr>
+<td>Hard reasoning, maths, careful analysis</td>
+<td>smart or best</td>
+<td>Cloud models are still ahead</td>
+</tr>
+<tr>
+<td>An agent doing a long job with many tools</td>
+<td>fast, smart or best</td>
+<td>Small local models drift on long, many-step jobs; see below</td>
+</tr>
+</tbody></table>
+<h2>What the private model is good at</h2>
+<ul>
+<li><strong>Privacy,</strong> which nothing else gives you. The question and the answer stay on your hardware, and Edgible&#39;s part is the key that lets your gateway reach it.</li>
+<li><strong>Cost that doesn&#39;t surprise you.</strong> There&#39;s no bill, whatever the agent does. A runaway agent costs you warm air, not dollars.</li>
+<li><strong>Always the same.</strong> A cloud model is retired or changed on someone else&#39;s schedule. Yours changes when you say.</li>
+</ul>
+<h2>What it isn&#39;t good at, yet</h2>
+<p>We measured these on a computer with 32 GB of memory its GPU can use. Yours will differ, but the shape won&#39;t.</p>
+<ul>
+<li><strong>The start of an agent conversation.</strong> The numbers below are for short questions. Your agent opens every conversation with about 12,000 tokens of instructions and tools, and a local model reads them at the pace of its hardware: 80 seconds with <code>qwen2.5:7b</code> on our test computer, then under a second per message for the rest of that conversation. The wait comes back after five idle minutes, when the computer unloads the model. It is a cost per conversation, not per message, so a few long conversations suit a private model better than many short ones.</li>
+<li><strong>Speed.</strong> A small model answers a short question almost at once. The 20 billion parameter one is fine. The biggest we tried, <code>qwen3.5:27b</code>, produced about six words a second, and took half a minute for a short answer once you count loading it. Good for a document you leave running. Slow for a chat.</li>
+<li><strong>Memory.</strong> A model needs about its own size in memory <em>on top of</em> everything else on the computer. A model that nearly fits makes everything slow.</li>
+<li><strong>Long jobs with many tools.</strong> A single tool call works: we asked both <code>qwen2.5:7b</code> and <code>gpt-oss:20b</code> for the weather in Paris with a weather tool on offer, three times each, and every time they called it correctly. What we saw go wrong was a long agent session on a small model with a full set of tools: slow, mostly at the start of each conversation (above), and clumsy. Cloud models are still the safer choice for that. Use private for what you say and ask, and a cloud model for a long job you want your agent to <em>do</em>, unless you&#39;ve tried a local model on your own tasks and it holds up.</li>
+<li><strong>Strength.</strong> A 7 billion parameter model is not a cloud model. For hard problems it will be wrong more often, and say it with the same confidence. Check what matters.</li>
+</ul>
+<h2>Keep an eye on</h2>
+<ul>
+<li><strong>Is the GPU computer awake?</strong> <code>private</code> doesn&#39;t fall back, by design. &quot;It can&#39;t answer&quot; means check that computer.</li>
+<li><strong>Which model did you pick?</strong> The menu in your agent says.</li>
+<li><strong>Disk.</strong> Models are big. <code>ollama</code> on that computer lists them; delete the ones you don&#39;t use.</li>
+</ul>
+<h2>What you&#39;ve just done</h2>
+<p>You&#39;ve built something most people don&#39;t have: a way to use AI that matches the sensitivity of the question.</p>
+<ul>
+<li><strong>Your own hardware, used well,</strong> for the work that must stay home.</li>
+<li><strong>Cloud models, used on purpose,</strong> for the work that&#39;s better there.</li>
+<li><strong>One agent, one gateway, one place to see what everything costs.</strong></li>
+<li><strong>No ports opened,</strong> on either machine, and no key shown to anyone.</li>
+</ul>
+<p>The next time someone says &quot;I&#39;d use AI for that but I can&#39;t put it in a cloud service&quot;, you know what to tell them.</p>
+<p>Want to stop, or start again? <a href="../take-it-all-down/">Take it all down</a> removes the private model and everything else cleanly, in reverse order, keeping your data or not.</p>
+<nav class="chapters"><a class="prev" href="../give-your-agent-your-files/"><span>← Previous</span>Give your agent your own files</a><a class="next" href="../take-it-all-down/"><span>Next →</span>Take it all down</a></nav>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Edgible. Keep your data close.</span>
+    <div class="foot-right">
+      <span><a href="https://cards.edgible.org">Cards</a> · <a href="../../contact/">Contact</a> · <a href="../../llms.txt">For AI assistants</a> · <a href="../choosing-between-them.md">This page as Markdown</a></span>
+      <a class="foot-logo" href="../../"><img src="../../images/edgible-symbol-white.png" alt="Edgible"></a>
+    </div>
+  </div>
+</footer>
+<script src="../../menu.js" defer></script>
+</body>
+</html>

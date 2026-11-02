@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en" data-default-theme="light">
+<head>
+  <link rel="stylesheet" href="theme.css">
+  <script src="theme.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found · Edgible</title>
+  <meta name="description" content="This page is not here. Here is where to go next.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f6f7fd">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face { font-family: "Nexa"; src: url("/fonts/Nexa-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("/fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("/fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("/fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    :root {
+      --night-1: #111827;
+      --night-2: #1e293b;
+      --night-3: #312e81;
+      --bg: var(--night-1);
+      --bg-alt: rgba(255,255,255,.03);
+      --surface: rgba(255,255,255,.05);
+      --line: rgba(255,255,255,.12);
+      --blue-mid: #2e4a9e;
+      --yellow: #ffd21f;
+      --coral: #ff7a59;
+      --teal: #4fc3a8;
+      --heading: #ffffff;
+      --ink: #e6eaff;
+      --muted: #a7b1dc;
+      --muted-2: #7c86b8;
+      --on-yellow: #111827;
+      --accent-text: #ffd21f;
+      --bar-bg: rgba(17,24,39,.72);
+      --radius: 14px;
+      --wrap: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { background: linear-gradient(135deg, var(--night-1) 0%, var(--night-2) 45%, var(--night-3) 100%) fixed; background-color: var(--night-1); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: transparent; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-text); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    header.bar { background: var(--bar-bg); border-bottom: 1px solid var(--line); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    header.bar .note { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+    .btn { display: inline-block; padding: 13px 24px; border-radius: 999px; font-weight: 600; font-size: 17px; text-decoration: none; }
+    .btn.primary { background: var(--yellow); color: var(--on-yellow); box-shadow: 0 6px 22px rgba(255,210,31,.25); }
+
+    .hero { padding: 88px 0 72px; background: radial-gradient(ellipse at 70% 100%, rgba(99,102,241,.18), transparent 60%); }
+    .eyebrow, .kicker { font-weight: 600; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 14px; }
+    .eyebrow { color: var(--teal); }
+    .kicker { color: var(--coral); }
+    h1 { font-size: clamp(40px, 7vw, 80px); line-height: 1.04; letter-spacing: -.02em; margin: 0 0 24px; color: var(--heading); font-weight: 800; }
+    h1 span { display: block; }
+    h1 span + span { color: var(--accent-text); }
+    .lede { font-size: clamp(19px, 2.2vw, 22px); color: var(--muted); max-width: 760px; margin: 0 0 12px; }
+    .lede strong { color: var(--heading); font-weight: 600; }
+
+    /* The scale graphic: a field of dots for each number, the second far denser than the first. */
+    .scale { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 52px; }
+    .tile { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); min-height: 230px; padding: 26px; display: flex; flex-direction: column; justify-content: flex-end; background-color: rgba(255,255,255,.03); }
+    .tile::before { content: ""; position: absolute; inset: 0; opacity: .85; -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 78%); mask-image: linear-gradient(to bottom, #000 0%, transparent 78%); }
+    .tile.agents::before { background-image: radial-gradient(circle, var(--teal) 2.2px, transparent 2.6px); background-size: 26px 26px; }
+    .tile.apps::before { background-image: radial-gradient(circle, var(--yellow) 1.4px, transparent 1.8px); background-size: 12px 12px; }
+    .tile > * { position: relative; }
+    .tile .big { font-size: clamp(44px, 6vw, 72px); font-weight: 800; line-height: 1; letter-spacing: -.02em; color: var(--heading); margin: 0; }
+    .tile .what { margin: 8px 0 0; color: var(--muted); font-size: 18px; }
+    .scale-note { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+
+    section { padding: 96px 0; }
+    section.alt { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    h2 { font-size: clamp(30px, 4.2vw, 46px); line-height: 1.12; letter-spacing: -.015em; margin: 0 0 20px; color: var(--heading); font-weight: 700; }
+    .intro { font-size: 21px; color: var(--muted); max-width: 760px; margin: 0 0 40px; }
+    .prose p { font-size: 20px; color: var(--muted); max-width: 760px; margin: 0 0 20px; }
+    .prose strong { color: var(--accent-text); font-weight: 500; }
+
+    .ladder, .ways, .tiers, .beliefs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .beliefs.two { grid-template-columns: repeat(2, 1fr); gap: 36px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 26px; display: flex; flex-direction: column; }
+    .card .label { font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+    .card h3 { margin: 0 0 10px; font-size: 26px; color: var(--heading); line-height: 1.2; font-weight: 700; }
+    .card p { margin: 0 0 12px; color: var(--muted); }
+    .card ul { margin: 0; padding-left: 20px; color: var(--muted); }
+    .card li { margin-bottom: 6px; }
+    .card .eg { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); font-size: 15px; }
+    .card .tag { font-weight: 500; color: var(--accent-text); margin: 0 0 14px; }
+    .sub { font-size: 22px; color: var(--heading); margin: 56px 0 8px; font-weight: 600; }
+    .subnote { color: var(--muted); max-width: 720px; margin: 0 0 24px; }
+    .hero-line { margin-top: 40px; padding: 22px 26px; border-left: 4px solid var(--yellow); background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; font-size: 22px; color: var(--heading); }
+    .hero-line span { display: block; font-size: 15px; color: var(--muted); margin-top: 6px; }
+
+    .belief { border-top: 2px solid var(--yellow); padding-top: 22px; }
+    .belief:nth-child(2) { border-top-color: var(--teal); }
+    .belief h3 { margin: 0 0 10px; font-size: 24px; color: var(--heading); }
+    .belief p { margin: 0 0 10px; color: var(--muted); font-size: 18px; }
+
+    .proof-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .proof-links a { text-decoration: none; padding: 11px 20px; border: 2px solid var(--blue-mid); border-radius: 999px; color: var(--heading); font-weight: 600; }
+    .proof-links a:hover { border-color: var(--muted); }
+
+    .closing { background: radial-gradient(ellipse at 50% 0%, rgba(255,210,31,.10), transparent 60%), var(--bg-alt); border-top: 1px solid var(--line); }
+    .closing p { color: var(--muted); font-size: 20px; max-width: 680px; margin: 0 0 32px; }
+
+
+
+    .lost { padding: 96px 0 64px; background: radial-gradient(ellipse at 70% 100%, rgba(99,102,241,.18), transparent 60%); }
+    .lost h1 { font-size: clamp(40px, 6.4vw, 72px); }
+    .lost .lede { margin-bottom: 36px; }
+    .lost .proof-links { margin-top: 0; }
+    /* A news ticker along the bottom of the screen: a label, then the facts scrolling past. */
+    .ticker { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; display: flex; align-items: stretch; height: 52px; background: #0b1020; border-top: 2px solid var(--yellow); box-shadow: 0 -8px 28px rgba(0,0,0,.35); }
+    .ticker .tag { flex: none; display: flex; align-items: center; padding: 0 20px; background: var(--yellow); color: var(--on-yellow); font-weight: 800; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+    .ticker .window { flex: 1; overflow: hidden; display: flex; align-items: center; }
+    .ticker .track { display: flex; flex: none; white-space: nowrap; will-change: transform; animation: tick var(--dur, 120s) linear infinite; }
+    .ticker .window:hover .track, .ticker .window:focus-within .track { animation-play-state: paused; }
+    .ticker .item { display: inline-flex; align-items: center; font-size: 17px; color: #ffffff; }
+    .ticker .item::after { content: ""; width: 7px; height: 7px; margin: 0 28px; border-radius: 50%; background: var(--coral); flex: none; }
+    .ticker .item a { color: var(--yellow); font-weight: 600; margin-left: 8px; }
+    @keyframes tick { to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .ticker .track { animation: none; }
+      .ticker .item:not(:first-child) { display: none; }
+      .ticker .window { padding-left: 18px; }
+      .ticker .item::after { display: none; }
+      .ticker .item { white-space: normal; font-size: 16px; }
+      .ticker .track { white-space: normal; }
+    }
+    body { padding-bottom: 52px; }
+    @media (max-width: 860px) {
+      .ticker .tag { padding: 0 12px; font-size: 12px; }
+      .scale, .ladder, .ways, .tiers, .beliefs, .beliefs.two { grid-template-columns: 1fr; }
+      section { padding: 72px 0; }
+      .hero { padding: 64px 0 56px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="/"><img src="/images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+  </div>
+</header>
+
+<main>
+  <section class="lost" aria-labelledby="lost-title">
+    <div class="wrap">
+      <p class="eyebrow">404</p>
+      <h1 id="lost-title"><span>This page isn't home.</span></h1>
+      <p class="lede">The link may be old, or mistyped. Your data has a home, and so does everything else on this site. Here's where to start.</p>
+      <div class="proof-links">
+        <a href="/">Home</a>
+        <a href="/playbooks/">Playbooks</a>
+        <a href="https://cards.edgible.org">Cards</a>
+        <a href="/proof/">Proof</a>
+        <a href="/contact/">Contact</a>
+      </div>
+    </div>
+  </section>
+</main>
+<div class="ticker" role="region" aria-label="Facts about self-hosting">
+  <span class="tag">Breaking</span>
+  <div class="window"><div class="track" id="track"><span class="item">The first website ran on a NeXT computer at CERN, set up by the web's inventor, Tim Berners-Lee. The web began self-hosted.</span></div></div>
+</div>
+
+
+<script>
+  (function () {
+    var facts = [
+      { t: "The first website ran on a NeXT computer at CERN, set up by the web's inventor, Tim Berners-Lee. The web began self-hosted." },
+      { t: "An old laptop in a cupboard makes a perfectly good server. It already has a screen, a battery and a keyboard for emergencies." },
+      { t: "A self-hosted app keeps working when its maker changes the pricing, gets acquired or shuts down." },
+      { t: "Linux, which now runs much of the internet, started as a hobby project. Self-hosting has always been where good things begin." },
+      { t: "Your photos can't train someone else's AI if they never leave your house." },
+      { t: "Self-hosting means no \u201cwe're updating our terms\u201d emails. You are the terms." },
+      { t: "One small machine can run a website, a photo library and a password manager, all at the same time." },
+      { t: "Gitea, WordPress and plenty of other well-loved apps are happy to live on a machine you own." },
+      { t: "The cloud is someone else's computer. Self-hosting is the same idea, with the computer yours." },
+      { t: "An app you host yourself moves with you: new machine, same app, same data." },
+      { t: "Proud of an app you've built? Share it with the world as an Edgible card, so anyone, or any AI, can set it up.", href: "/add-your-app/", label: "Add your app" },
+      { t: "Don't know where to start? Tell your AI what you need. It finds a tested card and sets it up, and Edgible keeps it safe.", href: "https://cards.edgible.org", label: "Browse the cards" },
+      { t: "Every app you publish with Edgible gets its own secure web address, with no certificates to set up or renew." },
+      { t: "Your app can be public, private to your team, or behind a sign-in. You choose for each app." },
+      { t: "Edgible cards are tested on real machines, so what worked for someone else is what you get.", href: "/proof/", label: "See the proof" },
+      { t: "No spare computer? Try Edgible inside a virtual machine on your laptop. It's free, safe and disposable." }
+    ];
+    var track = document.getElementById("track");
+    // A random order each visit, so the first fact differs.
+    for (var i = facts.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = facts[i]; facts[i] = facts[j]; facts[j] = t;
+    }
+    function items() {
+      var frag = document.createDocumentFragment();
+      facts.forEach(function (f) {
+        var item = document.createElement("span");
+        item.className = "item";
+        item.appendChild(document.createTextNode(f.t));
+        if (f.href) {
+          var a = document.createElement("a");
+          a.href = f.href;
+          a.textContent = f.label;
+          item.appendChild(a);
+        }
+        frag.appendChild(item);
+      });
+      return frag;
+    }
+    track.textContent = "";
+    track.appendChild(items());
+    var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!still) {
+      // The facts twice, so the loop has no gap: the track slides half its width, then starts over.
+      track.appendChild(items());
+      var clone = track.querySelectorAll(".item");
+      for (var k = facts.length; k < clone.length; k++) { clone[k].setAttribute("aria-hidden", "true"); clone[k].querySelectorAll("a").forEach(function (l) { l.tabIndex = -1; }); }
+      track.style.setProperty("--dur", Math.round(track.scrollWidth / 2 / 70) + "s");
+    }
+  })();
+</script>
+
+</body>
+</html>

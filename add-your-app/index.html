@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>document.documentElement.className += " js";</script>
+  <link rel="stylesheet" href="../menu.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add your app · Edgible</title>
+  <meta name="description" content="Built an app, with an AI or by hand? Edgible can put it live, keep it running, and list it in the card catalog so anyone can run it.">
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* The main page's typeface, colours, top bar and footer (site/index.html), with styles for reading. */
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    /* Playbooks are for doing, so they read on a light page; the dark top bar keeps them Edgible's. */
+    :root {
+      --night-1: #111827;
+      --line: #e3e6ef;
+      --paper: #fbfaf7;
+      --surface: #f1f2f7;
+      --yellow: #ffd21f;
+      --prompt: #fff8d6;
+      --link: #2e4a9e;
+      --heading: #111827;
+      --ink: #2b3245;
+      --muted: #5d6680;
+      --radius: 14px;
+      --wrap: 1120px;
+      --read: 760px;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--link); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    header.bar { position: sticky; top: 0; z-index: 10; background: var(--night-1); border-bottom: 1px solid rgba(255,255,255,.12); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    nav.links { display: flex; gap: 24px; font-weight: 500; font-size: 16px; }
+    nav.links a { text-decoration: none; color: #a7b1dc; }
+    nav.links a:hover { color: #ffffff; }
+
+    main { max-width: var(--read); margin: 0 auto; padding: 56px 24px 88px; }
+    h1, h2, h3 { color: var(--heading); line-height: 1.25; font-weight: 800; }
+    h1 { font-size: 40px; margin: 0 0 16px; }
+    h2 { font-size: 26px; margin: 48px 0 12px; }
+    h3 { font-size: 20px; margin: 32px 0 8px; }
+    p, li { max-width: 70ch; }
+    strong { color: var(--heading); }
+    /* A quote is something to say to your AI, or a box such as What you need. */
+    blockquote { margin: 20px 0; padding: 16px 20px; background: var(--prompt); border-left: 4px solid var(--yellow); border-radius: 0 var(--radius) var(--radius) 0; color: var(--heading); }
+    blockquote p { margin: 0; }
+    blockquote p + p, blockquote ul { margin-top: 10px; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; background: var(--surface); padding: 2px 6px; border-radius: 6px; }
+    pre { background: var(--night-1); color: #e6eaff; border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; }
+    pre code { background: none; padding: 0; color: inherit; }
+    details { margin: 24px 0; padding: 12px 18px; background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); }
+    summary { cursor: pointer; color: var(--heading); font-weight: 700; }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 16px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--heading); }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+    /* The site's icons are drawn light on dark, so on these pages each sits on a navy tile. */
+    h2 .ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--night-1); margin-right: 12px; vertical-align: middle; flex: none; }
+    h2 .ico svg { width: 30px; height: 30px; }
+    h2:has(.ico) { display: flex; align-items: center; }
+
+    /* Previous and Next, at the end of each chapter. */
+    nav.chapters { display: flex; gap: 14px; margin-top: 56px; flex-wrap: wrap; }
+    nav.chapters a { flex: 1 1 240px; display: block; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; text-decoration: none; color: var(--heading); font-weight: 700; }
+    nav.chapters a:hover { border-color: var(--link); }
+    nav.chapters a span { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 4px; }
+    nav.chapters a.next { text-align: right; margin-left: auto; }
+    footer { padding: 14px 0; font-size: 14px; color: #a7b1dc; background: var(--night-1); }
+    footer a { color: #a7b1dc; }
+    footer a:hover { color: #ffffff; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer .foot-right { display: flex; align-items: center; gap: 20px; }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      main { padding: 40px 16px 64px; }
+      nav.links { gap: 16px; font-size: 15px; }
+      h1 { font-size: 32px; }
+      table { display: block; overflow-x: auto; }
+    }
+    /* The path, drawn. */
+    figure.flow { margin: 28px auto; max-width: 460px; }
+    figure.flow svg { width: 100%; height: auto; display: block; font-family: Nexa, Jost, system-ui, sans-serif; }
+    .flow .box { fill: #ffffff; stroke: var(--line); stroke-width: 1.5; }
+    .flow .box.opt { stroke-dasharray: 5 4; stroke: var(--muted); }
+    .flow .num { fill: var(--yellow); }
+    .flow .numt { fill: var(--heading); font-weight: 800; font-size: 16px; }
+    .flow .t { fill: var(--heading); font-weight: 800; font-size: 17px; }
+    .flow .t.b { font-size: 15px; }
+    .flow .s { fill: var(--muted); font-size: 13.5px; }
+    .flow .s2 { fill: var(--heading); font-weight: 700; font-size: 14px; }
+    .flow .arr { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .flow .arr.thin { stroke-width: 1.5; }
+    .lead { font-size: 20px; color: var(--heading); }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 560px) { .cols { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../"><img src="../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="links" id="site-nav">
+      <a href="../playbooks/">Playbooks</a>
+      <a href="https://cards.edgible.org">Cards</a>
+      <a href="../proof/">Proof</a>
+      <a href="../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+<h1>Add your app</h1>
+<p class="lead">You built something, maybe with an AI. Edgible can put it on the internet, keep it running, and, if you want, list it in the card catalog so anyone can run it.</p>
+
+<p>We tried it ourselves, with a club noticeboard that an AI wrote. <a href="https://cards.edgible.org/club-noticeboard/">Here is its card</a>: who looks after it, and the day it was tested.</p>
+
+<h2>The whole path</h2>
+<figure class="flow">
+<svg viewBox="0 0 420 834" role="img" aria-labelledby="flow-t flow-d" xmlns="http://www.w3.org/2000/svg">
+<title id="flow-t">From an app you built to one running on Edgible</title>
+<desc id="flow-d">Five steps in order: create your Edgible account, give your AI the Edgible skill, set up Edgible on your computer, tell it about your app, fix what is missing. Then three things you might want: get it live, keep it running, and optionally share it, which means testing it on your own Edgible, opening a pull request, Edgible reading and testing it, and listing it in the catalog with its steward.</desc>
+<rect x="10" y="14" width="400" height="70" rx="14" class="box"/>
+<circle cx="44" cy="49" r="15" class="num"/><text x="44" y="55" class="numt" text-anchor="middle">1</text>
+<text x="72" y="44" class="t">Create your Edgible account</text>
+<text x="72" y="66" class="s">You: edgible.com. Free, no credit card</text>
+<path d="M210 84 V104" class="arr"/><path d="M204 98 L210 106 L216 98" class="arr"/>
+<rect x="10" y="110" width="400" height="70" rx="14" class="box"/>
+<circle cx="44" cy="145" r="15" class="num"/><text x="44" y="151" class="numt" text-anchor="middle">2</text>
+<text x="72" y="140" class="t">Give your AI the Edgible skill</text>
+<text x="72" y="162" class="s">You: one prompt, once</text>
+<path d="M210 180 V200" class="arr"/><path d="M204 194 L210 202 L216 194" class="arr"/>
+<rect x="10" y="206" width="400" height="70" rx="14" class="box"/>
+<circle cx="44" cy="241" r="15" class="num"/><text x="44" y="247" class="numt" text-anchor="middle">3</text>
+<text x="72" y="236" class="t">Set up Edgible on your computer</text>
+<text x="72" y="258" class="s">Your AI installs it. You approve the link</text>
+<path d="M210 276 V296" class="arr"/><path d="M204 290 L210 298 L216 290" class="arr"/>
+<rect x="10" y="302" width="400" height="70" rx="14" class="box"/>
+<circle cx="44" cy="337" r="15" class="num"/><text x="44" y="343" class="numt" text-anchor="middle">4</text>
+<text x="72" y="332" class="t">Tell it about your app</text>
+<text x="72" y="354" class="s">Your AI checks it and lists what a card needs</text>
+<path d="M210 372 V392" class="arr"/><path d="M204 386 L210 394 L216 386" class="arr"/>
+<rect x="10" y="398" width="400" height="70" rx="14" class="box"/>
+<circle cx="44" cy="433" r="15" class="num"/><text x="44" y="439" class="numt" text-anchor="middle">5</text>
+<text x="72" y="428" class="t">Fix what is missing</text>
+<text x="72" y="450" class="s">Your AI builds it. You make the calls</text>
+<path d="M210 468 V488" class="arr"/><path d="M204 482 L210 490 L216 482" class="arr"/>
+<path d="M73 486 H347" class="arr thin"/>
+<path d="M73 486 V494" class="arr thin"/>
+<rect x="10" y="494" width="126" height="62" rx="14" class="box"/>
+<text x="73" y="521" class="t b" text-anchor="middle">Get it live</text>
+<text x="73" y="542" class="s" text-anchor="middle">an address</text>
+<path d="M210 486 V494" class="arr thin"/>
+<rect x="147" y="494" width="126" height="62" rx="14" class="box"/>
+<text x="210" y="521" class="t b" text-anchor="middle">Keep it running</text>
+<text x="210" y="542" class="s" text-anchor="middle">kept safe</text>
+<path d="M347 486 V494" class="arr thin"/>
+<rect x="284" y="494" width="126" height="62" rx="14" class="box opt"/>
+<text x="347" y="521" class="t b" text-anchor="middle">Share it</text>
+<text x="347" y="542" class="s" text-anchor="middle">optional</text>
+<path d="M347 556 V572" class="arr"/><path d="M341 566 L347 574 L353 566" class="arr"/>
+<rect x="140" y="578" width="270" height="44" rx="12" class="box opt"/>
+<text x="275" y="605" class="s2" text-anchor="middle">Test it on your own Edgible</text>
+<path d="M275 622 V638" class="arr"/><path d="M269 632 L275 640 L281 632" class="arr"/>
+<rect x="140" y="644" width="270" height="44" rx="12" class="box opt"/>
+<text x="275" y="671" class="s2" text-anchor="middle">Open a pull request</text>
+<path d="M275 688 V704" class="arr"/><path d="M269 698 L275 706 L281 698" class="arr"/>
+<rect x="140" y="710" width="270" height="44" rx="12" class="box opt"/>
+<text x="275" y="737" class="s2" text-anchor="middle">Edgible reads it and tests it</text>
+<path d="M275 754 V770" class="arr"/><path d="M269 764 L275 772 L281 764" class="arr"/>
+<rect x="140" y="776" width="270" height="44" rx="12" class="box opt"/>
+<text x="275" y="803" class="s2" text-anchor="middle">Listed in the catalog, with its steward</text>
+</svg>
+</figure>
+
+<h2>Three things you might want</h2>
+<ul>
+  <li><strong>Get it live.</strong> An address people can open, with HTTPS and the sign-in you choose, from a computer you control.</li>
+  <li><strong>Keep it running.</strong> In a container, with its data kept safe and backed up, so it survives restarts and upgrades. That setup can stay private.</li>
+  <li><strong>Share it.</strong> A card in the public catalog, so other people can run your app with one prompt. This one is optional, and it comes last.</li>
+</ul>
+
+<h2>What you need</h2>
+<ul>
+  <li><strong>An Edgible account.</strong> Everything here runs on Edgible, whether the card stays yours or goes in the public catalog. It is free during the beta, with no credit card.</li>
+  <li><strong>A computer that can stay on,</strong> or a small cloud server in your own account. It is also where you test your card.</li>
+  <li><strong>An AI that can run commands.</strong> We recommend Claude Code.</li>
+</ul>
+
+<h2>Get going, in order</h2>
+<ol class="steps">
+  <li>
+    <p><strong>Create your Edgible account, or sign in.</strong> Go to <a href="https://www.edgible.com">edgible.com</a>, sign up, and make an organisation. Stay signed in in this browser, as the account you want to use: later your AI shows you a sign-in link, and it approves whichever account this browser is signed in to.</p>
+  </li>
+  <li>
+    <p><strong>Give your AI the Edgible skill,</strong> once. Other assistants that read skills work too.</p>
+    <blockquote><p>Install the Edgible skill from github.com/edgible-org/card-kit</p></blockquote>
+  </li>
+  <li>
+    <p><strong>Set up Edgible on your computer.</strong> It installs Edgible, shows you a sign-in link to approve, and adds the machine. It asks before it changes anything, and it reads back which account you signed in as, so you can check it is the one you meant.</p>
+    <blockquote><p>Set up Edgible on this computer so I can run my own apps.</p></blockquote>
+  </li>
+  <li>
+    <p><strong>Tell it about your app.</strong></p>
+    <blockquote><p>I built an app at (your repository or folder). Help me put it on Edgible. Tell me what it needs to go live, and what it needs to become a card in the catalog.</p></blockquote>
+  </li>
+</ol>
+<p>It reads your app and tells you plainly what must change and what would make it better, and offers to build each missing piece. It changes nothing in your app without asking.</p>
+
+<h2>What a card needs</h2>
+<div class="cols">
+<div>
+<h3>Required</h3>
+<ul>
+  <li>A public image with a version tag, built for both Intel and Apple Silicon</li>
+  <li>A licence that lets others run it</li>
+  <li>Its settings written down</li>
+  <li>Its port, and where its data lives</li>
+  <li>No secrets in the code</li>
+  <li>Someone who answers for it: a GitHub name</li>
+</ul>
+</div>
+<div>
+<h3>Nice to have</h3>
+<ul>
+  <li>A healthcheck</li>
+  <li>Not running as root</li>
+  <li>Secrets that can come from files</li>
+  <li>A note on how to back it up</li>
+  <li>An icon: a square logo, which your AI can draw for you. Without one, the catalog shows the Edgible symbol</li>
+  <li>Tagged releases</li>
+  <li>No default password in the files</li>
+</ul>
+</div>
+</div>
+<p>The skill runs a checker, <code>check-app</code>, and reads you the result. You can run it yourself too: it is in <a href="https://github.com/edgible-org/card-kit">card-kit</a>.</p>
+
+<h2>You test it first, on your own Edgible</h2>
+<p>Before a card reaches us, your AI tests it on a machine of yours, signed in to your own Edgible account. A spare computer or a small virtual machine will do. Nothing of ours is touched, and the result goes into your pull request. Using Edgible this way is the point: you are running your own app on it.</p>
+<p>A person at Edgible then reads the card and tests it again on our own machines before it is listed. That is done by hand, so it is not instant.</p>
+
+<h2>Who answers for it</h2>
+<p>Every card in the catalog shows who looks after it. Put your GitHub name on yours and it says <em>Stewarded by</em> you: you review changes to it and fix it if its test fails. Prefer not to? It can be listed with <em>No steward</em>. It is still tested every night, and if its test fails, it is shown dimmed until it passes. Your app stays yours, with your licence and your repository. The card only describes how to run it.</p>
+
+<h2>Building with an AI agent that works on its own?</h2>
+<p>An agent can do all of it. <code>check-app --json</code> tells it what is missing until nothing required is left. It asks you only for what is yours to decide, such as the licence and who the steward is. Then it opens the pull request from a fork. Start from the <a href="https://github.com/edgible-org/card-kit">Edgible skill</a>, the <a href="https://github.com/edgible-org/cards/blob/main/CONTRIBUTING.md">contributing guide</a>, and <a href="../llms.txt">llms.txt</a>.</p>
+
+<h2>Stuck, or not sure it is ready?</h2>
+<p>Tell us what you built and where you got to, on the <a href="../contact/">contact page</a>.</p>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Edgible. Keep your data close.</span>
+    <div class="foot-right">
+      <span><a href="https://cards.edgible.org">Cards</a> · <a href="../llms.txt">For AI assistants</a></span>
+      <a class="foot-logo" href="../"><img src="../images/edgible-symbol-white.png" alt="Edgible"></a>
+    </div>
+  </div>
+</footer>
+<script src="../menu.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>document.documentElement.className += " js";</script>
+  <link rel="stylesheet" href="../../menu.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your private model · Edgible</title>
+  <meta name="description" content="Run an AI model on your computer's GPU with Ollama, behind a key, so only your own gateway can use it.">
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="alternate" type="text/markdown" title="This page as Markdown" href="../your-private-model.md">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* The main page's typeface, colours, top bar and footer (site/index.html), with styles for reading. */
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    /* Playbooks are for doing, so they read on a light page; the dark top bar keeps them Edgible's. */
+    :root {
+      --night-1: #111827;
+      --line: #e3e6ef;
+      --paper: #fbfaf7;
+      --surface: #f1f2f7;
+      --yellow: #ffd21f;
+      --prompt: #fff8d6;
+      --link: #2e4a9e;
+      --heading: #111827;
+      --ink: #2b3245;
+      --muted: #5d6680;
+      --radius: 14px;
+      --wrap: 1120px;
+      --read: 760px;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--link); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    header.bar { position: sticky; top: 0; z-index: 10; background: var(--night-1); border-bottom: 1px solid rgba(255,255,255,.12); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    nav.links { display: flex; gap: 24px; font-weight: 500; font-size: 16px; }
+    nav.links a { text-decoration: none; color: #a7b1dc; }
+    nav.links a:hover { color: #ffffff; }
+
+    main { max-width: var(--read); margin: 0 auto; padding: 56px 24px 88px; }
+    h1, h2, h3 { color: var(--heading); line-height: 1.25; font-weight: 800; }
+    h1 { font-size: 40px; margin: 0 0 16px; }
+    h2 { font-size: 26px; margin: 48px 0 12px; }
+    h3 { font-size: 20px; margin: 32px 0 8px; }
+    p, li { max-width: 70ch; }
+    strong { color: var(--heading); }
+    /* A quote is something to say to your AI, or a box such as What you need. */
+    blockquote { margin: 20px 0; padding: 16px 20px; background: var(--prompt); border-left: 4px solid var(--yellow); border-radius: 0 var(--radius) var(--radius) 0; color: var(--heading); }
+    blockquote p { margin: 0; }
+    blockquote p + p, blockquote ul { margin-top: 10px; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; background: var(--surface); padding: 2px 6px; border-radius: 6px; }
+    pre { background: var(--night-1); color: #e6eaff; border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; }
+    pre code { background: none; padding: 0; color: inherit; }
+    details { margin: 24px 0; padding: 12px 18px; background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); }
+    summary { cursor: pointer; color: var(--heading); font-weight: 700; }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 16px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--heading); }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+    /* The site's icons are drawn light on dark, so on these pages each sits on a navy tile. */
+    /* A page's icon: a navy tile beside its title; a small one beside each entry on the landing page. */
+    .page-ico { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 48px; height: 48px; border-radius: 12px; background: var(--night-1); color: #ffffff; }
+    .page-ico svg { width: 36px; height: 36px; }
+    h1.with-ico { display: flex; align-items: center; gap: 16px; }
+    .ico.sm { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--night-1); margin-right: 10px; vertical-align: middle; }
+    .ico.sm svg { width: 22px; height: 22px; }
+    /* The icons draw in the text colour, so give every navy tile a white one */
+    .ico, .page-ico, .flow use { color: #ffffff; }
+    /* A list item with an icon: no bullet or number (the map above has the numbers), the icon hangs in the margin
+       and the text, even when it wraps, stays in its own column */
+    li:has(.ico.sm) { list-style: none; position: relative; padding-left: 54px; margin: 18px 0; min-height: 34px; }
+    li .ico.sm { position: absolute; left: 0; top: -2px; width: 36px; height: 36px; margin: 0; }
+    li .ico.sm svg { width: 26px; height: 26px; }
+    ul:has(.ico.sm), ol:has(.ico.sm) { padding-left: 0; }
+    li:has(.ico.sm) > p { margin: 0; }
+    li > ol:has(.ico.sm) { margin: 14px 0 0; }
+    li > ol > li:has(.ico.sm) { margin: 12px 0; }
+    h2 .ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--night-1); margin-right: 12px; vertical-align: middle; flex: none; }
+    h2 .ico svg { width: 30px; height: 30px; }
+    h2:has(.ico) { display: flex; align-items: center; }
+
+    /* Previous and Next, at the end of each chapter. */
+    nav.chapters { display: flex; gap: 14px; margin-top: 56px; flex-wrap: wrap; }
+    nav.chapters a { flex: 1 1 240px; display: block; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; text-decoration: none; color: var(--heading); font-weight: 700; }
+    nav.chapters a:hover { border-color: var(--link); }
+    nav.chapters a span { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 4px; }
+    nav.chapters a.next { text-align: right; margin-left: auto; }
+    footer { padding: 14px 0; font-size: 14px; color: #a7b1dc; background: var(--night-1); }
+    footer a { color: #a7b1dc; }
+    footer a:hover { color: #ffffff; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer .foot-right { display: flex; align-items: center; gap: 20px; }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      main { padding: 40px 16px 64px; }
+      nav.links { gap: 16px; font-size: 15px; }
+      h1 { font-size: 32px; }
+      table { display: block; overflow-x: auto; }
+    }
+    /* The route through the playbooks, drawn. */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 28px 0 8px; }
+    .path { display: block; padding: 20px 22px 18px; border: 1.5px solid var(--line); border-radius: var(--radius); background: #ffffff; color: var(--ink); text-decoration: none; }
+    a.path:hover, a.path:focus { border-color: var(--link); }
+    .path h2 { margin: 14px 0 6px; font-size: 22px; }
+    .path p { margin: 0 0 12px; color: var(--ink); }
+    .path .go { font-weight: 700; color: var(--link); font-size: 15px; }
+    .path.soon { background: transparent; border-style: dashed; }
+    .path.soon h2, .path.soon p { color: var(--muted); }
+    .path.soon .go { color: var(--muted); }
+    .path svg { width: 100%; max-width: 220px; height: auto; display: block; }
+    .path .mf { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .path .md { fill: var(--yellow); }
+    .path .rb { fill: none; stroke: #8a6a00; stroke-width: 1.5; stroke-linecap: round; }
+    .path .eye { fill: var(--ink); }
+    .path .og { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .path .og.soon { stroke: var(--muted); }
+    .path .dash { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    @media (max-width: 640px) { .paths { grid-template-columns: 1fr; } }
+    figure.flow { margin: 28px auto; max-width: 460px; }
+    figure.flow svg { width: 100%; height: auto; display: block; font-family: inherit; }
+    .flow a { cursor: pointer; }
+    .flow .frame { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .flow .box { fill: #ffffff; stroke: var(--line); stroke-width: 1.5; }
+    .flow .box.opt { stroke-dasharray: 5 4; stroke: var(--muted); }
+    .flow a:hover .box, .flow a:focus .box { stroke: var(--link); }
+    .flow .num { fill: var(--yellow); }
+    .flow .numt { fill: var(--heading); font-weight: 800; font-size: 14px; }
+    .flow .t { fill: var(--heading); font-weight: 800; font-size: 17px; }
+    .flow .t.b { font-size: 15px; }
+    .flow .s { fill: var(--muted); font-size: 13.5px; }
+    .flow .s2 { fill: var(--heading); font-weight: 700; font-size: 14px; }
+    .flow .arr { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../../"><img src="../../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="links" id="site-nav">
+      <a href="../../playbooks/">Playbooks</a>
+      <a href="https://cards.edgible.org">Cards</a>
+      <a href="../../proof/">Proof</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+<h1 class="with-ico"><span class="page-ico" aria-hidden="true"><svg><use href="../../images/icons.svg#cube"/></svg></span><span>Your private model</span></h1>
+<p><em>Chapter 2 of <a href="../a-private-model-for-your-agent/">A private model for your agent</a>. Draft: <a href="mailto:stefano@edgible.com?subject=Playbook%20feedback">tell us how it goes</a>.</em></p>
+<p>The model runs in <strong>Ollama</strong>, a popular open-source program for running AI models on your own computer. Edgible&#39;s Ollama recipe for your system installs it to use the computer&#39;s GPU and puts a key in front of it.</p>
+<p>Two details are worth knowing, because they&#39;re why this is safe:</p>
+<ul>
+<li><strong>Ollama listens on that computer only.</strong> Nothing else on your network, not another computer, a guest on your wifi, or anything that gets into one, can reach it directly.</li>
+<li><strong>The address Edgible gives it is a small guard in front.</strong> It lets a caller <em>use</em> the model and nothing else: no downloading, deleting or changing models. A key can use your models and can&#39;t change them. You change them on that computer.</li>
+</ul>
+<blockquote>
+<p><strong>What you need</strong></p>
+<ul>
+<li><a href="../second-machine/">Chapter 1</a> done, and <strong>Claude Code on that computer.</strong></li>
+<li><strong>Free memory for the model you pick,</strong> and a few gigabytes of disk. <a href="../a-private-model-for-your-agent/">The table on the front page</a> says what suits your computer. If you&#39;re unsure, start with <code>qwen2.5:7b</code>.</li>
+</ul>
+</blockquote>
+<h2>1. Ask Claude Code to set it up</h2>
+<p>In Claude Code on the GPU computer, say:</p>
+<blockquote>
+<p>Set up Ollama on this computer so my AI gateway can use it privately.</p>
+</blockquote>
+<p>It tells you what it&#39;s about to install, and asks first: <strong>Ollama</strong> and <strong>Caddy</strong> (the small guard), each checked against its publisher&#39;s checksum before anything is unpacked, and two background services that start when you log in. It then publishes the guard on Edgible as an app, <code>ollama</code>, that needs a key.</p>
+<p>If another Ollama is already running on this computer, it says so and picks a free port rather than taking over. Your existing models can be reused: say so when it asks where models live.</p>
+<h2>2. Download a model</h2>
+<blockquote>
+<p>Download the qwen2.5:7b model.</p>
+</blockquote>
+<p>It downloads onto that computer, on your own connection, and takes a few minutes. A bigger model takes longer: <code>gpt-oss:20b</code> is 13 GB. Download a second, larger one now if it has the memory, for <code>private-smart</code>:</p>
+<blockquote>
+<p>Download the gpt-oss:20b model too.</p>
+</blockquote>
+<h2>3. Check it works, and is locked</h2>
+<blockquote>
+<p>Check my private model runs on the GPU, and that its Edgible address needs a key.</p>
+</blockquote>
+<p>It asks the model a tiny question on the computer and confirms it ran entirely on the GPU. Then it calls the Edgible address without a key, and expects to be turned away. It should tell you it was.</p>
+<h2>4. Make a key for your gateway</h2>
+<blockquote>
+<p>Make an Edgible API key for my ollama app, for my AI gateway to use, and keep it safe in my Edgible account.</p>
+</blockquote>
+<p>Name the <code>ollama</code> app, so it can&#39;t mean something else: a key for an app that calls the gateway is a different thing, with its own budget. Claude tells you what it&#39;s about to do, something like <em>&quot;make a key named <code>ai-gateway</code> for the <code>ollama</code> app and store it as the secret <code>ollama</code>&quot;</em>, and asks. You never see the key and it never goes into the chat. If the gateway is ever compromised, you delete that one key and nothing else changes.</p>
+<p>Already have a key stored from an earlier try? Claude says so, and warns that making a new one deletes the old: anything still using it stops until it&#39;s given the new one. In chapter 3, adding Ollama to the gateway gives it the new key and restarts it.</p>
+<h2>What you&#39;ve just done</h2>
+<p>You have a private AI model, and it&#39;s well guarded:</p>
+<ul>
+<li><strong>It runs on your hardware.</strong> What you ask it never leaves your computer.</li>
+<li><strong>Only a key opens it,</strong> and each key can be named, given an end date, and switched off alone.</li>
+<li><strong>A key can use it but not change it.</strong> Nobody holding a key can download, delete or replace your models.</li>
+<li><strong>Nothing on your network can reach it directly,</strong> including other computers at home.</li>
+<li><strong>Its address is on Edgible,</strong> so your gateway, on another machine, can reach it from anywhere.</li>
+</ul>
+<details>
+<summary>Prefer to do it by hand?</summary><p>What Claude Code does, in order. The recipe is Edgible&#39;s Ollama card for your system; today that is the <a href="https://github.com/edgible-org/cards/tree/main/ollama-osx">ollama-osx card</a>, for computers with Apple silicon. Its README has every step, and our regression runs it as written.</p>
+<ol>
+<li><strong>Fetch the card</strong>, set <code>DEVICE</code> to <code>edgible-gpu</code> and <code>ORG_LABEL</code> to your organisation&#39;s name in <code>card.env</code>, and run its Check.</li>
+<li><strong>Install</strong>: <code>sh ollama-osx/install.sh</code> with <code>card.env</code> exported. It stops, naming the program, if either port is in use.</li>
+<li><strong>Pull a model</strong> on that computer: <code>curl http://127.0.0.1:11434/api/pull -d &#39;{&quot;model&quot;: &quot;qwen2.5:7b&quot;}&#39;</code>.</li>
+<li><strong>Publish</strong> the app <code>ollama</code> on <code>api-key</code>, as the README&#39;s Publish step shows.</li>
+<li><strong>Make the gateway&#39;s key</strong> with <code>edgible app api-keys create --app ollama --name gateway</code>. It is shown once: store it straight away with <code>edgible secret set ollama</code>, from a file that holds only the key, and delete the file.</li>
+</ol>
+</details>
+<nav class="chapters"><a class="prev" href="../second-machine/"><span>← Previous</span>Add a second machine</a><a class="next" href="../private-in-your-gateway/"><span>Next →</span>Private in your gateway</a></nav>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Edgible. Keep your data close.</span>
+    <div class="foot-right">
+      <span><a href="https://cards.edgible.org">Cards</a> · <a href="../../contact/">Contact</a> · <a href="../../llms.txt">For AI assistants</a> · <a href="../your-private-model.md">This page as Markdown</a></span>
+      <a class="foot-logo" href="../../"><img src="../../images/edgible-symbol-white.png" alt="Edgible"></a>
+    </div>
+  </div>
+</footer>
+<script src="../../menu.js" defer></script>
+</body>
+</html>

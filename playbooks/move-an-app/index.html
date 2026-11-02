@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>document.documentElement.className += " js";</script>
+  <link rel="stylesheet" href="../../menu.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Move an app to another machine · Edgible</title>
+  <meta name="description" content="Move an app and its data from one computer to another, even a different kind of computer, and check that nothing was lost on the way.">
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="alternate" type="text/markdown" title="This page as Markdown" href="../move-an-app.md">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* The main page's typeface, colours, top bar and footer (site/index.html), with styles for reading. */
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    /* Playbooks are for doing, so they read on a light page; the dark top bar keeps them Edgible's. */
+    :root {
+      --night-1: #111827;
+      --line: #e3e6ef;
+      --paper: #fbfaf7;
+      --surface: #f1f2f7;
+      --yellow: #ffd21f;
+      --prompt: #fff8d6;
+      --link: #2e4a9e;
+      --heading: #111827;
+      --ink: #2b3245;
+      --muted: #5d6680;
+      --radius: 14px;
+      --wrap: 1120px;
+      --read: 760px;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--link); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    header.bar { position: sticky; top: 0; z-index: 10; background: var(--night-1); border-bottom: 1px solid rgba(255,255,255,.12); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    nav.links { display: flex; gap: 24px; font-weight: 500; font-size: 16px; }
+    nav.links a { text-decoration: none; color: #a7b1dc; }
+    nav.links a:hover { color: #ffffff; }
+
+    main { max-width: var(--read); margin: 0 auto; padding: 56px 24px 88px; }
+    h1, h2, h3 { color: var(--heading); line-height: 1.25; font-weight: 800; }
+    h1 { font-size: 40px; margin: 0 0 16px; }
+    h2 { font-size: 26px; margin: 48px 0 12px; }
+    h3 { font-size: 20px; margin: 32px 0 8px; }
+    p, li { max-width: 70ch; }
+    strong { color: var(--heading); }
+    /* A quote is something to say to your AI, or a box such as What you need. */
+    blockquote { margin: 20px 0; padding: 16px 20px; background: var(--prompt); border-left: 4px solid var(--yellow); border-radius: 0 var(--radius) var(--radius) 0; color: var(--heading); }
+    blockquote p { margin: 0; }
+    blockquote p + p, blockquote ul { margin-top: 10px; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; background: var(--surface); padding: 2px 6px; border-radius: 6px; }
+    pre { background: var(--night-1); color: #e6eaff; border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; }
+    pre code { background: none; padding: 0; color: inherit; }
+    details { margin: 24px 0; padding: 12px 18px; background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); }
+    summary { cursor: pointer; color: var(--heading); font-weight: 700; }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 16px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--heading); }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+    /* The site's icons are drawn light on dark, so on these pages each sits on a navy tile. */
+    /* A page's icon: a navy tile beside its title; a small one beside each entry on the landing page. */
+    .page-ico { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 48px; height: 48px; border-radius: 12px; background: var(--night-1); color: #ffffff; }
+    .page-ico svg { width: 36px; height: 36px; }
+    h1.with-ico { display: flex; align-items: center; gap: 16px; }
+    .ico.sm { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--night-1); margin-right: 10px; vertical-align: middle; }
+    .ico.sm svg { width: 22px; height: 22px; }
+    /* The icons draw in the text colour, so give every navy tile a white one */
+    .ico, .page-ico, .flow use { color: #ffffff; }
+    /* A list item with an icon: no bullet or number (the map above has the numbers), the icon hangs in the margin
+       and the text, even when it wraps, stays in its own column */
+    li:has(.ico.sm) { list-style: none; position: relative; padding-left: 54px; margin: 18px 0; min-height: 34px; }
+    li .ico.sm { position: absolute; left: 0; top: -2px; width: 36px; height: 36px; margin: 0; }
+    li .ico.sm svg { width: 26px; height: 26px; }
+    ul:has(.ico.sm), ol:has(.ico.sm) { padding-left: 0; }
+    li:has(.ico.sm) > p { margin: 0; }
+    li > ol:has(.ico.sm) { margin: 14px 0 0; }
+    li > ol > li:has(.ico.sm) { margin: 12px 0; }
+    h2 .ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--night-1); margin-right: 12px; vertical-align: middle; flex: none; }
+    h2 .ico svg { width: 30px; height: 30px; }
+    h2:has(.ico) { display: flex; align-items: center; }
+
+    /* Previous and Next, at the end of each chapter. */
+    nav.chapters { display: flex; gap: 14px; margin-top: 56px; flex-wrap: wrap; }
+    nav.chapters a { flex: 1 1 240px; display: block; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; text-decoration: none; color: var(--heading); font-weight: 700; }
+    nav.chapters a:hover { border-color: var(--link); }
+    nav.chapters a span { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 4px; }
+    nav.chapters a.next { text-align: right; margin-left: auto; }
+    footer { padding: 14px 0; font-size: 14px; color: #a7b1dc; background: var(--night-1); }
+    footer a { color: #a7b1dc; }
+    footer a:hover { color: #ffffff; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer .foot-right { display: flex; align-items: center; gap: 20px; }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      main { padding: 40px 16px 64px; }
+      nav.links { gap: 16px; font-size: 15px; }
+      h1 { font-size: 32px; }
+      table { display: block; overflow-x: auto; }
+    }
+    /* The route through the playbooks, drawn. */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 28px 0 8px; }
+    .path { display: block; padding: 20px 22px 18px; border: 1.5px solid var(--line); border-radius: var(--radius); background: #ffffff; color: var(--ink); text-decoration: none; }
+    a.path:hover, a.path:focus { border-color: var(--link); }
+    .path h2 { margin: 14px 0 6px; font-size: 22px; }
+    .path p { margin: 0 0 12px; color: var(--ink); }
+    .path .go { font-weight: 700; color: var(--link); font-size: 15px; }
+    .path.soon { background: transparent; border-style: dashed; }
+    .path.soon h2, .path.soon p { color: var(--muted); }
+    .path.soon .go { color: var(--muted); }
+    .path svg { width: 100%; max-width: 220px; height: auto; display: block; }
+    .path .mf { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .path .md { fill: var(--yellow); }
+    .path .rb { fill: none; stroke: #8a6a00; stroke-width: 1.5; stroke-linecap: round; }
+    .path .eye { fill: var(--ink); }
+    .path .og { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .path .og.soon { stroke: var(--muted); }
+    .path .dash { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    @media (max-width: 640px) { .paths { grid-template-columns: 1fr; } }
+    figure.flow { margin: 28px auto; max-width: 460px; }
+    figure.flow svg { width: 100%; height: auto; display: block; font-family: inherit; }
+    .flow a { cursor: pointer; }
+    .flow .frame { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .flow .box { fill: #ffffff; stroke: var(--line); stroke-width: 1.5; }
+    .flow .box.opt { stroke-dasharray: 5 4; stroke: var(--muted); }
+    .flow a:hover .box, .flow a:focus .box { stroke: var(--link); }
+    .flow .num { fill: var(--yellow); }
+    .flow .numt { fill: var(--heading); font-weight: 800; font-size: 14px; }
+    .flow .t { fill: var(--heading); font-weight: 800; font-size: 17px; }
+    .flow .t.b { font-size: 15px; }
+    .flow .s { fill: var(--muted); font-size: 13.5px; }
+    .flow .s2 { fill: var(--heading); font-weight: 700; font-size: 14px; }
+    .flow .arr { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../../"><img src="../../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="links" id="site-nav">
+      <a href="../../playbooks/">Playbooks</a>
+      <a href="https://cards.edgible.org">Cards</a>
+      <a href="../../proof/">Proof</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+<h1 class="with-ico"><span class="page-ico" aria-hidden="true"><svg><use href="../../images/icons.svg#machine"/></svg></span><span>Move an app to another machine</span></h1>
+<p><em>Chapter 3 of <a href="../looking-after-it/">Looking after it</a>. <em>New: we ran this once, moving a wiki from a Mac to a Windows laptop. Other pairs of machines are still to be tried, so <a href="mailto:stefano@edgible.com?subject=Playbook%20feedback">tell us how it goes</a>.</em></em></p>
+<p>Sooner or later an app outgrows its machine, or the machine goes. A move is a restore (chapter 2) onto a different computer, then a switch. The old copy keeps serving until the switch, so you can stop at any point and nothing is lost.</p>
+<blockquote>
+<p><strong>What you need</strong></p>
+<ul>
+<li>An app that runs from an Edgible card, one whose card says where its data lives (see <a href="../looking-after-it/">Looking after it</a>).</li>
+<li><a href="../back-up-an-app/">Chapters 1 and 2</a> done, so you know a backup of this app restores.</li>
+<li>The new machine, set up as in <a href="../get-edgible-running/">Get Edgible running</a> and showing as online in Edgible. Your assistant can set it up.</li>
+<li>Your AI assistant on the old machine, and on the new one. We ran it that way, with you passing the file between them.</li>
+<li>A way to get the backup folder from the old machine to the new one (step 2). That part is yours.</li>
+</ul>
+</blockquote>
+<h2>1. Back up on the old machine</h2>
+<blockquote>
+<p>Back up my team wiki, and tell me what will stop first.</p>
+</blockquote>
+<p>It&#39;s the same backup as in <a href="../back-up-an-app/">chapter 1</a>. Your assistant tells you what stops and for how long, and waits for your yes. In our run, a small wiki stopped for <strong>8 seconds</strong>. It then reports a fingerprint of the data, for us &quot;3 pages&quot;, which the new machine will have to match.</p>
+<p>Ask your assistant where it put the backup, and note the full path of the folder. If you want it somewhere particular, such as an external drive, say so before it starts.</p>
+<h2>2. Make the backup visible to the new machine</h2>
+<p>Moving the backup between computers is up to you. Edgible writes it into a folder, and reads it back from a folder. How the folder gets from one machine to the other is your choice, and your assistant can help if you ask: an external drive, a shared network folder, or any way you already move files. Two rules:</p>
+<ul>
+<li><strong>Bring the whole folder.</strong> It has a list of every file in it, and a restore checks them all. A damaged or incomplete copy is caught before anything changes.</li>
+<li><strong>Keep it private.</strong> The backup holds the app&#39;s settings and its passwords and keys, so don&#39;t put it anywhere other people can read it.</li>
+</ul>
+<p>On the new machine, note where the folder now is. That is what you tell your assistant in the next step.</p>
+<p><em>What we did:</em> the Mac and the Windows laptop were on the same network, so we packed the folder into one file, shared it for a few minutes, fetched it on the other side, checked it was identical, and shut the share down. Do whatever suits you.</p>
+<h2>3. Restore it on the new machine</h2>
+<blockquote>
+<p>Restore the backup in this folder on this machine as my team wiki, and tell me if it matches.</p>
+</blockquote>
+<p>Your assistant checks every file, loads the data, starts the app, and compares the fingerprint with the backup&#39;s: &quot;3 pages, same as the backup: pass&quot;. The old machine is still serving the real app, so nothing has changed for anyone yet.</p>
+<p>Three things to expect when the machines are different:</p>
+<ul>
+<li><strong>The processor can differ.</strong> Our Mac has an Apple chip and the Windows laptop an Intel-style one. The wiki ran on both, because its image supports both. Your assistant checks this when it starts the app, and tells you if an app won&#39;t run on the new machine.</li>
+<li><strong>The app&#39;s settings name the old machine.</strong> Your assistant changes the device name in the settings to the new one before publishing.</li>
+<li><strong>Your logins and keys come across unchanged,</strong> so people stay signed in and nothing needs resetting. If you think the old machine or the backup may have been exposed, tell your assistant, and it can replace the app&#39;s keys instead; people then sign in again. We haven&#39;t tried that part.</li>
+</ul>
+<h2>4. Switch</h2>
+<p>This is the only step where your app is down. Ask first:</p>
+<blockquote>
+<p>Switch my team wiki to the new machine. Tell me when it&#39;s down and when it&#39;s back.</p>
+</blockquote>
+<p>Your assistant removes the app&#39;s address on the old machine, publishes it from the new one, and waits until the address answers. In our run that took about a minute and a half. The address stays the same, so bookmarks and links keep working.</p>
+<h2>5. Check it, as a person</h2>
+<p>Open the address, sign in, and look. We checked three things, and so should you:</p>
+<ul>
+<li><strong>Your pages are there,</strong> with the text you wrote.</li>
+<li><strong>Your account still works,</strong> with the same password. Accounts live in the app&#39;s data, so they move with it.</li>
+<li><strong>The sign-in in front of the app</strong> is still the one you chose.</li>
+</ul>
+<p>If anything is missing, don&#39;t delete anything on the old machine. Its data and the backup are untouched by the move, and we didn&#39;t need to go back, so putting the app back there is untried.</p>
+<h2>6. Retire the old copy, later</h2>
+<p>Keep the old machine&#39;s copy of the data and the backup for a few days. When you&#39;re sure, ask your assistant to remove them, and tell it to ask before each deletion.</p>
+<h2>What you&#39;ve just done</h2>
+<ul>
+<li><strong>You moved an app and its data</strong> to a different kind of computer.</li>
+<li><strong>You proved it</strong> with a fingerprint and a look, not by hoping.</li>
+<li><strong>You kept the way back</strong> open until you were sure.</li>
+</ul>
+<details>
+<summary>Prefer to do it by hand?</summary><p>card-kit&#39;s <code>backup-card</code>, <code>restore-card</code> and <code>verify-card</code>, from the Edgible skill. On the old machine:</p>
+<pre><code class="language-bash">python3 backup-card.py ~/otter-wiki --dry-run
+python3 backup-card.py ~/otter-wiki                       # writes ~/otter-wiki-backups/&lt;stamp&gt;/
+# or: python3 backup-card.py ~/otter-wiki --to /path/to/a/folder
+</code></pre>
+<p>Get that whole folder to the new machine however you like. Then, there:</p>
+<pre><code class="language-bash">python3 restore-card.py &lt;path to the backup folder&gt; ~/otter-wiki --dry-run
+python3 restore-card.py &lt;path to the backup folder&gt; ~/otter-wiki --yes
+sed -i &#39;s/^DEVICE=.*/DEVICE=&lt;new device name&gt;/&#39; ~/otter-wiki/card.env
+</code></pre>
+<p>Then publish with the card&#39;s README (the Publish step), after <code>edgible app delete otter-wiki --yes</code> on the old side.</p>
+<p>Snags we hit, so you don&#39;t have to:</p>
+<ul>
+<li><strong>A folder packed on a Mac</strong> (for example with <code>tar</code>) includes hidden <code>._</code> files. Delete them from the unpacked copy (<code>find &lt;folder&gt; -name &#39;._*&#39; -delete</code>) before restoring, or pack with <code>COPYFILE_DISABLE=1 tar …</code>.</li>
+<li><strong>Run the restore as your own user</strong> when you can, not with <code>sudo</code>. If you used <code>sudo</code>, run <code>sudo chown -R &quot;$USER&quot;: ~/otter-wiki</code> afterwards, or the Publish step can&#39;t read <code>card.env</code>.</li>
+</ul>
+</details>
+<nav class="chapters"><a class="prev" href="../restore-and-prove-it/"><span>← Previous</span>Restore it, and prove it</a></nav>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Edgible. Keep your data close.</span>
+    <div class="foot-right">
+      <span><a href="https://cards.edgible.org">Cards</a> · <a href="../../contact/">Contact</a> · <a href="../../llms.txt">For AI assistants</a> · <a href="../move-an-app.md">This page as Markdown</a></span>
+      <a class="foot-logo" href="../../"><img src="../../images/edgible-symbol-white.png" alt="Edgible"></a>
+    </div>
+  </div>
+</footer>
+<script src="../../menu.js" defer></script>
+</body>
+</html>

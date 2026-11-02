@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>document.documentElement.className += " js";</script>
+  <link rel="stylesheet" href="../../menu.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Give your agent your own files · Edgible</title>
+  <meta name="description" content="Let your own AI agent read a folder of your notes and documents, read-only, and answer questions about them from your phone.">
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="alternate" type="text/markdown" title="This page as Markdown" href="../give-your-agent-your-files.md">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* The main page's typeface, colours, top bar and footer (site/index.html), with styles for reading. */
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    /* Playbooks are for doing, so they read on a light page; the dark top bar keeps them Edgible's. */
+    :root {
+      --night-1: #111827;
+      --line: #e3e6ef;
+      --paper: #fbfaf7;
+      --surface: #f1f2f7;
+      --yellow: #ffd21f;
+      --prompt: #fff8d6;
+      --link: #2e4a9e;
+      --heading: #111827;
+      --ink: #2b3245;
+      --muted: #5d6680;
+      --radius: 14px;
+      --wrap: 1120px;
+      --read: 760px;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--link); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    header.bar { position: sticky; top: 0; z-index: 10; background: var(--night-1); border-bottom: 1px solid rgba(255,255,255,.12); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    nav.links { display: flex; gap: 24px; font-weight: 500; font-size: 16px; }
+    nav.links a { text-decoration: none; color: #a7b1dc; }
+    nav.links a:hover { color: #ffffff; }
+
+    main { max-width: var(--read); margin: 0 auto; padding: 56px 24px 88px; }
+    h1, h2, h3 { color: var(--heading); line-height: 1.25; font-weight: 800; }
+    h1 { font-size: 40px; margin: 0 0 16px; }
+    h2 { font-size: 26px; margin: 48px 0 12px; }
+    h3 { font-size: 20px; margin: 32px 0 8px; }
+    p, li { max-width: 70ch; }
+    strong { color: var(--heading); }
+    /* A quote is something to say to your AI, or a box such as What you need. */
+    blockquote { margin: 20px 0; padding: 16px 20px; background: var(--prompt); border-left: 4px solid var(--yellow); border-radius: 0 var(--radius) var(--radius) 0; color: var(--heading); }
+    blockquote p { margin: 0; }
+    blockquote p + p, blockquote ul { margin-top: 10px; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; background: var(--surface); padding: 2px 6px; border-radius: 6px; }
+    pre { background: var(--night-1); color: #e6eaff; border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; }
+    pre code { background: none; padding: 0; color: inherit; }
+    details { margin: 24px 0; padding: 12px 18px; background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); }
+    summary { cursor: pointer; color: var(--heading); font-weight: 700; }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 16px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--heading); }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+    /* The site's icons are drawn light on dark, so on these pages each sits on a navy tile. */
+    /* A page's icon: a navy tile beside its title; a small one beside each entry on the landing page. */
+    .page-ico { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 48px; height: 48px; border-radius: 12px; background: var(--night-1); color: #ffffff; }
+    .page-ico svg { width: 36px; height: 36px; }
+    h1.with-ico { display: flex; align-items: center; gap: 16px; }
+    .ico.sm { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--night-1); margin-right: 10px; vertical-align: middle; }
+    .ico.sm svg { width: 22px; height: 22px; }
+    /* The icons draw in the text colour, so give every navy tile a white one */
+    .ico, .page-ico, .flow use { color: #ffffff; }
+    /* A list item with an icon: no bullet or number (the map above has the numbers), the icon hangs in the margin
+       and the text, even when it wraps, stays in its own column */
+    li:has(.ico.sm) { list-style: none; position: relative; padding-left: 54px; margin: 18px 0; min-height: 34px; }
+    li .ico.sm { position: absolute; left: 0; top: -2px; width: 36px; height: 36px; margin: 0; }
+    li .ico.sm svg { width: 26px; height: 26px; }
+    ul:has(.ico.sm), ol:has(.ico.sm) { padding-left: 0; }
+    li:has(.ico.sm) > p { margin: 0; }
+    li > ol:has(.ico.sm) { margin: 14px 0 0; }
+    li > ol > li:has(.ico.sm) { margin: 12px 0; }
+    h2 .ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--night-1); margin-right: 12px; vertical-align: middle; flex: none; }
+    h2 .ico svg { width: 30px; height: 30px; }
+    h2:has(.ico) { display: flex; align-items: center; }
+
+    /* Previous and Next, at the end of each chapter. */
+    nav.chapters { display: flex; gap: 14px; margin-top: 56px; flex-wrap: wrap; }
+    nav.chapters a { flex: 1 1 240px; display: block; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; text-decoration: none; color: var(--heading); font-weight: 700; }
+    nav.chapters a:hover { border-color: var(--link); }
+    nav.chapters a span { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 4px; }
+    nav.chapters a.next { text-align: right; margin-left: auto; }
+    footer { padding: 14px 0; font-size: 14px; color: #a7b1dc; background: var(--night-1); }
+    footer a { color: #a7b1dc; }
+    footer a:hover { color: #ffffff; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer .foot-right { display: flex; align-items: center; gap: 20px; }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      main { padding: 40px 16px 64px; }
+      nav.links { gap: 16px; font-size: 15px; }
+      h1 { font-size: 32px; }
+      table { display: block; overflow-x: auto; }
+    }
+    /* The route through the playbooks, drawn. */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 28px 0 8px; }
+    .path { display: block; padding: 20px 22px 18px; border: 1.5px solid var(--line); border-radius: var(--radius); background: #ffffff; color: var(--ink); text-decoration: none; }
+    a.path:hover, a.path:focus { border-color: var(--link); }
+    .path h2 { margin: 14px 0 6px; font-size: 22px; }
+    .path p { margin: 0 0 12px; color: var(--ink); }
+    .path .go { font-weight: 700; color: var(--link); font-size: 15px; }
+    .path.soon { background: transparent; border-style: dashed; }
+    .path.soon h2, .path.soon p { color: var(--muted); }
+    .path.soon .go { color: var(--muted); }
+    .path svg { width: 100%; max-width: 220px; height: auto; display: block; }
+    .path .mf { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .path .md { fill: var(--yellow); }
+    .path .rb { fill: none; stroke: #8a6a00; stroke-width: 1.5; stroke-linecap: round; }
+    .path .eye { fill: var(--ink); }
+    .path .og { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .path .og.soon { stroke: var(--muted); }
+    .path .dash { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    @media (max-width: 640px) { .paths { grid-template-columns: 1fr; } }
+    figure.flow { margin: 28px auto; max-width: 460px; }
+    figure.flow svg { width: 100%; height: auto; display: block; font-family: inherit; }
+    .flow a { cursor: pointer; }
+    .flow .frame { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .flow .box { fill: #ffffff; stroke: var(--line); stroke-width: 1.5; }
+    .flow .box.opt { stroke-dasharray: 5 4; stroke: var(--muted); }
+    .flow a:hover .box, .flow a:focus .box { stroke: var(--link); }
+    .flow .num { fill: var(--yellow); }
+    .flow .numt { fill: var(--heading); font-weight: 800; font-size: 14px; }
+    .flow .t { fill: var(--heading); font-weight: 800; font-size: 17px; }
+    .flow .t.b { font-size: 15px; }
+    .flow .s { fill: var(--muted); font-size: 13.5px; }
+    .flow .s2 { fill: var(--heading); font-weight: 700; font-size: 14px; }
+    .flow .arr { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../../"><img src="../../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="links" id="site-nav">
+      <a href="../../playbooks/">Playbooks</a>
+      <a href="https://cards.edgible.org">Cards</a>
+      <a href="../../proof/">Proof</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+<h1 class="with-ico"><span class="page-ico" aria-hidden="true"><svg><use href="../../images/icons.svg#data"/></svg></span><span>Give your agent your own files</span></h1>
+<p><em>Chapter 5 of <a href="../a-private-model-for-your-agent/">A private model for your agent</a>. New: tested on our own machines, from a phone, so <a href="mailto:stefano@edgible.com?subject=Playbook%20feedback">tell us how it goes</a>.</em></p>
+<p>So far your agent knows what you tell it and what&#39;s on the web. This chapter lets it read <strong>your own files</strong>: a folder of notes, appointments, recipes, club minutes, anything you keep as text. Then you can ask from your phone, <em>&quot;When&#39;s my dentist?&quot;</em>, and it looks it up in your files, on your machine.</p>
+<p>With your private model answering, nothing here leaves your machines: not your files, and not your questions. It&#39;s the first thing your agent can do that you couldn&#39;t give it before, and it&#39;s read-only: your agent can read the folder, never change it.</p>
+<blockquote>
+<p><strong>What you need</strong></p>
+<ul>
+<li><a href="../a-private-model-for-your-agent/">Chapters 1 to 4 of this playbook</a> done: your agent running on your machine, offering your private model beside its everyday ones.</li>
+<li>A folder of files <strong>on that machine</strong>: text, Markdown or similar. A few notes are enough to start.</li>
+<li><strong>A capable model.</strong> Small models fumble tools. Use <code>private-smart</code>, the 20 billion parameter model, as we did; the 7 billion one lost its way. A gateway model such as <strong>fast</strong> or <strong>smart</strong> works too, but then what the agent reads goes to that provider.</li>
+</ul>
+</blockquote>
+<h2>1. Ask your AI to give your agent the folder</h2>
+<p>In your AI assistant on the machine (or in Claude, if it can reach it):</p>
+<blockquote>
+<p>Give my agent read-only access to the folder /home/me/notes, using the filesystem MCP server. Check that it can read the folder but not change it.</p>
+</blockquote>
+<p>Change the folder to yours. It does three things, and tells you what it&#39;s doing:</p>
+<ul>
+<li><strong>Mounts the folder read-only</strong> into your agent, as <code>notes</code> in its own workspace and as <code>/notes</code>, so even a mistake can&#39;t change a file.</li>
+<li><strong>Adds the filesystem server</strong> to your agent as <code>notes</code>, with only its reading tools: list, read and search. Writing, editing and moving are switched off.</li>
+<li><strong>Restarts your agent</strong> so it picks the folder up.</li>
+</ul>
+<h2>2. Ask it a question about your files</h2>
+<p>Open your agent, on your computer or your phone, and pick <code>private-smart</code> from the menu by the message box. If it has been used a lot already, send <code>/new</code> first, for a clean start: an agent that has gone looking in the wrong place tends to keep doing it. Then ask:</p>
+<blockquote>
+<p>Look in my notes folder and tell me what time my dentist appointment is.</p>
+</blockquote>
+<p>Your agent lists the folder, reads what looks relevant, and answers from it. Two things that trip people up:</p>
+<ul>
+<li><strong>Its search finds file names, not words inside files.</strong> It copes by listing the folder and reading, which is why a folder of a few dozen files works better than thousands.</li>
+<li><strong>Small models fumble.</strong> A model on your own machine with a few billion parameters may lose its way; your gateway&#39;s <strong>fast</strong> or <strong>smart</strong> is better. If it can&#39;t find the folder, say &quot;the notes folder, with your notes tools&quot;.</li>
+</ul>
+<h2>3. Check it can&#39;t change anything</h2>
+<blockquote>
+<p>Add the line &quot;Buy milk&quot; to shopping.md in my notes folder, then tell me whether it worked.</p>
+</blockquote>
+<p>The file stays as it was. Agents sometimes say a thing worked when it didn&#39;t, so <strong>look at the file</strong> instead of trusting the reply: that&#39;s the point of read-only, and why we show it to you.</p>
+<h2>What you&#39;ve just done</h2>
+<ul>
+<li><strong>Your agent can read your own files,</strong> and answers from your phone, with your documents staying on your machine.</li>
+<li><strong>It can&#39;t change them.</strong> The folder itself is locked read-only on your machine, so whichever of the agent&#39;s tools tries to write, it fails. The notes server also has its writing tools switched off.</li>
+<li><strong>You added a new ability without writing code,</strong> using one of the open MCP servers any agent can use. The same steps work for others.</li>
+</ul>
+<p>Honest limits: it reads text, not scans or photos, and it only sees that one folder. Add more folders, or other servers, the same way.</p>
+<p>Why your agent, not Claude&#39;s app? When you ask your agent with the private model, your files and your question stay on your machines. Claude&#39;s own app can reach your files too, through a connector, but then it reads them on Anthropic&#39;s side, so we don&#39;t recommend that for private notes.</p>
+<p>Next, <a href="../choosing-between-them/">choosing between them</a>: which questions go to the private model, and which don&#39;t. Done with it all? <a href="../take-it-all-down/">Take it all down</a> removes it cleanly.</p>
+<details>
+<summary>Prefer to do it by hand?</summary><p>This is the notes folder setting of the <a href="https://github.com/edgible-org/cards/tree/main/edgible-agent">edgible-agent card</a>.</p>
+<p><strong>A new agent:</strong> in the card&#39;s <code>card.env</code>, set <code>OPENCLAW_NOTES_DIR</code> to the folder&#39;s absolute path before the first Start. Start sets up everything below on its own.</p>
+<p><strong>An agent that&#39;s already running:</strong> the setting only applies at the first Start, so do it in two parts.</p>
+<ol>
+<li>In <code>docker-compose.yml</code>, under the <code>openclaw</code> service&#39;s <code>volumes:</code>, add <code>- /home/me/notes:/notes:ro</code> and <code>- /home/me/notes:/home/node/.openclaw/workspace/notes:ro</code>, and bring the agent up again.</li>
+<li>Add the server, with its reading tools only:</li>
+</ol>
+<pre><code class="language-bash">docker compose --env-file edgible-agent/card.env -f edgible-agent/docker-compose.yml run --rm --no-deps openclaw-cli mcp add notes --command npx --arg -y --arg @modelcontextprotocol/server-filesystem@2.1.0 --arg /notes
+docker compose --env-file edgible-agent/card.env -f edgible-agent/docker-compose.yml run --rm --no-deps openclaw-cli mcp tools notes --include read_text_file,read_multiple_files,list_directory,list_directory_with_sizes,directory_tree,search_files,get_file_info,list_allowed_directories
+</code></pre>
+<p>Check it with <code>mcp probe notes</code>: it should list 8 tools.</p>
+</details>
+<nav class="chapters"><a class="prev" href="../private-for-your-agent/"><span>← Previous</span>Private for your agent</a><a class="next" href="../choosing-between-them/"><span>Next →</span>Choosing between them</a></nav>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Edgible. Keep your data close.</span>
+    <div class="foot-right">
+      <span><a href="https://cards.edgible.org">Cards</a> · <a href="../../contact/">Contact</a> · <a href="../../llms.txt">For AI assistants</a> · <a href="../give-your-agent-your-files.md">This page as Markdown</a></span>
+      <a class="foot-logo" href="../../"><img src="../../images/edgible-symbol-white.png" alt="Edgible"></a>
+    </div>
+  </div>
+</footer>
+<script src="../../menu.js" defer></script>
+</body>
+</html>

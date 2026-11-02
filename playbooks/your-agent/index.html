@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>document.documentElement.className += " js";</script>
+  <link rel="stylesheet" href="../../menu.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your agent · Edgible</title>
+  <meta name="description" content="Your own AI agent, OpenClaw, on your machine, using your AI gateway with its own key and budget, behind your Edgible sign-in.">
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="alternate" type="text/markdown" title="This page as Markdown" href="../your-agent.md">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* The main page's typeface, colours, top bar and footer (site/index.html), with styles for reading. */
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    /* Playbooks are for doing, so they read on a light page; the dark top bar keeps them Edgible's. */
+    :root {
+      --night-1: #111827;
+      --line: #e3e6ef;
+      --paper: #fbfaf7;
+      --surface: #f1f2f7;
+      --yellow: #ffd21f;
+      --prompt: #fff8d6;
+      --link: #2e4a9e;
+      --heading: #111827;
+      --ink: #2b3245;
+      --muted: #5d6680;
+      --radius: 14px;
+      --wrap: 1120px;
+      --read: 760px;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--link); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    header.bar { position: sticky; top: 0; z-index: 10; background: var(--night-1); border-bottom: 1px solid rgba(255,255,255,.12); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    nav.links { display: flex; gap: 24px; font-weight: 500; font-size: 16px; }
+    nav.links a { text-decoration: none; color: #a7b1dc; }
+    nav.links a:hover { color: #ffffff; }
+
+    main { max-width: var(--read); margin: 0 auto; padding: 56px 24px 88px; }
+    h1, h2, h3 { color: var(--heading); line-height: 1.25; font-weight: 800; }
+    h1 { font-size: 40px; margin: 0 0 16px; }
+    h2 { font-size: 26px; margin: 48px 0 12px; }
+    h3 { font-size: 20px; margin: 32px 0 8px; }
+    p, li { max-width: 70ch; }
+    strong { color: var(--heading); }
+    /* A quote is something to say to your AI, or a box such as What you need. */
+    blockquote { margin: 20px 0; padding: 16px 20px; background: var(--prompt); border-left: 4px solid var(--yellow); border-radius: 0 var(--radius) var(--radius) 0; color: var(--heading); }
+    blockquote p { margin: 0; }
+    blockquote p + p, blockquote ul { margin-top: 10px; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; background: var(--surface); padding: 2px 6px; border-radius: 6px; }
+    pre { background: var(--night-1); color: #e6eaff; border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; }
+    pre code { background: none; padding: 0; color: inherit; }
+    details { margin: 24px 0; padding: 12px 18px; background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); }
+    summary { cursor: pointer; color: var(--heading); font-weight: 700; }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 16px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--heading); }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+    /* The site's icons are drawn light on dark, so on these pages each sits on a navy tile. */
+    /* A page's icon: a navy tile beside its title; a small one beside each entry on the landing page. */
+    .page-ico { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 48px; height: 48px; border-radius: 12px; background: var(--night-1); color: #ffffff; }
+    .page-ico svg { width: 36px; height: 36px; }
+    h1.with-ico { display: flex; align-items: center; gap: 16px; }
+    .ico.sm { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--night-1); margin-right: 10px; vertical-align: middle; }
+    .ico.sm svg { width: 22px; height: 22px; }
+    /* The icons draw in the text colour, so give every navy tile a white one */
+    .ico, .page-ico, .flow use { color: #ffffff; }
+    /* A list item with an icon: no bullet or number (the map above has the numbers), the icon hangs in the margin
+       and the text, even when it wraps, stays in its own column */
+    li:has(.ico.sm) { list-style: none; position: relative; padding-left: 54px; margin: 18px 0; min-height: 34px; }
+    li .ico.sm { position: absolute; left: 0; top: -2px; width: 36px; height: 36px; margin: 0; }
+    li .ico.sm svg { width: 26px; height: 26px; }
+    ul:has(.ico.sm), ol:has(.ico.sm) { padding-left: 0; }
+    li:has(.ico.sm) > p { margin: 0; }
+    li > ol:has(.ico.sm) { margin: 14px 0 0; }
+    li > ol > li:has(.ico.sm) { margin: 12px 0; }
+    h2 .ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--night-1); margin-right: 12px; vertical-align: middle; flex: none; }
+    h2 .ico svg { width: 30px; height: 30px; }
+    h2:has(.ico) { display: flex; align-items: center; }
+
+    /* Previous and Next, at the end of each chapter. */
+    nav.chapters { display: flex; gap: 14px; margin-top: 56px; flex-wrap: wrap; }
+    nav.chapters a { flex: 1 1 240px; display: block; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; text-decoration: none; color: var(--heading); font-weight: 700; }
+    nav.chapters a:hover { border-color: var(--link); }
+    nav.chapters a span { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 4px; }
+    nav.chapters a.next { text-align: right; margin-left: auto; }
+    footer { padding: 14px 0; font-size: 14px; color: #a7b1dc; background: var(--night-1); }
+    footer a { color: #a7b1dc; }
+    footer a:hover { color: #ffffff; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer .foot-right { display: flex; align-items: center; gap: 20px; }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      main { padding: 40px 16px 64px; }
+      nav.links { gap: 16px; font-size: 15px; }
+      h1 { font-size: 32px; }
+      table { display: block; overflow-x: auto; }
+    }
+    /* The route through the playbooks, drawn. */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 28px 0 8px; }
+    .path { display: block; padding: 20px 22px 18px; border: 1.5px solid var(--line); border-radius: var(--radius); background: #ffffff; color: var(--ink); text-decoration: none; }
+    a.path:hover, a.path:focus { border-color: var(--link); }
+    .path h2 { margin: 14px 0 6px; font-size: 22px; }
+    .path p { margin: 0 0 12px; color: var(--ink); }
+    .path .go { font-weight: 700; color: var(--link); font-size: 15px; }
+    .path.soon { background: transparent; border-style: dashed; }
+    .path.soon h2, .path.soon p { color: var(--muted); }
+    .path.soon .go { color: var(--muted); }
+    .path svg { width: 100%; max-width: 220px; height: auto; display: block; }
+    .path .mf { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .path .md { fill: var(--yellow); }
+    .path .rb { fill: none; stroke: #8a6a00; stroke-width: 1.5; stroke-linecap: round; }
+    .path .eye { fill: var(--ink); }
+    .path .og { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .path .og.soon { stroke: var(--muted); }
+    .path .dash { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    @media (max-width: 640px) { .paths { grid-template-columns: 1fr; } }
+    figure.flow { margin: 28px auto; max-width: 460px; }
+    figure.flow svg { width: 100%; height: auto; display: block; font-family: inherit; }
+    .flow a { cursor: pointer; }
+    .flow .frame { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .flow .box { fill: #ffffff; stroke: var(--line); stroke-width: 1.5; }
+    .flow .box.opt { stroke-dasharray: 5 4; stroke: var(--muted); }
+    .flow a:hover .box, .flow a:focus .box { stroke: var(--link); }
+    .flow .num { fill: var(--yellow); }
+    .flow .numt { fill: var(--heading); font-weight: 800; font-size: 14px; }
+    .flow .t { fill: var(--heading); font-weight: 800; font-size: 17px; }
+    .flow .t.b { font-size: 15px; }
+    .flow .s { fill: var(--muted); font-size: 13.5px; }
+    .flow .s2 { fill: var(--heading); font-weight: 700; font-size: 14px; }
+    .flow .arr { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../../"><img src="../../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="links" id="site-nav">
+      <a href="../../playbooks/">Playbooks</a>
+      <a href="https://cards.edgible.org">Cards</a>
+      <a href="../../proof/">Proof</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+<h1 class="with-ico"><span class="page-ico" aria-hidden="true"><svg><use href="../../images/icons.svg#chat"/></svg></span><span>Your agent</span></h1>
+<p><em>Chapter 4 of <a href="../your-own-ai-agent/">Your own AI agent, from anywhere</a>. New: tested on our own machines, so <a href="mailto:stefano@edgible.com?subject=Playbook%20feedback">tell us how it goes</a>.</em></p>
+<p>Now the agent itself. It&#39;s <strong>OpenClaw</strong>, a popular open-source AI agent: it chats, remembers, researches, and uses tools on your behalf. Yours comes with Edgible&#39;s tools and skill built in, so it can also look after your apps, asking you first before it changes anything.</p>
+<p>It runs on your machine, uses your AI gateway with <strong>its own key and its own budget</strong>, and only you can open it.</p>
+<blockquote>
+<p><strong>What you need</strong></p>
+<ul>
+<li><a href="../your-own-ai-agent/">Chapters 1 to 3</a> done: Edgible running, Claude connected, and your AI gateway.</li>
+<li><strong>8 GB of memory</strong> on the machine in all. The agent needs about 4 GB on top of the gateway, and with less, it gets stopped mid-answer.</li>
+</ul>
+</blockquote>
+<h2>1. Ask Claude to set it up</h2>
+<p>In Claude, say:</p>
+<blockquote>
+<p>Set up my own AI agent on my edgible-vm, called my-agent. It should use my AI gateway, with a budget of five dollars a month.</p>
+</blockquote>
+<p>Claude does three things, and asks before each:</p>
+<ul>
+<li><strong>Makes the agent&#39;s own gateway key,</strong> with its five-dollar budget. The key goes straight into your Edgible account; neither you nor the agent&#39;s settings ever show it.</li>
+<li><strong>Sets the agent up</strong> on your machine, with your gateway as its only way to reach an AI model.</li>
+<li><strong>Locks it to you:</strong> the agent&#39;s address opens only after you sign in with your Edgible account.</li>
+</ul>
+<p>At the end, it gives you the agent&#39;s address.</p>
+<h2>2. Meet your agent</h2>
+<p>Open the address, and sign in with Edgible. You&#39;re in OpenClaw: a chat, with your agent on the other side. Say hello:</p>
+<blockquote>
+<p>What can you do for me?</p>
+</blockquote>
+<p>If the page shows <em>&quot;Proxy client attribution is required.&quot;</em>, reload it once. It means a request reached your agent without Edgible&#39;s sign-in having said who you are, and it can happen just after the agent starts. If it stays in one browser while another browser works, that browser is holding an old session for the same address, from an earlier agent you ran there, say: clear this site&#39;s cookies and data, or open the page in a private window, and sign in again. Nothing is wrong with your agent.</p>
+<p>Its first answers come from <strong>fast</strong>, your gateway&#39;s everyday model. The menu by the message box lets you pick another, such as <strong>smart</strong> for harder questions, or <strong>best</strong> when it really matters.</p>
+<h2>3. Let it look after your apps</h2>
+<p>Your agent has Edgible&#39;s tools, but they need your permission once. Ask it:</p>
+<blockquote>
+<p>Sign in to Edgible.</p>
+</blockquote>
+<p>It shows a link and a short code, as in chapter 1: open the link, check the code, and approve. Then try:</p>
+<blockquote>
+<p>What&#39;s running on my Edgible?</p>
+</blockquote>
+<h2>4. Ask what it has spent</h2>
+<blockquote>
+<p>What have you spent so far?</p>
+</blockquote>
+<p>It answers with its own spending against its budget, and only its own. It can&#39;t see what your other agents spend: that view is yours, in Claude.</p>
+<h2>What you&#39;ve just done</h2>
+<p>You have your own AI agent, and it&#39;s well brought up:</p>
+<ul>
+<li><strong>It&#39;s yours.</strong> It runs on your machine. Its memory, your files and your conversations stay there.</li>
+<li><strong>Only you can open it,</strong> behind your Edgible sign-in. No password of its own to leak, and no ports open.</li>
+<li><strong>It can&#39;t run up a bill.</strong> It has its own key and budget on your gateway. At its limit it stops; it never sees your provider keys, and it can&#39;t touch other agents&#39; budgets.</li>
+<li><strong>It knows its own spending,</strong> and you see everyone&#39;s.</li>
+<li><strong>It asks before it acts</strong> on your apps, every time.</li>
+</ul>
+<p>Most people trying agents give one a provider key and hope. Yours has guardrails from the first message.</p>
+<details>
+<summary>Prefer to do it by hand?</summary><p>What Claude does, in order. The agent is the <a href="https://github.com/edgible-org/cards/tree/main/edgible-agent">edgible-agent card</a> in its shared-gateway mode; its README has every step, and our regression runs it as written.</p>
+<ol>
+<li><strong>Make the agent&#39;s gateway key</strong> in the gateway&#39;s admin page: Keys, Create key, named after the agent, with a budget of 5 dollars per 30 days, and allowed routes <code>/v1/chat/completions</code>, <code>/v1/models</code> and <code>/key/info</code>, so it can&#39;t read anyone else&#39;s spending.</li>
+<li><strong>On the machine, the edgible-agent card.</strong> In its <code>card.env</code>: <code>COMPOSE_PROFILES</code> empty (no gateway of its own), <code>OPENCLAW_MODEL_URL</code> set to your gateway&#39;s API address ending <code>/v1</code>, <code>OPENCLAW_MODEL_KEY</code> to the key from step 1, <code>OPENCLAW_USERS</code> to the email you sign in to Edgible with, and, to let it change apps, <code>EDGIBLE_MCP_ALLOW_WRITE=1</code> with <code>EDGIBLE_MCP_DEVICES</code> set to this machine. Then Check and Start.</li>
+<li><strong>Publish it</strong> on <code>org</code>.</li>
+<li><strong>Sign its Edgible tools in,</strong> once: the README&#39;s <code>edgible auth login --no-browser</code> inside its <code>edgible-mcp</code> container, or ask the agent <em>&quot;Sign in to Edgible&quot;</em>.</li>
+</ol>
+</details>
+<nav class="chapters"><a class="prev" href="../your-ai-gateway/"><span>← Previous</span>Your AI gateway</a><a class="next" href="../run-it-from-your-phone/"><span>Next →</span>Run it from your phone</a></nav>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Edgible. Keep your data close.</span>
+    <div class="foot-right">
+      <span><a href="https://cards.edgible.org">Cards</a> · <a href="../../contact/">Contact</a> · <a href="../../llms.txt">For AI assistants</a> · <a href="../your-agent.md">This page as Markdown</a></span>
+      <a class="foot-logo" href="../../"><img src="../../images/edgible-symbol-white.png" alt="Edgible"></a>
+    </div>
+  </div>
+</footer>
+<script src="../../menu.js" defer></script>
+</body>
+</html>

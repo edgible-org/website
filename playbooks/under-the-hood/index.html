@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>document.documentElement.className += " js";</script>
+  <link rel="stylesheet" href="../../menu.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Under the hood · Edgible</title>
+  <meta name="description" content="What the AI agent playbook does for you that's easy to miss, for experts and the curious: how your data, keys and costs stay under your control.">
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <link rel="alternate" type="text/markdown" title="This page as Markdown" href="../under-the-hood.md">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* The main page's typeface, colours, top bar and footer (site/index.html), with styles for reading. */
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../../fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    /* Playbooks are for doing, so they read on a light page; the dark top bar keeps them Edgible's. */
+    :root {
+      --night-1: #111827;
+      --line: #e3e6ef;
+      --paper: #fbfaf7;
+      --surface: #f1f2f7;
+      --yellow: #ffd21f;
+      --prompt: #fff8d6;
+      --link: #2e4a9e;
+      --heading: #111827;
+      --ink: #2b3245;
+      --muted: #5d6680;
+      --radius: 14px;
+      --wrap: 1120px;
+      --read: 760px;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--link); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    header.bar { position: sticky; top: 0; z-index: 10; background: var(--night-1); border-bottom: 1px solid rgba(255,255,255,.12); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    nav.links { display: flex; gap: 24px; font-weight: 500; font-size: 16px; }
+    nav.links a { text-decoration: none; color: #a7b1dc; }
+    nav.links a:hover { color: #ffffff; }
+
+    main { max-width: var(--read); margin: 0 auto; padding: 56px 24px 88px; }
+    h1, h2, h3 { color: var(--heading); line-height: 1.25; font-weight: 800; }
+    h1 { font-size: 40px; margin: 0 0 16px; }
+    h2 { font-size: 26px; margin: 48px 0 12px; }
+    h3 { font-size: 20px; margin: 32px 0 8px; }
+    p, li { max-width: 70ch; }
+    strong { color: var(--heading); }
+    /* A quote is something to say to your AI, or a box such as What you need. */
+    blockquote { margin: 20px 0; padding: 16px 20px; background: var(--prompt); border-left: 4px solid var(--yellow); border-radius: 0 var(--radius) var(--radius) 0; color: var(--heading); }
+    blockquote p { margin: 0; }
+    blockquote p + p, blockquote ul { margin-top: 10px; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; background: var(--surface); padding: 2px 6px; border-radius: 6px; }
+    pre { background: var(--night-1); color: #e6eaff; border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; }
+    pre code { background: none; padding: 0; color: inherit; }
+    details { margin: 24px 0; padding: 12px 18px; background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); }
+    summary { cursor: pointer; color: var(--heading); font-weight: 700; }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 16px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--heading); }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+    /* The site's icons are drawn light on dark, so on these pages each sits on a navy tile. */
+    /* A page's icon: a navy tile beside its title; a small one beside each entry on the landing page. */
+    .page-ico { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 48px; height: 48px; border-radius: 12px; background: var(--night-1); color: #ffffff; }
+    .page-ico svg { width: 36px; height: 36px; }
+    h1.with-ico { display: flex; align-items: center; gap: 16px; }
+    .ico.sm { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--night-1); margin-right: 10px; vertical-align: middle; }
+    .ico.sm svg { width: 22px; height: 22px; }
+    /* The icons draw in the text colour, so give every navy tile a white one */
+    .ico, .page-ico, .flow use { color: #ffffff; }
+    /* A list item with an icon: no bullet or number (the map above has the numbers), the icon hangs in the margin
+       and the text, even when it wraps, stays in its own column */
+    li:has(.ico.sm) { list-style: none; position: relative; padding-left: 54px; margin: 18px 0; min-height: 34px; }
+    li .ico.sm { position: absolute; left: 0; top: -2px; width: 36px; height: 36px; margin: 0; }
+    li .ico.sm svg { width: 26px; height: 26px; }
+    ul:has(.ico.sm), ol:has(.ico.sm) { padding-left: 0; }
+    li:has(.ico.sm) > p { margin: 0; }
+    li > ol:has(.ico.sm) { margin: 14px 0 0; }
+    li > ol > li:has(.ico.sm) { margin: 12px 0; }
+    h2 .ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--night-1); margin-right: 12px; vertical-align: middle; flex: none; }
+    h2 .ico svg { width: 30px; height: 30px; }
+    h2:has(.ico) { display: flex; align-items: center; }
+
+    /* Previous and Next, at the end of each chapter. */
+    nav.chapters { display: flex; gap: 14px; margin-top: 56px; flex-wrap: wrap; }
+    nav.chapters a { flex: 1 1 240px; display: block; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; text-decoration: none; color: var(--heading); font-weight: 700; }
+    nav.chapters a:hover { border-color: var(--link); }
+    nav.chapters a span { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 4px; }
+    nav.chapters a.next { text-align: right; margin-left: auto; }
+    footer { padding: 14px 0; font-size: 14px; color: #a7b1dc; background: var(--night-1); }
+    footer a { color: #a7b1dc; }
+    footer a:hover { color: #ffffff; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer .foot-right { display: flex; align-items: center; gap: 20px; }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      main { padding: 40px 16px 64px; }
+      nav.links { gap: 16px; font-size: 15px; }
+      h1 { font-size: 32px; }
+      table { display: block; overflow-x: auto; }
+    }
+    /* The route through the playbooks, drawn. */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 28px 0 8px; }
+    .path { display: block; padding: 20px 22px 18px; border: 1.5px solid var(--line); border-radius: var(--radius); background: #ffffff; color: var(--ink); text-decoration: none; }
+    a.path:hover, a.path:focus { border-color: var(--link); }
+    .path h2 { margin: 14px 0 6px; font-size: 22px; }
+    .path p { margin: 0 0 12px; color: var(--ink); }
+    .path .go { font-weight: 700; color: var(--link); font-size: 15px; }
+    .path.soon { background: transparent; border-style: dashed; }
+    .path.soon h2, .path.soon p { color: var(--muted); }
+    .path.soon .go { color: var(--muted); }
+    .path svg { width: 100%; max-width: 220px; height: auto; display: block; }
+    .path .mf { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .path .md { fill: var(--yellow); }
+    .path .rb { fill: none; stroke: #8a6a00; stroke-width: 1.5; stroke-linecap: round; }
+    .path .eye { fill: var(--ink); }
+    .path .og { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .path .og.soon { stroke: var(--muted); }
+    .path .dash { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    @media (max-width: 640px) { .paths { grid-template-columns: 1fr; } }
+    figure.flow { margin: 28px auto; max-width: 460px; }
+    figure.flow svg { width: 100%; height: auto; display: block; font-family: inherit; }
+    .flow a { cursor: pointer; }
+    .flow .frame { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+    .flow .box { fill: #ffffff; stroke: var(--line); stroke-width: 1.5; }
+    .flow .box.opt { stroke-dasharray: 5 4; stroke: var(--muted); }
+    .flow a:hover .box, .flow a:focus .box { stroke: var(--link); }
+    .flow .num { fill: var(--yellow); }
+    .flow .numt { fill: var(--heading); font-weight: 800; font-size: 14px; }
+    .flow .t { fill: var(--heading); font-weight: 800; font-size: 17px; }
+    .flow .t.b { font-size: 15px; }
+    .flow .s { fill: var(--muted); font-size: 13.5px; }
+    .flow .s2 { fill: var(--heading); font-weight: 700; font-size: 14px; }
+    .flow .arr { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../../"><img src="../../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="links" id="site-nav">
+      <a href="../../playbooks/">Playbooks</a>
+      <a href="https://cards.edgible.org">Cards</a>
+      <a href="../../proof/">Proof</a>
+      <a href="../../contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+<h1 class="with-ico"><span class="page-ico" aria-hidden="true"><svg><use href="../../images/icons.svg#eye"/></svg></span><span>Under the hood</span></h1>
+<p><em>For the experts and the curious, alongside <a href="../your-own-ai-agent/">Your own AI agent, from anywhere</a>.</em></p>
+<p>The playbook reads as a handful of plain sentences to an AI. Behind them, a lot happens that&#39;s easy to miss. This page sets it out, so that you, or someone you ask, can judge whether it&#39;s done properly. Everything here was built and tested on our own machines; where something isn&#39;t done yet, the last section says so.</p>
+<p>The theme is one idea: <strong>keep your data close, with confidence.</strong> Close, because it runs on a machine you control. Confidence, because what&#39;s close is also locked down, costed and recoverable.</p>
+<h2><span class="ico" aria-hidden="true"><svg><use href="../../images/icons.svg#machine"/></svg></span>Where Edgible comes in</h2>
+<p>Three kinds of thing work together in this playbook. <strong>Open-source apps</strong> do the jobs: OpenClaw the agent, LiteLLM the gateway, linkding the bookmarks. <strong>Our open recipes and skill</strong> (the cards, card-kit and the Edgible skill for AI assistants) set them up the same tested way every time. And <strong>Edgible</strong>, the platform, gives each app a safe way to be reached and run. This is Edgible&#39;s part, and what you&#39;d otherwise put together yourself:</p>
+<table>
+<thead>
+<tr>
+<th>What you get</th>
+<th>What Edgible does</th>
+<th>Without Edgible, you&#39;d need</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Apps reachable from anywhere, with no ports opened</td>
+<td>A small agent on your machine connects out to Edgible, which carries each app&#39;s traffic in</td>
+<td>A static address or dynamic DNS, open ports on your router, or a VPN or tunnel service you run</td>
+</tr>
+<tr>
+<td>A web address and HTTPS for every app</td>
+<td>Generates each app&#39;s address and issues and renews its certificate; your own domain with one CNAME</td>
+<td>A domain, DNS records and a certificate tool for each app</td>
+</tr>
+<tr>
+<td>Sign-in in front of every app</td>
+<td>Edgible&#39;s own sign-in, per app: only your organisation, open, or a key; it passes the signed-in person&#39;s email to the app and strips any forgery</td>
+<td>An identity server such as Authelia or Authentik, set up for each app</td>
+</tr>
+<tr>
+<td>Keys kept out of files and chats</td>
+<td>Organisation secrets, stored once and handed to apps by reference when they start</td>
+<td>A secrets manager, or keys in settings files on the machine</td>
+</tr>
+<tr>
+<td>Apps described, not hand-built</td>
+<td>Each app is a declaration: what runs, where, how it&#39;s reached and with which secrets, applied in one step and changed in place</td>
+<td>Scripts and notes per machine, and remembering what you did</td>
+</tr>
+<tr>
+<td>A fleet you can see and steer</td>
+<td>Your machines and apps in one console and one command line, each machine&#39;s agent updating itself and rolling back if an update fails</td>
+<td>Logging in to each machine to check on it</td>
+</tr>
+<tr>
+<td>Moving to another machine</td>
+<td>Starts the app on the new machine, switches its traffic over, then stops the old copy</td>
+<td>Backing up, copying, reconfiguring and re-pointing DNS by hand</td>
+</tr>
+<tr>
+<td>AI that can help, safely</td>
+<td>An official command line and MCP tools that AI assistants use, signed in with a code you approve</td>
+<td>Giving an AI broad access to your machine, or doing it all yourself</td>
+</tr>
+</tbody></table>
+<p>Everything Edgible doesn&#39;t do is open and yours: the apps, the recipes and the data. The recipes run without Edgible too, with a reverse proxy of your choosing. Edgible is what makes them reachable, signed-in and steerable without the plumbing.</p>
+<h2><span class="ico" aria-hidden="true"><svg><use href="../../images/icons.svg#home"/></svg></span>1. Nothing exposed by default</h2>
+<ul>
+<li><strong>No inbound ports.</strong> Edgible&#39;s agent on your machine connects out to Edgible. Nothing on your router or firewall is opened, and your machine&#39;s own address is never published.</li>
+<li><strong>Every page sits behind your Edgible sign-in</strong> unless it has to be open: the gateway&#39;s admin, the connector&#39;s sign-in page and your agent all use it.</li>
+<li><strong>The few open addresses answer only credentials you authorised.</strong> The connector answers only Claude, with a token issued after you signed in and allowed it. The gateway&#39;s API answers only keys it issued itself. Linkding is open so its browser extension and phone apps can reach it, behind its own sign-in.</li>
+<li><strong>Your agent trusts only Edgible&#39;s sign-in.</strong> OpenClaw runs in trusted-proxy mode: it takes your identity from a header that Edgible&#39;s front door sets, and strips from anything a client sends, and admits only the email addresses you named. It trusts that header from one address only, the proxy in front of it.</li>
+</ul>
+<h2><span class="ico" aria-hidden="true"><svg><use href="../../images/icons.svg#lock"/></svg></span>2. Keys never travel through chat</h2>
+<ul>
+<li><strong>Key links.</strong> When a key is needed, Claude gives you a one-time link that works for ten minutes, and you paste the key there. Claude never sees it, and it never sits in a chat history.</li>
+<li><strong>Provider keys are stored once,</strong> as Edgible organisation secrets, and passed to apps by reference when they start. They&#39;re never written into a settings file or an app&#39;s configuration.</li>
+<li><strong>Passwords are made on your machine,</strong> at the app&#39;s first start, by a small helper that never shows them again. The one exception is a first-use password a person needs, shown to you once and meant to be changed at once.</li>
+<li><strong>The gateway&#39;s master key is kept by your connector</strong> and shown to nobody, Claude included. Claude asks the connector to make keys and report spending; it never handles the master key itself.</li>
+<li><strong>Logs are treated as secret.</strong> The gateway&#39;s own logs record callers&#39; keys, so our tools read only app names, models and numbers from them, and never pass a key on.</li>
+</ul>
+<h2><span class="ico" aria-hidden="true"><svg><use href="../../images/icons.svg#govern"/></svg></span>3. Least privilege, by default</h2>
+<ul>
+<li><strong>Each agent has its own key,</strong> with its own budget, limited to the routes it needs: asking models, listing them, and reading its own record. It can&#39;t read other agents&#39; spending or reach the gateway&#39;s admin.</li>
+<li><strong>What you see depends on who&#39;s asking.</strong> Through Claude, the owner sees every agent&#39;s spending by model. An agent sees only its own, and says so.</li>
+<li><strong>The connector may change only the machines you allowed,</strong> and Claude asks before every change: setting up, moving, restarting or removing an app, changing a budget, giving an app your domain.</li>
+<li><strong>Every change is recorded</strong> on your machine: what, when, on which machine, and that you agreed. Ask Claude to show it at any time.</li>
+</ul>
+<h2><span class="ico" aria-hidden="true"><svg><use href="../../images/icons.svg#record"/></svg></span>4. Costs that can&#39;t run away</h2>
+<ul>
+<li><strong>Every agent has a budget,</strong> and stops at it. The dearest model, <code>best</code>, has its own cap on top.</li>
+<li><strong>Backups only go sideways or down.</strong> When a provider fails, the request falls to a cheaper or equal model, never a dearer one.</li>
+<li><strong>Private stays private.</strong> A model on your own machine never falls back to one on the internet.</li>
+<li><strong>You can check the real dollars any time,</strong> by agent and by model, and a test question costs a tiny fraction of a cent.</li>
+</ul>
+<h2><span class="ico" aria-hidden="true"><svg><use href="../../images/icons.svg#tested"/></svg></span>5. Software you can trust</h2>
+<ul>
+<li><strong>Exact, tested versions.</strong> Each app runs a pinned version that our regression has set up from scratch, published, checked and torn down.</li>
+<li><strong>Tested where it runs.</strong> We test on the hardware people actually use, ARM included. That&#39;s how we found that one LiteLLM release&#39;s ARM image held Intel programs: it ran on a Mac only because the Mac quietly emulated them, and failed on real ARM Linux. We moved to a version that works, and <a href="https://github.com/BerriAI/litellm/issues/47887">reported it</a>.</li>
+<li><strong>No automatic upgrades.</strong> A new version reaches you only after it has been tested, never because it was released. LiteLLM&#39;s own supply-chain incident in March 2026 is the reason it matters.</li>
+<li><strong>Agents are told the house rules.</strong> The Edgible skill tells assistants to ask before risky steps, give honest advice, including when not to self-host, never print a secret, and stop at the first failure rather than work around it.</li>
+</ul>
+<h2><span class="ico" aria-hidden="true"><svg><use href="../../images/icons.svg#recipe"/></svg></span>6. No black box, no lock-in</h2>
+<ul>
+<li><strong>Every step can be done by hand.</strong> Each chapter ends with the same steps without AI, taken from the card READMEs our regression runs exactly as written.</li>
+<li><strong>Open-source apps, on your machine:</strong> OpenClaw, LiteLLM, linkding. Your data is in your machine&#39;s volumes, classified so backups and moves know what matters.</li>
+<li><strong>Moving is built in.</strong> An app can move to another machine, data and all, with a check that the data arrived intact.</li>
+<li><strong>Your own domain</strong> for any app, with HTTPS, without interrupting it.</li>
+</ul>
+<h2><span class="ico" aria-hidden="true"><svg><use href="../../images/icons.svg#machine"/></svg></span>7. Two machines, one private model</h2>
+<p>For <a href="../a-private-model-for-your-agent/">A private model for your agent</a>, which adds a GPU machine to the picture:</p>
+<ul>
+<li><strong>Ollama never faces your network.</strong> It listens on that computer only. What Edgible publishes is a small guard in front of it, which tells Ollama the request came from the computer itself, because Ollama refuses anything else. That&#39;s why we don&#39;t just open Ollama to the network: it has no sign-in of its own, so everyone on your wifi would be able to use your GPU and change your models.</li>
+<li><strong>A key can use the model, not change it.</strong> The guard passes on asking, chatting and listing models, and refuses downloading, copying, creating and deleting them. Edgible checks the key itself, on that computer, before a request reaches the guard.</li>
+<li><strong>The key is made for one caller and stored once.</strong> The gateway holds it by reference from your Edgible account, never in a file or in chat, and you can end it alone.</li>
+<li><strong><code>private</code> never leaves.</strong> It doesn&#39;t fall back to a cloud model, so an asleep computer gives you silence, not a leak. <code>private-smart</code> falls back only to <code>private</code>.</li>
+<li><strong>Each downloaded program is checked</strong> against its publisher&#39;s checksum before it is unpacked.</li>
+</ul>
+<h2><span class="ico" aria-hidden="true"><svg><use href="../../images/icons.svg#map"/></svg></span>Known limits</h2>
+<p>We&#39;d rather you heard these from us:</p>
+<ul>
+<li><p><strong>The ready-made recipe is for computers with Apple silicon today.</strong> A recipe for Linux with an NVIDIA GPU is planned.</p>
+</li>
+<li><p><strong>We tested two machines on one computer</strong> (a computer with a GPU and a virtual machine on it), not two physical machines on different networks. The path between them is the same Edgible address either way, but we haven&#39;t proved it across networks yet.</p>
+</li>
+<li><p><strong>The guard is a workaround.</strong> Edgible can&#39;t yet forward a host name of your choosing to an app, which publishing Ollama directly would need, so a small guard does that part. It works, and it adds one more program to keep up to date.</p>
+</li>
+<li><p><strong>A small local model is a less steady agent than a cloud one on long jobs.</strong> A single tool call works, but a long, many-step session drifts. It is a good private reader and writer; give your agent a cloud model for long jobs with many tools.</p>
+</li>
+<li><p><strong>Your agent can&#39;t give you key links yet,</strong> so storing a key happens in Claude, not in the agent&#39;s chat.</p>
+</li>
+<li><p><strong>A lost first-use password needs a terminal</strong> to recover today. A no-terminal way is planned.</p>
+</li>
+<li><p><strong>Two copies of the same app on one machine</strong> can clash over a port, so for now, one of each per machine.</p>
+</li>
+<li><p><strong>A virtual machine is on only while your computer is.</strong> It&#39;s right for trying things out, not for apps other people rely on.</p>
+</li>
+<li><p><strong>Edgible is in public beta.</strong> An account holds twenty apps for now, and when a machine loses its internet connection, its link to Edgible can take a restart to recover.</p>
+</li>
+</ul>
+
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Edgible. Keep your data close.</span>
+    <div class="foot-right">
+      <span><a href="https://cards.edgible.org">Cards</a> · <a href="../../contact/">Contact</a> · <a href="../../llms.txt">For AI assistants</a> · <a href="../under-the-hood.md">This page as Markdown</a></span>
+      <a class="foot-logo" href="../../"><img src="../../images/edgible-symbol-white.png" alt="Edgible"></a>
+    </div>
+  </div>
+</footer>
+<script src="../../menu.js" defer></script>
+</body>
+</html>
