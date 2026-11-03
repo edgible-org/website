@@ -33,3 +33,6 @@ header.bar.open .menu-btn span::after { transform: translateY(-7px) rotate(-45de
   footer .wrap { flex-wrap: nowrap; gap: 12px; }
   footer .foot-right > span { display: none; }
 }
+
+/* Cards is another site: a small arrow says so. */
+nav.links a.ext::after { content: "\2197" / ""; display: inline-block; margin-left: 3px; font-size: .9em; opacity: .8; }
