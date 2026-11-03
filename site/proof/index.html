@@ -217,16 +217,14 @@
 
 <p class="close">Want to see it, or talk it through? <a href="../contact/">Talk to us</a>.</p>
 <script>
-// The numbers come from the latest test run, so they don't go stale; the figures above are the fallback.
-fetch("https://raw.githubusercontent.com/edgible-org/cards/test-status/status.json").then(r => r.ok ? r.json() : null).then(d => {
-  if (!d) return;
-  const runs = Object.values(d), pass = runs.filter(r => r.result === "pass").length;
-  const last = runs.map(r => r.tested || "").sort().pop();
-  document.getElementById("n-pass").textContent = pass + " of " + runs.length;
-  const cards = document.getElementById("n-cards");
-  cards.textContent = Math.max(+cards.textContent, runs.length);
-  if (last) document.getElementById("n-date").textContent = ", last run " +
-    new Date(last + "T12:00:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "long"});
+// The numbers come from the catalog's own build (the same as its homepage), so they keep up as cards
+// are added; the figures above are the fallback.
+fetch("https://raw.githubusercontent.com/edgible-org/cards/site/stats.json").then(r => r.ok ? r.json() : null).then(d => {
+  if (!d || !d.cards) return;
+  document.getElementById("n-cards").textContent = d.cards;
+  document.getElementById("n-pass").textContent = d.passing + " of " + d.tested;
+  if (d.last_run) document.getElementById("n-date").textContent = ", last run " +
+    new Date(d.last_run + "T12:00:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "long"});
 }).catch(() => {});
 </script>
 </main>
