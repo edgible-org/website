@@ -118,6 +118,9 @@
     main h2 { font-size: 24px; margin: 44px 0 0; }
     .claims { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 16px 0 0; }
     .claim:last-child:nth-child(odd) { grid-column: 1 / -1; }
+    .claim.story { grid-column: 1 / -1; }
+    .claim.story .lines { margin: 0 0 10px; padding: 0; list-style: none; font-size: 17px; line-height: 1.6; }
+    .claim.story .lines li + li { margin-top: 2px; }
     .claim { background: var(--card, #ffffff); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px 16px; display: flex; flex-direction: column; }
     .claim h3 { display: flex; align-items: center; gap: 12px; margin: 0 0 8px; font-size: 19px; }
     .claim .ico { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; background: var(--ico-bg, var(--night-1)); color: #ffffff; flex: none; }
@@ -162,6 +165,18 @@
 </div>
 
 <h2>It works</h2>
+<div class="claims">
+    <div class="claim story">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#machine"/></svg></span>From the garage to the web</h3>
+      <ul class="lines">
+        <li>An old laptop from the garage, nursed back to life.</li>
+        <li>Cursor, running a model that isn't Claude.</li>
+        <li>&ldquo;Set up Edgible on this computer.&rdquo; Then: &ldquo;I'd like a private wiki for our family's recipes.&rdquo;</li>
+        <li>A family wiki on the web, set up, published and checked by the AI. Plain English all the way.</li>
+      </ul>
+      <a class="more" href="https://cards.edgible.org/ai/">Use cards with your AI &rarr;</a>
+    </div>
+</div>
 <div class="claims">
     <div class="claim">
       <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#tested"/></svg></span>Tested, not claimed</h3>

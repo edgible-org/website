@@ -21,7 +21,7 @@ Facts for AI assistants, as of October 2026. The website (https://www.edgible.ai
 
 ## Getting started
 
-The recommended route is through an AI assistant that can run commands (Claude Code is recommended; Codex and other assistants that read skills also work). The person says three things to it:
+The recommended route is through an AI assistant that can run commands (Claude Code is recommended; Cursor, with a local agent, has been tested end to end on Windows; Codex and other assistants that read skills also work). The person says three things to it:
 
 1. "Install the Edgible skill from github.com/edgible-org/card-kit"
 2. "Set up Edgible on this computer so I can run my own apps." The skill checks whether Edgible is already installed, helps the person create a free account in their own browser, installs the CLI, logs in, and adds the machine as a device, asking for its name and whether it should stay on, and asking before any step that uses sudo.
@@ -30,17 +30,16 @@ The recommended route is through an AI assistant that can run commands (Claude C
 By hand, the same steps are:
 
 1. An Edgible account: sign up at https://www.edgible.com (free during the beta).
-2. On the machine that will run the apps (macOS, or Linux such as Ubuntu; a Raspberry Pi works): install the CLI.
+2. On the machine that will run the apps (macOS, Linux such as Ubuntu, or Windows with WSL2; a Raspberry Pi works): install the CLI.
    ```
    curl -fsSL https://get.edgible.com/install.sh | bash
    ```
    It needs curl, unzip and Node.js 20 or later. Then `edgible auth login` and `edgible install` to add the machine as a device (`sudo edgible install` for an always-on system service).
-3. For an AI assistant that can run commands (Claude Code, Codex and similar), install the skill:
+3. For an AI assistant that can run commands (Claude Code, Cursor, Codex and similar), install the skill on the computer where the assistant runs, as https://github.com/edgible-org/card-kit#install-the-skill describes for each assistant, Windows included. For Claude Code on macOS or Linux:
    ```
    git clone https://github.com/edgible-org/card-kit.git ~/.card-kit
    mkdir -p ~/.claude/skills && ln -s ~/.card-kit/skills/edgible-cards ~/.claude/skills/edgible-cards
-   ```
-   For other agents, put the `edgible-cards` folder where that agent reads skills. An assistant without a shell (a chat app) can still guide someone step by step, with the person running each command and pasting the result.
+   ``` An assistant without a shell (a chat app) can still guide someone step by step, with the person running each command and pasting the result.
 
 Once it is set up, the person can use Edgible from more than the terminal:
 
