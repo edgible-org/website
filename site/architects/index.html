@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../theme.css">
+  <script src="../theme.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Edgible for architects and evaluators</title>
+  <meta name="description" content="Where Edgible sits among tunnels, reverse proxies and self-hosted ingress, what it emphasises, and its honest limits.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    :root {
+      --night-1: #111827;
+      --night-2: #1e293b;
+      --night-3: #312e81;
+      --bg: var(--night-1);
+      --bg-alt: rgba(255,255,255,.03);
+      --surface: rgba(255,255,255,.05);
+      --line: rgba(255,255,255,.12);
+      --blue-mid: #2e4a9e;
+      --yellow: #ffd21f;
+      --coral: #ff7a59;
+      --teal: #4fc3a8;
+      --heading: #ffffff;
+      --ink: #e6eaff;
+      --muted: #a7b1dc;
+      --muted-2: #7c86b8;
+      --on-yellow: #111827;
+      --accent-text: #ffd21f;
+      --bar-bg: rgba(17,24,39,.72);
+      --radius: 14px;
+      --wrap: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { background: linear-gradient(135deg, var(--night-1) 0%, var(--night-2) 45%, var(--night-3) 100%) fixed; background-color: var(--night-1); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: transparent; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-text); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+    header.bar { background: var(--bar-bg); border-bottom: 1px solid var(--line); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    header.bar .note { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    main { max-width: 900px; margin: 0 auto; padding: 56px 24px 88px; }
+    h1 { font-size: clamp(34px, 5vw, 52px); line-height: 1.1; margin: 0 0 16px; color: var(--heading); font-weight: 800; }
+    h2 { font-size: 28px; margin: 56px 0 14px; color: var(--heading); line-height: 1.2; }
+    h3 { font-size: 21px; margin: 32px 0 10px; color: var(--heading); }
+    p, li { color: var(--ink); }
+    strong { color: var(--heading); }
+    .lead { font-size: 20px; color: var(--muted); max-width: 760px; }
+    .draft { margin: 24px 0 8px; padding: 14px 18px; border-left: 4px solid var(--yellow); background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; color: var(--muted); font-size: 15px; }
+    hr.part { border: 0; border-top: 1px solid var(--line); margin: 72px 0 0; }
+    .scroll { overflow-x: auto; margin: 20px 0; }
+    table { border-collapse: collapse; width: 100%; font-size: 15px; }
+    th, td { text-align: left; padding: 9px 11px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--heading); background: var(--surface); }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; background: var(--surface); padding: 2px 6px; border-radius: 6px; }
+    pre { background: rgba(0,0,0,.3); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; overflow-x: auto; }
+    pre code { background: none; padding: 0; }
+    footer { padding: 14px 0; font-size: 14px; color: var(--muted); background: var(--bar-bg); border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+    @media (max-width: 560px) { main { padding: 40px 16px 64px; } .wrap { padding: 0 16px; } }
+  </style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../"><img src="../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+    <span class="note">For architects</span>
+  </div>
+</header>
+
+<main id="top">
+<h1>For evaluators and architects</h1>
+<p class="draft">Draft, not linked from the site: moved here from the guides site as it was, to be reviewed. Links to the guides go to the cards site once the guides retire.</p>
+<p><strong>Where Edgible sits if you already know tunnels, reverse proxies, and self-hosted ingress.</strong></p>
+<p>You have probably already tried one or more of: a forwarded port, dynamic DNS with certbot, a hand-rolled reverse proxy, a managed outbound tunnel, or a mesh VPN. This page names the job in that vocabulary, states what any serious ingress product already does, and spells out what Edgible emphasises on top. For hands-on proof, follow the <a href="https://guides.edgible.com/index.html">guides</a> or see <a href="#what-edgible-does">What Edgible does</a>.</p>
+<h2 id="the-job-in-words-you-already-use">The job, in words you already use</h2>
+<p>People label the same outcome differently. Edgible is aimed at all of the following:</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Term</th>
+<th>What it usually means here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ingress</strong></td>
+<td>Public internet traffic reaching a process on a machine you control</td>
+</tr>
+<tr>
+<td><strong>Reverse tunnel / outbound tunnel</strong></td>
+<td>Your machine holds an outbound connection; nothing listens for inbound connections on the router</td>
+</tr>
+<tr>
+<td><strong>Remote access</strong></td>
+<td>Reaching a home or VM service from outside the LAN without a VPN client on the visitor</td>
+</tr>
+<tr>
+<td><strong>No port forwarding</strong></td>
+<td>No router rule exposing a local port; often required anyway when the ISP puts you behind carrier-grade NAT</td>
+</tr>
+<tr>
+<td><strong>Tunnel</strong></td>
+<td>Traffic carried inside another connection. The word covers public ingress, mesh VPNs, and short-lived dev relays; it does not specify which</td>
+</tr>
+<tr>
+<td><strong>Self-hosting</strong></td>
+<td>The app runs on hardware you own; ingress is what turns "works locally" into "reachable from anywhere"</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>The job, stated plainly:</strong> a service runs on your machine. You want a stable <code>https://</code> URL that the people and systems you choose can reach, without forwarding a port, operating dynamic DNS, renewing certificates yourself, or copying the workload to someone else's server.</p>
+<p>The guides on this site are use cases (websites, workflows, agents, models). Ingress is the capability they share.</p>
+<h2 id="where-edgible-sits">Where Edgible sits</h2>
+<p>Edgible is <strong>managed ingress for self-hosted services</strong>.</p>
+<p>A <strong>serving agent</strong> on your machine holds an <strong>outbound</strong> connection on TCP 443. Edgible provisions a <strong>hostname</strong>, issues and renews <strong>TLS certificates</strong>, and <strong>routes</strong> HTTPS to a local port. You choose an <strong>auth mode per app</strong>: <code>org</code> for a browser login from your organisation, <code>api-key</code> for machine callers, or <code>None</code> for open access.</p>
+<p>Published hostnames use the shape <code>https://&lt;app&gt;.&lt;org&gt;.edgible.com</code>. First publish is <strong>zero-DNS</strong>: a working <code>https://</code> name with certificate and routing, and no registrar or zone edit. Bring your own domain later with <strong>one <code>CNAME</code></strong> at the DNS provider you already use.</p>
+<p>Traffic path in outline:</p>
+<pre><code class="language-text">Visitor → HTTPS → Edgible gateway → outbound tunnel from your device → your service
+</code></pre>
+<p>TLS terminates on your machine. Your LAN does not accept inbound connections for this path.</p>
+<h2 id="how-you-operate-it">How you operate it</h2>
+<p>Edgible is a <strong>managed commercial service</strong>: the gateway and control plane run on Edgible's side; you run the serving agent and your workloads. You are not maintaining tunnel server, certificate automation, and an admin UI fork yourself.</p>
+<p>Day to day you use the <strong>CLI</strong> or the <strong>dashboard</strong> at <a href="https://app.prod.edgible.com/">app.prod.edgible.com</a> — devices, apps, certificates, and health. The guides show the same publish flow from flags or from prompts; see <a href="https://guides.edgible.com/guides/n8n-on-edgible/02-n8n-editor-through-edgible.html">n8n editor through Edgible</a> for both forms.</p>
+<p><strong>Example:</strong> something is already listening on a port — nginx, n8n, Ollama, a static file server. You do not write an ingress config or stand up a separate tunnel object first:</p>
+<pre><code class="language-bash">edgible app create existing
+</code></pre>
+<p>Answer name, auth mode, device, and port (or pass them as flags). Edgible discovers the listener, provisions the hostname, and starts certificate issuance. That is the shape most of these guides use.</p>
+<p>Few products in this category collapse <strong>publish an existing listener</strong> into one step with <strong>auth mode baked in</strong>. Many split routing rules, DNS, and access policy across a config file and a web console. One-line dev relays are faster for a throwaway port expose; they typically do not carry name, device, certificate state, and per-hostname auth through the same tool — which is why the honest limit on demo speed stays in the table below.</p>
+<h3 id="use-case-recipes-not-in-product-presets">Use-case recipes, not in-product presets</h3>
+<p>Edgible deliberately keeps <strong>one generic publish path</strong> in the CLI and console (<code>app create existing</code> with name, device, port, and auth). There is no maintained catalogue of app-specific shortcuts — no <code>publish ollama</code> or <code>publish n8n</code> baked into the product that must track every upstream port and auth pattern.</p>
+<p><strong>Use-case recipes live in the guides</strong> instead: observable chapters for n8n, a static site stack, Ollama, OpenClaw, each with a smoke test. They change when the self-host landscape changes, without waiting for a CLI release.</p>
+<p>That is intentional in an AI-assisted workflow: the same markdown the guides publish is fetchable at stable URLs, indexed in <a href="https://guides.edgible.com/llms.txt"><code>llms.txt</code></a>, and described in <a href="https://guides.edgible.com/working-with-ai.html">Working with an AI tool</a>. An assistant reads the recipe and runs the generic CLI with the right flags — the product does not need to embed every popular app.</p>
+<p>The same applies to <strong>third-party products we do not own</strong> (AI gateways, photo apps, new self-host favourites): we document <strong>ingress patterns</strong> (<code>api-key</code> for machine callers, split-surface for mixed visitors), not a maintained chapter per upstream that tracks their releases. Your agent combines Edgible’s guides with that product’s current documentation.</p>
+<p>For evaluators, the question is not “does Edgible ship a preset for X?” but “is there a proven chapter for X, and does the generic publish primitive support it?” — including <strong>split-surface publish</strong> when one process needs two hostnames. For gateways and other complements, ask whether the <strong>pattern</strong> is proven and whether reachability is the job Edgible solves.</p>
+<h2 id="what-any-serious-ingress-option-already-does">What any serious ingress option already does</h2>
+<p>These are table stakes in the category. They are necessary to be credible; they are not unique to Edgible.</p>
+<ul>
+<li>Outbound connectivity, no public IP required on your side</li>
+<li>Automatic HTTPS certificates for the published hostname</li>
+<li>Works behind NAT and CGNAT</li>
+<li>A stable URL for a local service</li>
+<li>No port-forward rule on the router</li>
+</ul>
+<p>If you are comparing products that all claim the above, the useful questions move to custody, policy, visitors, and operations. The next section groups <strong>approaches</strong> in this space; Edgible is one lane among several jobs that share vocabulary but not the same outcome.</p>
+<h2 id="comparing-ingress-approaches">Comparing ingress approaches</h2>
+<p>People looking at tunnels, ingress, and remote access often mix <strong>five different jobs</strong>. Edgible targets one of them. This summary is drawn from our internal competitive research, stated <strong>without naming products or prices</strong> so you can map it to whatever you already use.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Job</th>
+<th>Typical shape</th>
+<th>Fit for a lasting self-hosted stack?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DIY platform</strong></td>
+<td>You bring a public server, a domain, DNS records, and certificates — often a cluster. You operate the platform.</td>
+<td>Only if you want to run a platform team</td>
+</tr>
+<tr>
+<td><strong>Dev session</strong></td>
+<td>One command, a temporary public URL; the laptop must stay awake. Built for webhooks and previews.</td>
+<td>Poor as household or office infrastructure</td>
+</tr>
+<tr>
+<td><strong>Enrolled overlay</strong></td>
+<td>Every device installs a client and joins a private network. Strong for staff-to-NAS and device-to-device.</td>
+<td>Wrong when the caller will not install anything</td>
+</tr>
+<tr>
+<td><strong>One-app remote</strong></td>
+<td>A toggle that publishes a single application (often home automation).</td>
+<td>Fine for that one app; nothing else on the box</td>
+</tr>
+<tr>
+<td><strong>Assembled identity edge</strong></td>
+<td>Several products glued together; often requires moving your DNS zone or learning a glossary of infrastructure nouns before a URL exists</td>
+<td>An IT project, not something a small team can keep</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Edgible’s lane:</strong> a service already runs on hardware you own. You want a stable <code>https://</code> URL, certificates, and a policy <strong>per hostname</strong>, without forwarding a port, without standing up a cluster, and without putting a VPN client on every visitor.</p>
+<h3 id="capability-questions-same-job-different-products">Capability questions (same job, different products)</h3>
+<p>Use this when several options all claim outbound HTTPS and automatic certificates. Legend: <strong>Strong</strong> — routinely true for that approach · <strong>Partly</strong> — possible with extra setup or limits · <strong>Weak</strong> — not what that approach optimises for.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Edgible</th>
+<th>CDN-backed tunnel</th>
+<th>Mesh public funnel</th>
+<th>Dev relay</th>
+<th>DIY VPS + proxy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Working <code>https://</code> URL with no inbound port</td>
+<td>Strong</td>
+<td>Strong</td>
+<td>Strong</td>
+<td>Strong</td>
+<td>Strong</td>
+</tr>
+<tr>
+<td>Hostname live <strong>before</strong> you edit DNS</td>
+<td>Strong</td>
+<td>Partly</td>
+<td>Weak</td>
+<td>Strong</td>
+<td>Weak</td>
+</tr>
+<tr>
+<td>Keep DNS zone at your current provider</td>
+<td>Strong</td>
+<td>Weak</td>
+<td>n/a</td>
+<td>Partly</td>
+<td>Strong</td>
+</tr>
+<tr>
+<td>Custom domain with valid cert on <strong>your</strong> name</td>
+<td>Strong</td>
+<td>Strong*</td>
+<td>Weak</td>
+<td>Partly</td>
+<td>Strong</td>
+</tr>
+<tr>
+<td>Auth mode chosen <strong>per hostname</strong> at publish time</td>
+<td>Strong</td>
+<td>Partly</td>
+<td>Weak</td>
+<td>Partly</td>
+<td>Weak</td>
+</tr>
+<tr>
+<td>Same process, two hostnames, two auth modes (split-surface)</td>
+<td>Strong</td>
+<td>Partly</td>
+<td>Weak</td>
+<td>Partly</td>
+<td>Partly</td>
+</tr>
+<tr>
+<td>Machine callers (<code>api-key</code> / bearer) as a first-class mode</td>
+<td>Strong</td>
+<td>Partly</td>
+<td>Weak</td>
+<td>Partly</td>
+<td>Weak</td>
+</tr>
+<tr>
+<td>Visitor needs no installed client</td>
+<td>Strong</td>
+<td>Strong</td>
+<td>Partly</td>
+<td>Strong</td>
+<td>Strong</td>
+</tr>
+<tr>
+<td>Several apps on one machine, one ingress layer</td>
+<td>Strong</td>
+<td>Strong</td>
+<td>Partly</td>
+<td>Weak</td>
+<td>Strong</td>
+</tr>
+<tr>
+<td>One CLI for device + app + cert state</td>
+<td>Strong</td>
+<td>Partly</td>
+<td>Partly</td>
+<td>Partly</td>
+<td>Weak</td>
+</tr>
+<tr>
+<td>Sustained media / large libraries in scope (terms)</td>
+<td>Strong</td>
+<td>Weak</td>
+<td>Partly</td>
+<td>Partly</td>
+<td>Strong</td>
+</tr>
+<tr>
+<td>Global edge / DDoS scale</td>
+<td>Weak</td>
+<td>Strong</td>
+<td>Weak</td>
+<td>Weak</td>
+<td>Weak</td>
+</tr>
+<tr>
+<td>Fastest throwaway port expose</td>
+<td>Partly</td>
+<td>Partly</td>
+<td>Strong</td>
+<td>Strong</td>
+<td>Weak</td>
+</tr>
+<tr>
+<td>Device-to-device mesh (enrolled peers)</td>
+<td>Weak</td>
+<td>Weak</td>
+<td>Strong</td>
+<td>Weak</td>
+<td>Partly</td>
+</tr>
+</tbody>
+</table></div>
+<p>*CDN-backed tunnels often handle custom domains well, but frequently require the <strong>zone</strong> to live with the CDN operator — a different trade from a single <code>CNAME</code> at your existing DNS host.</p>
+<p><strong>How to read the table:</strong> Edgible is not strongest on every row. Session relays win the ten-second demo. Large CDN edges win global scale and DDoS. Mesh products win enrolled device-to-device access. The comparison that matters is whether you need a <strong>durable estate</strong> — several hostnames, mixed policies, visitors without clients, libraries and automation on metal you control.</p>
+<h3 id="where-another-approach-is-the-right-tool">Where another approach is the right tool</h3>
+<p>Stated plainly so the comparison stays credible:</p>
+<ul>
+<li><strong>Fastest throwaway demo</strong> — session tools mint a URL in seconds for a port that dies when the laptop sleeps. That is a developer loop, not an office estate.</li>
+<li><strong>Staff laptop to NAS or SSH between home machines</strong> — use an overlay when both sides can install a client.</li>
+<li><strong>Global anycast edge and DDoS</strong> — a large CDN operator will win that comparison.</li>
+<li><strong>Deep identity policy</strong> — enterprise zero-trust products offer more identity providers and richer rules than three hostname auth modes.</li>
+<li><strong>Webhook traffic debugging</strong> — some dev relays include a request inspector we do not replace.</li>
+<li><strong>You want to operate the entire stack</strong> — a rented VPS plus your own reverse proxy and cert automation is a valid hobby; it is a different job from managed ingress.</li>
+</ul>
+<h3 id="is-this-zero-trust-a-mesh">“Is this Zero Trust / a mesh?”</h3>
+<p>Those products are for <strong>enrolled devices</strong> talking to each other. Many Edgible callers are <strong>not staff</strong> — payment webhooks, a phone on cellular, automation hitting a local model. They will not install a client. We publish hostnames and attach a policy to each one.</p>
+<p>Mesh is the right tool for device-to-device. It is the wrong tool when the internet must reach an app under a policy you chose, with a normal browser or webhook. For a human in a browser, “only the right people get in” is already how the web works: login, 2FA, passkeys, an identity provider you already use — without enrolling their phone on a private network first.</p>
+<h3 id="fair-test-same-job">Fair test (same job)</h3>
+<ol>
+<li>Run something local (even a tiny web server).</li>
+<li>Publish until you have an <code>https://</code> URL <strong>before</strong> you touch DNS.</li>
+<li>Open that URL on a phone with Wi‑Fi off.</li>
+<li>If you need admin vs webhook, publish a <strong>second</strong> hostname to the <strong>same</strong> process with a different policy.</li>
+<li>Ask whether you can still <strong>name</strong> what you stood up — hostname, policy, machine — without a glossary.</li>
+</ol>
+<p>If that path is shorter and clearer than standing up a cluster, moving a DNS zone, joining a mesh, or living with a short-lived preview link, you are in Edgible’s lane. If you needed one of the other jobs above, use the approach built for it.</p>
+<h2 id="what-edgible-emphasises">What Edgible emphasises</h2>
+<p>Stated without naming other products.</p>
+<h3 id="1-zero-dns-publish">1. Zero-DNS publish</h3>
+<p>On first publish you get a working <code>https://</code> name, with certificate and routing in place, and <strong>no DNS step</strong> — no registrar, no zone record. Architects often describe this as a <strong>generated hostname</strong> or <strong>platform-provided name</strong>; we call it <strong>zero-DNS publish</strong>. Bring your own domain later if you want; you are not blocked waiting on a registrar.</p>
+<h3 id="2-your-dns-zone-stays-where-it-is">2. Your DNS zone stays where it is</h3>
+<p>Custom domains attach with <strong>one <code>CNAME</code></strong> at your existing provider. You do not move nameservers or hand over the whole zone to publish one service.</p>
+<h3 id="3-split-surface-publish">3. Split-surface publish</h3>
+<p>Each published app carries its own auth mode. The same process on the same port can be published <strong>twice</strong> with different rules — for example an admin UI on <code>org</code> and a webhook receiver on <code>None</code>, because payment providers and repository hosts cannot complete a browser login. That pattern is familiar as a <strong>separate admin hostname</strong> or <strong>dual public exposure</strong> of one backend; we call it <strong>split-surface publish</strong> (not split tunneling, which means something else in VPN literature).</p>
+<p>A forwarded port is all-or-nothing. A mesh VPN is enrol-or-nothing for visitors. Per-hostname policy is the middle ground those two cannot offer.</p>
+<p>Demonstrated in <a href="https://guides.edgible.com/guides/n8n-on-edgible/03-n8n-public-webhook-hostname.html">Public webhook hostname</a> and <a href="https://guides.edgible.com/guides/website-on-edgible/04-publish-umami.html">Publish Umami</a>.</p>
+<h3 id="4-nothing-on-the-visitor">4. Nothing on the visitor</h3>
+<p>Browsers, webhooks, phone apps and customers reach a normal <code>https://</code> URL. No VPN client, no enrolled device, no special app on the caller side. This is the line between <strong>public ingress</strong> and <strong>overlay VPN</strong> approaches in the same "tunneling" lists.</p>
+<h3 id="5-built-for-sustained-self-hosted-workloads">5. Built for sustained self-hosted workloads</h3>
+<p>Photo libraries, media, large uploads and long-lived services are in scope. Some CDN-backed tunnel offerings restrict sustained media traffic in their terms; evaluate any product against the shape of traffic you actually intend to carry.</p>
+<h3 id="6-against-diy-and-port-forwarding">6. Against DIY and port forwarding</h3>
+<p>If you are still on a forwarded port or a hand-maintained reverse proxy, the comparison is different from comparing two managed tunnels.</p>
+<ul>
+<li><strong>CGNAT:</strong> for a growing share of connections there is no public address to forward, so skill does not help.</li>
+<li><strong>Asymmetry:</strong> an open port answers the internet continuously; you patch and renew on that schedule.</li>
+<li><strong>Capability:</strong> one port cannot give one service two public identities with two access rules.</li>
+<li><strong>Cloud servers:</strong> the instance needs no static address and no load balancer, and its firewall can refuse every inbound connection. Its address can change on every restart, because nothing points at it: visitors reach the published hostname, and the serving agent connects out.</li>
+</ul>
+<p><a href="https://guides.edgible.com/guides/start-here/01-edgible-on-vm.html">Start here</a> ends with the observable check: the page loads on a phone with Wi-Fi off, while the verify list still shows the port is not forwarded. On a cloud server the check is the same in its own terms: the instance's firewall lists no inbound rules, and the published hostname still loads.</p>
+<h3 id="7-testing-on-real-machines-the-way-users-reach-them">7. Testing on real machines, the way users reach them</h3>
+<p>A self-hosted app is proven only when someone on the internet can use it with the right access rules, not when its container starts. Testing that across many machines is usually out of reach. Each machine sits behind a different router, often one that cannot forward a port. Each app needs a public hostname, a DNS record and a certificate, restricting it to a team means running a sign-in proxy, and every test leaves records and configuration to clean up. So most testing stops at <code>localhost</code>, or at one hand-built cloud server, which proves nothing about a small board computer in someone's home.</p>
+<p>With Edgible, any machine that runs containers, at home, in the office or in the cloud, runs a serving agent that connects out. Publishing an app gives it a real <code>https://</code> hostname at once, with the auth mode it needs: <code>None</code>, <code>org</code> or <code>api-key</code>. Unpublishing removes it. No port is opened, and no DNS or certificate is managed. A fleet of mismatched machines can then act as one test lab, and anyone can contribute a test result with an account and a machine. Builds that only connect out need nothing more; Edgible matters when the work must be reached.</p>
+<p>The check: every app card in <a href="https://github.com/edgible-org/cards">edgible-org/cards</a> carries a <code>test.yml</code> from this lifecycle, with <code>publish</code>, <code>verify</code> and <code>teardown</code> on a real serving device, and the nightly regression keeps it current.</p>
+<h2 id="quick-evaluation-checklist">Quick evaluation checklist</h2>
+<p>Questions an architect can answer from the guides without trusting marketing copy.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Where to look</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Does publishing work with no inbound port?</td>
+<td><a href="https://guides.edgible.com/guides/start-here/01-edgible-on-vm.html">Edgible on an Ubuntu VM</a>: phone on cellular</td>
+</tr>
+<tr>
+<td>Can you publish a port that is already listening, without a config file?</td>
+<td><a href="https://guides.edgible.com/guides/start-here/01-edgible-on-vm.html">Edgible on an Ubuntu VM</a> §1.9: <code>edgible app create existing</code></td>
+</tr>
+<tr>
+<td>Are use-case recipes maintained outside the CLI (guides / <code>llms.txt</code>)?</td>
+<td><a href="https://guides.edgible.com/index.html">Welcome</a> guide list, <a href="https://guides.edgible.com/working-with-ai.html">Working with an AI tool</a></td>
+</tr>
+<tr>
+<td>Are certificates issued per hostname?</td>
+<td>Console <strong>Certificates</strong>, or <code>edgible app list</code> / <code>edgible app status</code></td>
+</tr>
+<tr>
+<td>Can you publish with zero-DNS (no zone edit on first hostname)?</td>
+<td><a href="https://guides.edgible.com/guides/start-here/01-edgible-on-vm.html">Edgible on an Ubuntu VM</a> §1.9: hostname before any <code>CNAME</code></td>
+</tr>
+<tr>
+<td>Can one process use split-surface publish (two hostnames, two auth modes)?</td>
+<td><a href="https://guides.edgible.com/guides/n8n-on-edgible/03-n8n-public-webhook-hostname.html">n8n public webhook hostname</a>, <a href="https://guides.edgible.com/guides/website-on-edgible/04-publish-umami.html">Publish Umami</a></td>
+</tr>
+<tr>
+<td>Can machine callers use <code>api-key</code>?</td>
+<td><a href="https://guides.edgible.com/guides/llm-on-edgible/02-edgible-to-ollama.html">Edgible publishes Ollama</a></td>
+</tr>
+<tr>
+<td>Can a custom domain point at an Edgible hostname?</td>
+<td><a href="https://guides.edgible.com/guides/website-on-edgible/02-publish-the-site.html#26-a-domain-of-your-own-optional">A domain of your own</a></td>
+</tr>
+<tr>
+<td>Vocabulary in one fetch</td>
+<td><a href="https://guides.edgible.com/glossary.html">Glossary</a></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="honest-limits-to-weigh">Honest limits to weigh</h2>
+<p>No product wins every comparison. These are worth asking about in your environment.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Global edge and DDoS</strong></td>
+<td>A large CDN operator's edge network is bigger than a focused ingress platform's</td>
+</tr>
+<tr>
+<td><strong>Time to first URL in a demo</strong></td>
+<td>A one-line dev relay can be faster for a throwaway port expose</td>
+</tr>
+<tr>
+<td><strong>Device-to-device mesh</strong></td>
+<td>Overlay VPN products solve SSH and LAN extension between enrolled machines; that is a different job</td>
+</tr>
+<tr>
+<td><strong>Identity policy depth</strong></td>
+<td>Enterprise zero-trust products offer more identity providers and richer rules than three hostname auth modes</td>
+</tr>
+<tr>
+<td><strong>Visitor IP at the app</strong></td>
+<td>TLS terminates on your device (Edgible does not read HTTP), so apps that rely on <code>X-Forwarded-For</code> for geolocation or rate limits may see the tunnel hop until <a href="https://guides.edgible.com/guides/website-on-edgible/04-publish-umami.md#45-what-the-country-column-will-not-tell-you">client IP preservation</a> ships; the platform should not permanently block honoring the real visitor</td>
+</tr>
+<tr>
+<td><strong>Data durability and backup</strong></td>
+<td>Edgible publishes services; it does not store or back up your app data (photos, databases, model weights). Disks, snapshots, and offsite backup remain your stack — same as other managed tunnels or dev relays. Ingress ≠ backup.</td>
+</tr>
+<tr>
+<td><strong>Sustained library traffic</strong></td>
+<td>Photo and media workloads are in scope for ingress; some CDN-backed tunnels restrict that traffic in their terms — evaluate against the upload/download shape you intend (<a href="#what-edgible-does">What Edgible emphasises §5</a>)</td>
+</tr>
+<tr>
+<td><strong>Agent privileges</strong></td>
+<td>The serving agent is installed with privileges sufficient to configure networking on the host today; confirm your security model against that</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="related-pages">Related pages</h2>
+<ul>
+<li><a href="https://guides.edgible.com/appendix/the-dream.html">The tunneling dream</a>: the four awesome-tunneling requirements, scored against what the guides show</li>
+<li><a href="#what-edgible-does">What Edgible does</a>: each feature mapped to the chapter that demonstrates it</li>
+<li><a href="https://guides.edgible.com/glossary.html">Glossary</a>: <code>serving agent</code>, auth modes, published hostname, and the rest of the vocabulary</li>
+<li><a href="https://guides.edgible.com/working-with-ai.html">Working with an AI tool</a>: fetch this page as markdown, or use <code>llms.txt</code> for the whole site</li>
+</ul>
+<hr class="part">
+<h1 id="what-edgible-does">What Edgible does</h1>
+<p>Edgible publishes a service running on a machine you own at a public HTTPS hostname, using only an outbound connection on TCP 443. A service that does not speak HTTPS, such as a game server, is published the same way as a TCP or UDP app. The alternatives each cost something. Port-forwarding exposes the service, and anything it holds, to the open internet. A mesh VPN requires enrolling every device that will ever need access. A reverse proxy with certbot and dynamic DNS means you operate TLS and a domain yourself. With Edgible the machine makes the connection outward, and a hostname appears with a certificate already issued and an auth mode already applied.</p>
+<h2 id="the-three-differentiators">The three differentiators</h2>
+<ol>
+<li>
+<p>The connection is outbound only. The serving agent holds an outbound 443 connection, so NAT is sufficient and no router configuration is required. Chapters that publish a port check, in their verify list, that the port is still bound to loopback and still not forwarded. Demonstrated in <a href="https://guides.edgible.com/guides/start-here/01-edgible-on-vm.html">Start here</a>, where the test is a phone with Wi‑Fi off loading the page over cellular.</p>
+</li>
+<li>
+<p>Auth is a property of the hostname. Each app carries an auth mode, chosen when you create it: <code>org</code> restricts access to your organisation behind a browser login, <code>api-key</code> accepts a bearer secret from machines that cannot log in, and <code>None</code> is open. Auth attaches to the app, not to a path inside it.</p>
+</li>
+<li>
+<p>One process can have several hostnames with different auth modes — <strong>split-surface publish</strong>. Because auth attaches to the hostname, the same running service can be published more than once with different protection. n8n's editor holds credentials and every workflow, so it stays <code>org</code>. Stripe and GitHub cannot complete a browser login, so they call a second hostname on <code>None</code>. One container on port 5678, two hostnames. Demonstrated in <a href="https://guides.edgible.com/guides/n8n-on-edgible/02-n8n-editor-through-edgible.html">n8n editor through Edgible</a> and <a href="https://guides.edgible.com/guides/n8n-on-edgible/03-n8n-public-webhook-hostname.html">Public webhook hostname</a>.</p>
+</li>
+</ol>
+<p>Terms are defined once in the <a href="https://guides.edgible.com/glossary.html">Glossary</a>.</p>
+<h2 id="feature-benefit-and-where-it-is-demonstrated">Feature, benefit, and where it is demonstrated</h2>
+<p>Where names the chapter that demonstrates the feature. How is the observable proof: what you watch happen.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Benefit</th>
+<th>Where</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public HTTPS with no inbound port</td>
+<td>No inbound port to attack</td>
+<td><a href="https://guides.edgible.com/guides/start-here/01-edgible-on-vm.html">Edgible on an Ubuntu VM</a></td>
+<td>Loads on a phone with Wi‑Fi off</td>
+</tr>
+<tr>
+<td>Zero-DNS publish</td>
+<td>Hostname and cert without a DNS step</td>
+<td><a href="https://guides.edgible.com/guides/start-here/01-edgible-on-vm.html">Edgible on an Ubuntu VM</a>, <a href="https://guides.edgible.com/guides/website-on-edgible/02-publish-the-site.html">Publish the site</a>, <a href="https://guides.edgible.com/guides/llm-on-edgible/02-edgible-to-ollama.html">Edgible publishes Ollama</a></td>
+<td>URL works before any <code>CNAME</code></td>
+</tr>
+<tr>
+<td>A certificate per hostname, issued for you</td>
+<td>Never operate TLS</td>
+<td><a href="https://guides.edgible.com/guides/n8n-on-edgible/02-n8n-editor-through-edgible.html">n8n editor through Edgible</a></td>
+<td>Console shows the certificate issued</td>
+</tr>
+<tr>
+<td><code>org</code> auth</td>
+<td>Keep an interface private</td>
+<td><a href="https://guides.edgible.com/guides/openclaw-on-edgible/02-publish-openclaw-control-ui.html">OpenClaw Control UI through Edgible</a></td>
+<td>Phone opens the UI; Gateway on loopback</td>
+</tr>
+<tr>
+<td><code>None</code> auth</td>
+<td>Accept webhook callers</td>
+<td><a href="https://guides.edgible.com/guides/n8n-on-edgible/05-n8n-public-webhook.html">A webhook a stranger can hit</a></td>
+<td>An off-network GET returns JSON</td>
+</tr>
+<tr>
+<td><code>api-key</code> auth</td>
+<td>Secure Ollama</td>
+<td><a href="https://guides.edgible.com/guides/llm-on-edgible/02-edgible-to-ollama.html">Edgible publishes Ollama</a></td>
+<td>Bearer <code>curl</code> works; without it, <code>401</code></td>
+</tr>
+<tr>
+<td>Split-surface publish</td>
+<td>Admin and public callers on one process</td>
+<td><a href="https://guides.edgible.com/guides/n8n-on-edgible/03-n8n-public-webhook-hostname.html">Public webhook hostname</a>, <a href="https://guides.edgible.com/guides/website-on-edgible/04-publish-umami.html">Publish Umami</a></td>
+<td>Editor asks for login; hooks does not</td>
+</tr>
+<tr>
+<td>A static site published from your own disk</td>
+<td>No web host, no rented box</td>
+<td><a href="https://guides.edgible.com/guides/website-on-edgible/02-publish-the-site.html">Publish the site</a></td>
+<td>A phone on cellular loads files from your machine</td>
+</tr>
+<tr>
+<td>API key create, list, revoke</td>
+<td>Cut off a caller</td>
+<td><a href="https://guides.edgible.com/guides/llm-on-edgible/02-edgible-to-ollama.html">Edgible publishes Ollama</a></td>
+<td>Secret prints once; revoked key fails</td>
+</tr>
+<tr>
+<td>Device registration and health</td>
+<td>Confirm the machine is connected</td>
+<td><a href="https://guides.edgible.com/guides/start-here/01-edgible-on-vm.html">Edgible on an Ubuntu VM</a></td>
+<td><strong>Health check OK</strong> in about 15 seconds</td>
+</tr>
+<tr>
+<td>Publishes software you did not write</td>
+<td>Publish stock apps</td>
+<td><a href="https://guides.edgible.com/guides/llm-on-edgible/02-edgible-to-ollama.html">Edgible publishes Ollama</a></td>
+<td>Stock Ollama, unmodified, goes public</td>
+</tr>
+<tr>
+<td>CLI, console and wizard parity</td>
+<td>Repeatable setup</td>
+<td><a href="https://guides.edgible.com/guides/n8n-on-edgible/02-n8n-editor-through-edgible.html">n8n editor through Edgible</a></td>
+<td>Same app from flags or prompts</td>
+</tr>
+<tr>
+<td>Clean unpublish</td>
+<td>Reversible demo</td>
+<td><a href="https://guides.edgible.com/guides/n8n-on-edgible/06-n8n-teardown.html">Tear down n8n</a>, <a href="https://guides.edgible.com/guides/openclaw-on-edgible/09-openclaw-teardown.html">Tear down OpenClaw</a></td>
+<td>Hostnames dead; other apps still serving</td>
+</tr>
+<tr>
+<td>TCP and UDP apps</td>
+<td>Publish what is not web</td>
+<td><a href="https://guides.edgible.com/guides/game-server-on-edgible/02-java-over-tcp.html">Java players over TCP</a>, <a href="https://guides.edgible.com/guides/game-server-on-edgible/03-bedrock-over-udp.html">Bedrock players over UDP</a></td>
+<td><code>mc-monitor</code> answers on the public address over TCP and over UDP</td>
+</tr>
+<tr>
+<td>Many apps on one machine, each with its own auth mode</td>
+<td>One machine, mixed estate</td>
+<td><a href="https://guides.edgible.com/guides/llm-on-edgible/03-n8n-uses-ollama.html">n8n uses the published Ollama URL</a></td>
+<td><code>None</code>, <code>org</code> and <code>api-key</code> at once</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="the-set-piece-demos">The set-piece demos</h2>
+<p>The whole small-site stack, on hardware you own. <a href="https://guides.edgible.com/guides/website-on-edgible/index.html">Website on Edgible</a> publishes four hostnames off one machine: the site on <code>None</code>, the Umami tracking script on <code>None</code>, and the Umami and Uptime Kuma interfaces on <code>org</code>. It is the shortest demonstration that the access rule belongs to the hostname rather than to the service.</p>
+<p>The back office workhorse, with its credentials staying in your building. <a href="https://guides.edgible.com/guides/n8n-on-edgible/index.html">n8n on Edgible</a> covers the auth split end to end, including the <code>WEBHOOK_URL</code> setting that makes n8n print the public origin while traffic still reaches one process.</p>
+<p>The agent everyone is currently trying, on hardware you control. <a href="https://guides.edgible.com/guides/openclaw-on-edgible/index.html">OpenClaw on Edgible</a> keeps the Gateway on loopback and lets the phone in through <code>org</code>. The agent edits a live public page in <a href="https://guides.edgible.com/guides/openclaw-on-edgible/03-openclaw-changes-edgible-site.html">chapter 3</a>, and <a href="https://guides.edgible.com/guides/openclaw-on-edgible/04-edgible-openclaw-skill.html">chapter 4</a> installs a skill that lets it run the Edgible CLI.</p>
+<p>Private AI, where the prompts and the weights stay home. In <a href="https://guides.edgible.com/guides/llm-on-edgible/index.html">LLM on Edgible</a>, Ollama and the model weights stay on one machine while n8n on a second and OpenClaw on a third call it over HTTPS with a bearer secret. No port-forward and no mesh VPN. This combination exercises private inference, machine authentication and remote self-hosted callers together.</p>
+<p>Game night on a box you own, for the friends you invite. <a href="https://guides.edgible.com/guides/game-server-on-edgible/index.html">Game server on Edgible</a> runs one Minecraft server and publishes it twice: Java Edition as a TCP app on <code>25565</code> and Bedrock Edition, through the Geyser plugin, as a UDP app on <code>29132</code>. Friends on PC and on phone meet in one world. Neither app has an auth mode, so the game's own online mode and whitelist decide who plays.</p>
+<p>A proven solution can be shared as a pattern, so someone else can reproduce it. <a href="https://guides.edgible.com/guides/self-hosting-is-social/index.html">Self Hosting is Social</a> takes the website as the first card: a React site, a Strapi editor, analytics and a monitor, in two places, with the device name, the hostnames and the organization id left out. The second card is n8n: the editor on <code>org</code> and the hooks on <code>None</code>, one place. The third card is the assistant: Open WebUI on <code>org</code> and Ollama on <code>api-key</code>, one place. The card README is how the next person runs it.</p>
+<h2 id="what-it-replaces">What it replaces</h2>
+<p>Port-forwarding and the firewall rules around it. Dynamic DNS. Certbot and renewal cron. A hand-rolled nginx or Caddy reverse proxy. Mesh VPN enrolment for every client device. Ad-hoc tunnels that change URL on restart and cannot give one hostname a login and another none.</p>
+<h2 id="known-limits">Known limits</h2>
+<ul>
+<li>TLS terminates on the serving device, so the gateway cannot inject HTTP headers. The original client IP therefore does not reach the app, which breaks visitor geolocation in analytics tools. <a href="https://guides.edgible.com/guides/website-on-edgible/04-publish-umami.html#45-what-the-country-column-will-not-tell-you">What the country column will not tell you</a> shows the empty country column and proves the cause. PROXY protocol between gateway and device would close this gap.</li>
+<li>A TCP or UDP app has no auth mode, and its public port must be from <code>20000</code> to <code>29999</code>, held by one app on its gateway at a time. <a href="https://guides.edgible.com/guides/game-server-on-edgible/02-java-over-tcp.html#25-when-port-25565-is-taken">When port 25565 is taken</a> shows the error and the fix, and <a href="https://guides.edgible.com/guides/game-server-on-edgible/03-bedrock-over-udp.html#32-why-the-port-is-29132">Why the port is 29132</a> the range.</li>
+<li>WebSocket-heavy apps should be checked on first publish. <a href="https://guides.edgible.com/guides/n8n-on-edgible/02-n8n-editor-through-edgible.html">n8n editor through Edgible</a> describes what it means when the page shell loads but the canvas stays blank.</li>
+</ul>
+<hr />
+<p>Start at <a href="https://guides.edgible.com/index.html">Welcome</a> for where to begin, or go straight to <a href="https://guides.edgible.com/guides/start-here/index.html">Start here</a>.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Edgible. Keep your data close.</span>
+    <a class="foot-logo" href="../"><img src="../images/edgible-symbol-white.png" alt="Edgible"></a>
+  </div>
+</footer>
+
+</body>
+</html>
