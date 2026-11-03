@@ -118,7 +118,7 @@
     }
 
     /* Icon tiles: the sprite in images/icons.svg */
-    .msg, .step, .way, .future, .story-ex, .share-two div, .stack li, .ico { backdrop-filter: blur(8px); }
+    .msg, .step, .way, .future, .story-ex, .share-two div, .ico { backdrop-filter: blur(8px); }
     .ico { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 14px; background: var(--surface); border: 1px solid var(--blue-mid); margin-bottom: 16px; }
     .ico svg { width: 38px; height: 38px; }
     .ico.sm { width: 40px; height: 40px; border-radius: 11px; margin: 0; }
@@ -200,27 +200,6 @@
     .future.wide h3 { font-size: 26px; }
     .future.wide p { font-size: 18px; max-width: 820px; }
     .future p { margin: 0; color: var(--muted); }
-    .headline-close { margin: 64px 0 0; font-size: clamp(24px, 3.2vw, 34px); line-height: 1.3; font-weight: 600; color: var(--heading); max-width: 820px; }
-    .headline-close span { color: var(--accent-text); }
-
-    /* 6. Not another tunnel */
-    .stack-wrap { display: grid; grid-template-columns: 6fr 5fr; gap: 48px; align-items: start; }
-    .stack { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-    .stack li b { display: flex; align-items: center; gap: 12px; }
-    .stack li { display: grid; grid-template-columns: 150px 1fr; gap: 16px; align-items: center; padding: 18px 22px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
-    .stack li b { font-size: 20px; font-weight: 600; color: var(--heading); }
-    .stack li span { color: var(--muted); }
-    .stack .l5 { border-left: 4px solid var(--yellow); }
-    .stack .l4 { border-left: 4px solid var(--coral); }
-    .stack .l3 { border-left: 4px solid var(--teal); }
-    .stack .l2 { border-left: 4px solid var(--blue-mid); }
-    .stack .l1 { background: transparent; border-style: dashed; }
-    .stack .l1 b, .stack .l1 span { color: var(--muted-2); }
-    .compounds h3 { margin: 0 0 18px; font-size: 24px; color: var(--heading); }
-    .compounds .c { padding: 0 0 18px 18px; margin-bottom: 18px; border-left: 2px solid var(--yellow); }
-    .compounds .c:last-child { margin-bottom: 0; }
-    .compounds h4 { margin: 0 0 6px; font-size: 19px; font-weight: 600; color: var(--heading); }
-    .compounds p { margin: 0; color: var(--muted); }
 
     /* Closing call */
     .closing { background: radial-gradient(ellipse at 50% 0%, rgba(255,210,31,.10), transparent 60%), var(--bg-alt); border-top: 1px solid var(--line); }
@@ -247,11 +226,10 @@
     footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
 
     @media (max-width: 900px) {
-      .world .cols, .beliefs, .grid3, .ways, .headed .grid2, .stack-wrap, .timeline, .share-two, .start-steps { grid-template-columns: 1fr; }
+      .world .cols, .beliefs, .grid3, .ways, .headed .grid2, .timeline, .share-two, .start-steps { grid-template-columns: 1fr; }
       .timeline li::after { display: none; }
       .story-ex { padding: 28px 22px; }
       .asks li { max-width: 100%; }
-      .stack li { grid-template-columns: 1fr; gap: 4px; }
       .world .cols { gap: 8px; }
       .beliefs { gap: 28px; }
       .beliefs.two { grid-template-columns: 1fr; }
@@ -266,6 +244,27 @@
       .hero { padding-top: 48px; }
       .btn { width: 100%; text-align: center; }
     }
+
+    /* Why it matters: the three beliefs sit under the story */
+    .world-beliefs { margin-top: 64px; }
+
+    /* Other things people ask: three, then More examples */
+    .js .asks ul.folded li:nth-child(n+4) { display: none; }
+    .more-asks { display: none; margin-top: 8px; font: inherit; font-size: 16px; font-weight: 600; color: var(--accent-text); background: none; border: 1px solid var(--line); border-radius: 999px; padding: 8px 18px; cursor: pointer; }
+    .js .more-asks { display: inline-block; }
+    .more-asks:hover { border-color: var(--accent-text); }
+
+    /* Before you start: questions that open on a click */
+    .faq { max-width: 860px; margin-top: 28px; }
+    .faq details { border-top: 1px solid var(--line); }
+    .faq details:last-child { border-bottom: 1px solid var(--line); }
+    .faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 16px; padding: 20px 4px; font-size: 21px; font-weight: 700; color: var(--heading); }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; margin-left: auto; font-size: 28px; font-weight: 400; line-height: 1; color: var(--accent-text); }
+    .faq details[open] summary::after { content: "\2212"; }
+    .faq summary:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; border-radius: 6px; }
+    .faq details > p { margin: 0 4px 20px; color: var(--muted); font-size: 18px; max-width: 760px; }
+    .faq .padlock-fig { margin: 8px 4px 24px; }
   </style>
 </head>
 <body>
@@ -304,43 +303,35 @@
     </div>
   </section>
 
-  <!-- 2. The world we're entering -->
+  <!-- 2. Why it matters: the world we're entering, and what we believe -->
   <section class="alt world" aria-labelledby="world-title">
-    <div class="wrap cols">
-      <div>
-        <p class="kicker">The world we're entering</p>
-        <h2 id="world-title">AI is about to know everything about us.</h2>
-      </div>
-      <div class="story">
-        <p>Soon each of us will have AI agents working on our behalf: booking, writing, remembering, deciding. They'll build small apps on the fly, for one family, one club, one firm, and throw most of them away.</p>
-        <p>They only work well when they know us: our files, our habits, our clients, our children. It will be the most personal computing has ever been.</p>
-        <p>The easy place to run all of it is a big platform's cloud, and the price is quiet but enormous: <strong>every agent's memory, every app's records and every question we ask becomes data held, and often used, by someone else.</strong></p>
-        <p>It doesn't have to be that way.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. Why it matters -->
-  <section aria-labelledby="why-title">
     <div class="wrap">
-      <p class="kicker">Why it matters</p>
-      <h2 id="why-title">It's your data. Keep it.</h2>
-      <p class="intro">Models will change. Agents will change. Platforms will come and go. What lasts is the data: your members, your clients, your family's photos. And every new AI makes it worth more. Edgible exists to give you the confidence to keep it close.</p>
-      <div class="beliefs">
+      <div class="cols">
+        <div>
+          <p class="kicker">Why it matters</p>
+          <h2 id="world-title">AI is about to know everything about us.</h2>
+        </div>
+        <div class="story">
+          <p>Soon each of us will have AI agents booking, writing, remembering and deciding for us. They only work well when they know us: our files, our clients, our children.</p>
+          <p>The easy place to run them is a big platform's cloud, where <strong>every agent's memory and every question we ask becomes data held, and often used, by someone else.</strong></p>
+          <p>Models and platforms will come and go. What lasts is your data, and every new AI makes it worth more. It doesn't have to leave home.</p>
+        </div>
+      </div>
+      <div class="beliefs world-beliefs">
         <div class="belief">
           <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#data"/></svg></span>
           <h3>Your data is the value</h3>
-          <p>Whoever holds your data holds the value. It should be you, not the platform you happen to use this year.</p>
+          <p>Whoever holds it holds the value. It should be you, not this year's platform.</p>
         </div>
         <div class="belief">
           <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#home"/></svg></span>
           <h3>It belongs close to you</h3>
-          <p>On a computer at home or in the office, or a small server of your own, where you and your AI can reach it from anywhere.</p>
+          <p>On a computer at home or in the office, or a small server of your own, reachable from anywhere.</p>
         </div>
         <div class="belief">
           <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#tested"/></svg></span>
           <h3>Trust should come with proof</h3>
-          <p>Not a promise in the terms and conditions, but evidence you can see: where your data is, and that it's safe.</p>
+          <p>Not a promise in the terms, but evidence you can see: where your data is, and that it's safe.</p>
         </div>
       </div>
     </div>
@@ -361,15 +352,15 @@
           </li>
           <li>
             <span class="who">Your agent asks first</span>
-            <p>Is it a few simple pages, or something you edit every week? Then it lays out two or three honest options, including free hosting if that really is better, and recommends one. It picks from recipes we've tested, or helps you find a new one.</p>
+            <p>A few simple pages, or something you edit every week? It lays out two or three honest options, free hosting included if that's better, and recommends one from recipes we've tested.</p>
           </li>
           <li>
             <span class="who">It sets it up on a machine you control</span>
-            <p>A computer you already have, or a small server of your own for a few dollars a month. Your site gets your own address and a padlock, the editor sits behind your sign-in, and nobody gets into your network.</p>
+            <p>A computer you already have, or a small server for a few dollars a month. Your own address and padlock, the editor behind your sign-in, and nobody gets into your network.</p>
           </li>
           <li>
             <span class="who">Edgible looks after it</span>
-            <p>The recipe is tested on real machines every week. Backups count only once they've been restored and checked. If you change machines, your site moves with you.</p>
+            <p>Tested on real machines every week. Backups that have been restored and checked. Change machines, and your site moves with you.</p>
           </li>
         </ol>
         <p class="result">Same website. A fraction of the cost. <span>And it's yours.</span></p>
@@ -377,7 +368,7 @@
 
       <div class="asks">
         <p class="ex-label">Other things people ask</p>
-        <ul>
+        <ul class="folded" id="asks-list">
           <li>We want our family photos off Google, but still easy to share with Grandma.</li>
           <li>Our team wants a private AI, running on our own machine, that answers questions from our documents.</li>
           <li>I'd like my own AI assistant I can message from my phone, that gets things done on our own machine.</li>
@@ -386,6 +377,7 @@
           <li>Our small law firm needs one private place for precedents, and for onboarding new lawyers.</li>
           <li>We pay for website analytics. Could we run our own?</li>
         </ul>
+        <button class="more-asks" type="button" aria-controls="asks-list" aria-expanded="false">More examples</button>
       </div>
       <p class="aside">"Isn't self-hosting for nerds?" <span>It was. Now your AI does the nerdy bits.</span></p>
 
@@ -427,7 +419,7 @@
     <div class="wrap">
       <p class="kicker">Better together</p>
       <h2 id="together-title">Nobody should have to figure it out alone.</h2>
-      <p class="intro">Most people who run their own apps do it alone, and nobody ever sees how they did it. We're changing that. Every recipe can be safely shared, so what works for one person works for the next, and for the next person's AI. We call each tested recipe a <b>card</b>: <a href="https://github.com/edgible-org/card-kit#what-a-card-is">what a card is, and why</a>.</p>
+      <p class="intro">Most people who run their own apps do it alone. We're changing that: each tested recipe, which we call a <b>card</b>, can be shared, so what works for one person works for the next, and for their AI. <a href="https://github.com/edgible-org/card-kit#what-a-card-is">What a card is, and why</a>.</p>
       <figure class="loop">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 600" font-family="Nexa, Jost, system-ui, sans-serif" role="img" aria-labelledby="loop-desc"><title id="loop-desc">You have a need, and your AI suggests options from the shared recipes. Is there a recipe? If yes, it picks a tested recipe and it is running on your machine. If not, it builds a new one with you, it is tested and running, and you can choose to share it back, so the next person's AI finds it.</title>
 <defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#ffd21f"/></marker></defs>
@@ -502,174 +494,118 @@
     <div class="wrap">
       <p class="kicker">Where we're headed</p>
       <h2 id="headed-title">The safe place your agents put things.</h2>
-      <p class="intro">Before long you'll talk to any AI, and it will build and run things for you. When it needs somewhere to keep them, that place should be yours. That's what we're building.</p>
+      <p class="intro">Soon you'll talk to any AI and it will build and run things for you. Where it keeps them should be yours.</p>
       <div class="grid2">
         <div class="future wide">
           <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#shared"/></svg></span>
           <h3>Machines you can share</h3>
-          <p>Invite people into your organisation, and share the machines you choose with them. Your agents can then spread a big job across many computers, or borrow the one that has what the job needs, like a friend's powerful graphics card to run a larger AI model. Communities can pool what they have to take on problems together, and your data goes only where you choose, among people you trust.</p>
+          <p>Share machines with people you invite, so your agents can borrow a friend's graphics card or spread a big job across many computers. Your data goes only where you choose.</p>
         </div>
         <div class="future">
           <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#ai"/></svg></span>
           <h3>A home for your agents</h3>
-          <p>Your agents, the small apps they write, and everything they remember, running on machines you control and reachable wherever you are.</p>
+          <p>Your agents, their apps and their memory, on machines you control, reachable anywhere.</p>
         </div>
         <div class="future">
           <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#govern"/></svg></span>
           <h3>Agents that ask first</h3>
-          <p>No agent deletes, publishes or spends without your yes. Each one can do only its own job, and you can switch any of them off.</p>
+          <p>Nothing deleted, published or spent without your yes, and any agent can be switched off.</p>
         </div>
         <div class="future">
           <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#record"/></svg></span>
           <h3>A record you can read</h3>
-          <p>Every week, a plain report: what ran, what changed, and which person or agent changed it. Clear enough for a committee, solid enough for a regulator.</p>
+          <p>A plain weekly report of what ran, what changed, and who or what changed it.</p>
         </div>
         <div class="future">
           <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#map"/></svg></span>
           <h3>Know where your data is</h3>
-          <p>One map of everything you own: which app holds it, which machine it's on, and when it was last proven safe. Easy to move, easy to leave.</p>
+          <p>One map of what you own, where it is, and when it was last proven safe.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 6. Why it's defensible -->
-  <section class="alt moat" id="moat" aria-labelledby="moat-title">
-    <div class="wrap">
-      <p class="kicker">Not another tunnel</p>
-      <h2 id="moat-title">The tunnel is the easy part.</h2>
-      <p class="intro">Putting an app online is becoming free: tunnels, hosting, even the code itself. What people will pay for, and what's hard to copy, is everything above it.</p>
-      <div class="stack-wrap">
-        <ol class="stack" aria-label="What Edgible does, from the ground up">
-          <li class="l5"><b><span class="ico sm" aria-hidden="true"><svg><use href="images/icons.svg#govern"/></svg></span>Govern</b><span>Agents act only within limits you set, and ask before anything risky.</span></li>
-          <li class="l4"><b><span class="ico sm" aria-hidden="true"><svg><use href="images/icons.svg#tested"/></svg></span>Prove</b><span>Evidence, not promises: tested, backed up, restore-proven, and who touched what.</span></li>
-          <li class="l3"><b><span class="ico sm" aria-hidden="true"><svg><use href="images/icons.svg#backup"/></svg></span>Keep</b><span>Backups, updates, moves and health, looked after for years, not just set up once.</span></li>
-          <li class="l2"><b><span class="ico sm" aria-hidden="true"><svg><use href="images/icons.svg#recipe"/></svg></span>Run</b><span>Tested recipes that any AI can follow, for the apps and agents you rely on.</span></li>
-          <li class="l1"><b><span class="ico sm" aria-hidden="true"><svg><use href="images/icons.svg#lock"/></svg></span>Reach</b><span>A safe front door for every app. It matters, and it's where others stop.</span></li>
-        </ol>
-        <div class="compounds">
-          <h3>What compounds</h3>
-          <div class="c">
-            <h4>AI reaches for us by default</h4>
-            <p>Our recipes are written for AI, and we measure how well each assistant follows them. Every AI that learns them sends people our way.</p>
-          </div>
-          <div class="c">
-            <h4>Proof that builds up</h4>
-            <p>Every week of testing on real machines adds to a record nobody can fake, and nobody can fast-forward.</p>
-          </div>
-          <div class="c">
-            <h4>A network of machines and people</h4>
-            <p>Organisations, shared machines and recipes people share back. Each member makes it more useful for the next.</p>
-          </div>
-        </div>
-      </div>
-      <p class="headline-close">Software is getting cheap. Trust isn't. <span>That's the part we're building.</span></p>
-    </div>
-  </section>
-
-  <!-- Private or public: where the padlock is opened -->
-  <section id="padlock" aria-labelledby="padlock-title">
-    <div class="wrap">
-      <p class="kicker">Private or public</p>
-      <h2 id="padlock-title">Where is the padlock opened?</h2>
-      <p class="intro">Every private website uses a padlock to encrypt what travels between a visitor and the site. Most hosting and tunnel services open that padlock on their own servers, handle the traffic, then pass it on. With Edgible, the padlock stays locked all the way to your machine.</p>
-      <figure class="padlock-fig">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 400" font-family="Nexa, Jost, system-ui, sans-serif" role="img" aria-labelledby="padlock-desc"><title id="padlock-desc">Two routes from a visitor to your machine. With most hosting and tunnel services, the traffic is encrypted on the way in, a cloud service opens the padlock and handles it, then encrypts it again and passes it on. With Edgible, the traffic stays encrypted the whole way. Edgible's gateway passes it along sealed, and only your machine opens it.</title>
-<defs>
-<marker id="pa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#a7b1dc"/></marker>
-<g id="pl-c"><rect x="-13" y="-2" width="26" height="20" rx="4" fill="currentColor"/><path d="M-8 -2 V-8 a8 8 0 0 1 16 0 V-2" fill="none" stroke="currentColor" stroke-width="3.5"/></g>
-<g id="pl-o"><rect x="-13" y="-2" width="26" height="20" rx="4" fill="currentColor"/><path d="M-8 -2 V-9 a8 8 0 0 1 16 0 V-14" fill="none" stroke="currentColor" stroke-width="3.5"/></g>
-<g id="person"><circle cx="0" cy="-16" r="11" fill="#a7b1dc"/><path d="M-20 20 a20 17 0 0 1 40 0 Z" fill="#a7b1dc"/></g>
-<g id="house"><path d="M-30 0 L0 -26 L30 0 V28 H-30 Z" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="-7" y="8" width="14" height="20" rx="2" fill="currentColor"/></g>
-</defs>
-
-<text x="0" y="26" font-size="20" font-weight="700" fill="#ffffff">Most hosting and tunnel services</text>
-<use href="#person" transform="translate(90,105)"/>
-<text x="90" y="160" font-size="16" text-anchor="middle" fill="#a7b1dc">A visitor</text>
-<line x1="140" y1="105" x2="395" y2="105" stroke="#a7b1dc" stroke-width="2.5" marker-end="url(#pa)"/>
-<use href="#pl-c" transform="translate(268,80)" color="#ffd21f"/>
-<text x="268" y="136" font-size="16" text-anchor="middle" fill="#a7b1dc">encrypted</text>
-<text x="530" y="38" font-size="15" font-weight="600" text-anchor="middle" fill="#a7b1dc">Cloud service</text>
-<rect x="400" y="48" width="260" height="114" rx="14" fill="rgba(255,255,255,.05)" stroke="#ff7a59" stroke-width="2.5"/>
-<use href="#pl-o" transform="translate(530,84)" color="#ff7a59"/>
-<text x="530" y="128" font-size="17" font-weight="700" text-anchor="middle" fill="#ff7a59">Padlock opened here</text>
-<text x="530" y="149" font-size="14" text-anchor="middle" fill="#a7b1dc">handled, then locked again</text>
-<line x1="660" y1="105" x2="895" y2="105" stroke="#a7b1dc" stroke-width="2.5" marker-end="url(#pa)"/>
-<use href="#pl-c" transform="translate(778,80)" color="#ffd21f"/>
-<text x="778" y="136" font-size="16" text-anchor="middle" fill="#a7b1dc">encrypted again</text>
-<use href="#house" transform="translate(960,100)" color="#ffd21f"/>
-<text x="960" y="160" font-size="16" text-anchor="middle" fill="#a7b1dc">Your machine</text>
-
-<line x1="0" y1="205" x2="1060" y2="205" stroke="rgba(255,255,255,.12)"/>
-
-<text x="0" y="246" font-size="20" font-weight="700" fill="#4fc3a8">Edgible</text>
-<use href="#person" transform="translate(90,325)"/>
-<text x="90" y="380" font-size="16" text-anchor="middle" fill="#a7b1dc">A visitor</text>
-<line x1="140" y1="325" x2="395" y2="325" stroke="#a7b1dc" stroke-width="2.5" marker-end="url(#pa)"/>
-<use href="#pl-c" transform="translate(268,300)" color="#ffd21f"/>
-<text x="268" y="356" font-size="16" text-anchor="middle" fill="#a7b1dc">encrypted</text>
-<text x="530" y="258" font-size="15" font-weight="600" text-anchor="middle" fill="#a7b1dc">Edgible gateway</text>
-<rect x="400" y="268" width="260" height="114" rx="14" fill="rgba(255,255,255,.05)" stroke="#4fc3a8" stroke-width="2.5"/>
-<use href="#pl-c" transform="translate(530,304)" color="#ffd21f"/>
-<text x="530" y="348" font-size="17" font-weight="700" text-anchor="middle" fill="#4fc3a8">Passed along, still locked</text>
-<text x="530" y="369" font-size="14" text-anchor="middle" fill="#a7b1dc">our gateway can't open it</text>
-<line x1="660" y1="325" x2="895" y2="325" stroke="#a7b1dc" stroke-width="2.5" marker-end="url(#pa)"/>
-<use href="#pl-c" transform="translate(778,300)" color="#ffd21f"/>
-<text x="778" y="356" font-size="16" text-anchor="middle" fill="#a7b1dc">still encrypted</text>
-<use href="#house" transform="translate(960,320)" color="#ffd21f"/>
-<use href="#pl-o" transform="translate(1020,288)" color="#4fc3a8"/>
-<text x="960" y="380" font-size="16" text-anchor="middle" fill="#a7b1dc">Opened here, only here</text>
-        </svg>
-        <figcaption>Our gateway only passes encrypted traffic along. We can see which app was reached and when, not what was said.</figcaption>
-      </figure>
-      <div class="beliefs">
-        <div class="belief">
-          <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#lock"/></svg></span>
-          <h3>Keeping it private?</h3>
-          <p>Member lists, client files, an AI that reads your documents: keep the padlock on your machine, and use Edgible.</p>
-        </div>
-        <div class="belief">
-          <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#home"/></svg></span>
-          <h3>Running something public?</h3>
-          <p>Edgible still works, and so do other products, such as Cloudflare. Pick what suits you.</p>
-        </div>
-        <div class="belief">
-          <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#ai"/></svg></span>
-          <h3>Which AI reads it?</h3>
-          <p>You choose: a model running on your own machine, or a service you pick. Edgible doesn't choose for you.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- What you need, what it costs -->
+  <!-- Before you start: the questions people ask first, each opens on a click -->
   <section id="needs" aria-labelledby="needs-title">
     <div class="wrap">
       <p class="kicker">Before you start</p>
-      <h2 id="needs-title">What you need, what it costs, who sets it up.</h2>
-      <div class="beliefs two">
-        <div class="belief">
-          <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#machine"/></svg></span>
-          <h3>What you need</h3>
+      <h2 id="needs-title">Questions people ask first.</h2>
+      <div class="faq">
+        <details>
+          <summary>What do I need?</summary>
           <p>A computer that stays on, or a small server of your own for a few dollars a month. If it's off, your apps are off until it's back. And an AI assistant that works on your computer, such as Claude Code or Codex. A chat app on its own can't.</p>
-        </div>
-        <div class="belief">
-          <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#tested"/></svg></span>
-          <h3>What it costs</h3>
-          <p>Edgible is in beta. Pricing will be freemium: there will always be a free tier, and paid tiers such as Pro and Enterprise. Prices will be released soon, and will be competitive.</p>
-        </div>
-        <div class="belief">
-          <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#backup"/></svg></span>
-          <h3>Where your backups live</h3>
-          <p>Where you choose, on your own machines. Edgible never holds a copy. We suggest a second copy somewhere else.</p>
-        </div>
-        <div class="belief">
-          <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#ai"/></svg></span>
-          <h3>Who sets it up</h3>
+        </details>
+        <details>
+          <summary>What does it cost?</summary>
+          <p>Edgible is in beta. There will always be a free tier, with paid tiers such as Pro and Enterprise. Prices are coming soon, and will be competitive.</p>
+        </details>
+        <details>
+          <summary>Who sets it up?</summary>
           <p>Your AI does, a step at a time, and asks before anything changes. For a club or a firm, a volunteer or your IT person can do it once.</p>
-        </div>
+        </details>
+        <details>
+          <summary>Where do my backups live?</summary>
+          <p>Where you choose, on your own machines. Edgible never holds a copy. We suggest a second copy somewhere else.</p>
+        </details>
+        <details id="padlock">
+          <summary>Where is the padlock opened?</summary>
+          <p>The padlock encrypts what travels between a visitor and a site. Most hosting and tunnel services open it on their own servers, then pass the traffic on. With Edgible, it stays locked all the way to your machine.</p>
+        <figure class="padlock-fig">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 400" font-family="Nexa, Jost, system-ui, sans-serif" role="img" aria-labelledby="padlock-desc"><title id="padlock-desc">Two routes from a visitor to your machine. With most hosting and tunnel services, the traffic is encrypted on the way in, a cloud service opens the padlock and handles it, then encrypts it again and passes it on. With Edgible, the traffic stays encrypted the whole way. Edgible's gateway passes it along sealed, and only your machine opens it.</title>
+  <defs>
+  <marker id="pa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#a7b1dc"/></marker>
+  <g id="pl-c"><rect x="-13" y="-2" width="26" height="20" rx="4" fill="currentColor"/><path d="M-8 -2 V-8 a8 8 0 0 1 16 0 V-2" fill="none" stroke="currentColor" stroke-width="3.5"/></g>
+  <g id="pl-o"><rect x="-13" y="-2" width="26" height="20" rx="4" fill="currentColor"/><path d="M-8 -2 V-9 a8 8 0 0 1 16 0 V-14" fill="none" stroke="currentColor" stroke-width="3.5"/></g>
+  <g id="person"><circle cx="0" cy="-16" r="11" fill="#a7b1dc"/><path d="M-20 20 a20 17 0 0 1 40 0 Z" fill="#a7b1dc"/></g>
+  <g id="house"><path d="M-30 0 L0 -26 L30 0 V28 H-30 Z" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="-7" y="8" width="14" height="20" rx="2" fill="currentColor"/></g>
+  </defs>
+
+  <text x="0" y="26" font-size="20" font-weight="700" fill="#ffffff">Most hosting and tunnel services</text>
+  <use href="#person" transform="translate(90,105)"/>
+  <text x="90" y="160" font-size="16" text-anchor="middle" fill="#a7b1dc">A visitor</text>
+  <line x1="140" y1="105" x2="395" y2="105" stroke="#a7b1dc" stroke-width="2.5" marker-end="url(#pa)"/>
+  <use href="#pl-c" transform="translate(268,80)" color="#ffd21f"/>
+  <text x="268" y="136" font-size="16" text-anchor="middle" fill="#a7b1dc">encrypted</text>
+  <text x="530" y="38" font-size="15" font-weight="600" text-anchor="middle" fill="#a7b1dc">Cloud service</text>
+  <rect x="400" y="48" width="260" height="114" rx="14" fill="rgba(255,255,255,.05)" stroke="#ff7a59" stroke-width="2.5"/>
+  <use href="#pl-o" transform="translate(530,84)" color="#ff7a59"/>
+  <text x="530" y="128" font-size="17" font-weight="700" text-anchor="middle" fill="#ff7a59">Padlock opened here</text>
+  <text x="530" y="149" font-size="14" text-anchor="middle" fill="#a7b1dc">handled, then locked again</text>
+  <line x1="660" y1="105" x2="895" y2="105" stroke="#a7b1dc" stroke-width="2.5" marker-end="url(#pa)"/>
+  <use href="#pl-c" transform="translate(778,80)" color="#ffd21f"/>
+  <text x="778" y="136" font-size="16" text-anchor="middle" fill="#a7b1dc">encrypted again</text>
+  <use href="#house" transform="translate(960,100)" color="#ffd21f"/>
+  <text x="960" y="160" font-size="16" text-anchor="middle" fill="#a7b1dc">Your machine</text>
+
+  <line x1="0" y1="205" x2="1060" y2="205" stroke="rgba(255,255,255,.12)"/>
+
+  <text x="0" y="246" font-size="20" font-weight="700" fill="#4fc3a8">Edgible</text>
+  <use href="#person" transform="translate(90,325)"/>
+  <text x="90" y="380" font-size="16" text-anchor="middle" fill="#a7b1dc">A visitor</text>
+  <line x1="140" y1="325" x2="395" y2="325" stroke="#a7b1dc" stroke-width="2.5" marker-end="url(#pa)"/>
+  <use href="#pl-c" transform="translate(268,300)" color="#ffd21f"/>
+  <text x="268" y="356" font-size="16" text-anchor="middle" fill="#a7b1dc">encrypted</text>
+  <text x="530" y="258" font-size="15" font-weight="600" text-anchor="middle" fill="#a7b1dc">Edgible gateway</text>
+  <rect x="400" y="268" width="260" height="114" rx="14" fill="rgba(255,255,255,.05)" stroke="#4fc3a8" stroke-width="2.5"/>
+  <use href="#pl-c" transform="translate(530,304)" color="#ffd21f"/>
+  <text x="530" y="348" font-size="17" font-weight="700" text-anchor="middle" fill="#4fc3a8">Passed along, still locked</text>
+  <text x="530" y="369" font-size="14" text-anchor="middle" fill="#a7b1dc">our gateway can't open it</text>
+  <line x1="660" y1="325" x2="895" y2="325" stroke="#a7b1dc" stroke-width="2.5" marker-end="url(#pa)"/>
+  <use href="#pl-c" transform="translate(778,300)" color="#ffd21f"/>
+  <text x="778" y="356" font-size="16" text-anchor="middle" fill="#a7b1dc">still encrypted</text>
+  <use href="#house" transform="translate(960,320)" color="#ffd21f"/>
+  <use href="#pl-o" transform="translate(1020,288)" color="#4fc3a8"/>
+  <text x="960" y="380" font-size="16" text-anchor="middle" fill="#a7b1dc">Opened here, only here</text>
+          </svg>
+          <figcaption>Our gateway only passes encrypted traffic along. We can see which app was reached and when, not what was said.</figcaption>
+        </figure>
+          <p>Keeping it private, such as member lists, client files, or an AI that reads your documents? Use Edgible. Running something public? Edgible works, and so do others, such as Cloudflare. And which AI reads your data is your choice: one on your own machine, or a service you pick.</p>
+        </details>
+        <details>
+          <summary>When isn't it the right fit?</summary>
+          <p>A simple website (free hosts are easier), heavy public traffic or video, and regulated records at scale, which need compliant hosting and professional advice.</p>
+        </details>
       </div>
-      <p class="needs"><strong>When it isn't the right fit:</strong> a simple website (free hosts are easier), heavy public traffic or video, and regulated records at scale, which need compliant hosting and professional advice.</p>
     </div>
   </section>
 
@@ -682,12 +618,12 @@
       <ol class="start-steps">
         <li>
           <h3>Give your AI the Edgible skill</h3>
-          <p>The skill teaches your AI our tested recipes and how to look after them. We recommend Claude Code. It also works with Codex and other assistants that read skills, and we're measuring how well each one does.</p>
+          <p>It teaches your AI our tested recipes. We recommend Claude Code; Codex and other assistants that read skills work too, and we're measuring how well.</p>
           <p class="say">Install the Edgible skill from github.com/edgible-org/card-kit</p>
         </li>
         <li>
           <h3>Ask it to set up Edgible</h3>
-          <p>It checks your computer, helps you create a free account, and asks what to call the machine and whether it should stay on. It asks before anything that changes your system.</p>
+          <p>It checks your computer, helps you make a free account, and asks before changing anything.</p>
           <p class="say">Set up Edgible on this computer so I can run my own apps.</p>
         </li>
         <li>
@@ -699,7 +635,7 @@
       <p class="close-lede">Built an app yourself, with an AI or by hand? <a href="https://cards.edgible.org/add-your-app/">Share it as a card</a>, so anyone can run it with one prompt.</p>
       <div class="anywhere">
         <h3 class="sub">Then talk to it from anywhere.</h3>
-        <p class="close-lede">Once it's set up, you're not tied to one screen. Use the AI you like, where you are.</p>
+        <p class="close-lede">Once it's set up, use the AI you like, wherever you are.</p>
         <div class="grid3">
           <div class="step">
             <span class="ico" aria-hidden="true"><svg><use href="images/icons.svg#machine"/></svg></span>
@@ -722,7 +658,7 @@
       <div class="ctas">
         <a class="btn primary" href="https://cards.edgible.org/playbooks/get-edgible-running/">Step by step: Get Edgible running</a>
         <a class="btn secondary" href="https://cards.edgible.org">See the tested cards</a>
-        <a class="btn secondary" href="https://guides.edgible.com/guides/start-here/index.html">Prefer to do it by hand?</a>
+        <a class="btn secondary" href="https://edgible.com/">Prefer to do it by hand?</a>
         <a class="btn secondary" href="contact/">Talk to us</a>
       </div>
     </div>
@@ -739,6 +675,22 @@
   </div>
 </footer>
 
+<script>
+// More examples: show the rest of the asks. The padlock question opens itself when a link points at it.
+(function () {
+  var b = document.querySelector('.more-asks'), ul = document.getElementById('asks-list');
+  if (b && ul) b.addEventListener('click', function () {
+    var open = ul.classList.toggle('folded') === false;
+    b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    b.textContent = open ? 'Fewer examples' : 'More examples';
+  });
+  function openHash() {
+    var d = location.hash && document.getElementById(location.hash.slice(1));
+    if (d && d.tagName === 'DETAILS') { d.open = true; d.scrollIntoView(); }
+  }
+  openHash(); window.addEventListener('load', openHash); window.addEventListener('hashchange', openHash);
+})();
+</script>
 <script src="menu.js" defer></script>
 </body>
 </html>
