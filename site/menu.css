@@ -12,8 +12,8 @@ header.bar.open .menu-btn span { background: transparent; }
 header.bar.open .menu-btn span::before { transform: translateY(7px) rotate(45deg); }
 header.bar.open .menu-btn span::after { transform: translateY(-7px) rotate(-45deg); }
 
-/* Four links (the playbooks, proof, contact pages) fold below 720px; the home page has eight, so it folds below 1120px. */
-@media (max-width: 720px) {
+/* Five links and the Get started button fold below 860px. (.wide, for a longer menu, folds below 1120px.) */
+@media (max-width: 860px) {
   .js header.bar .menu-btn { display: inline-flex; }
   .js header.bar nav.links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; padding: 4px 16px 12px; background: var(--bar-solid, #111827); border-bottom: 1px solid var(--bar-line, rgba(255,255,255,.12)); font-size: 17px; }
   .js header.bar.open nav.links { display: flex; }
@@ -36,3 +36,11 @@ header.bar.open .menu-btn span::after { transform: translateY(-7px) rotate(-45de
 
 /* Cards is another site: a small arrow says so. */
 nav.links a.ext::after { content: "\2197" / ""; display: inline-block; margin-left: 3px; font-size: .9em; opacity: .8; }
+
+/* The logo on the left; the links, Get started, the theme button and the menu button on the right.
+   Get started stays in the bar when the links fold into the menu. */
+header.bar .wrap > .logo { margin-right: auto; }
+.nav-cta { order: 1; margin-left: 24px; padding: 8px 18px; border-radius: 999px; background: #ffd21f; color: #111827 !important; font-weight: 600; font-size: 15px; line-height: 1.3; text-decoration: none; white-space: nowrap; }
+.nav-cta:hover { background: #ffdf55; }
+.menu-btn { order: 2; margin-left: 8px; }
+@media (max-width: 420px) { .nav-cta { margin-left: 12px; padding: 7px 14px; } }
