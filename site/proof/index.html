@@ -3,6 +3,8 @@
 <head>
   <script>document.documentElement.className += " js";</script>
   <link rel="stylesheet" href="../menu.css">
+  <link rel="stylesheet" href="../theme.css">
+  <script src="../theme.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Proof · Edgible</title>
@@ -110,20 +112,28 @@
   
     /* What's real today: a lead, a few numbers, and three groups of short claims, each with where to check it. */
     .nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0 8px; }
-    .num { background: var(--night-1); color: #e6eaff; border-radius: var(--radius); padding: 20px 22px; }
+    .num { background: var(--tile, var(--night-1)); border: 1px solid var(--tile-line, transparent); color: #e6eaff; border-radius: var(--radius); padding: 20px 22px; }
     .num b { display: block; font-size: 36px; line-height: 1.1; color: var(--yellow); font-weight: 800; }
     .num > span { display: block; margin-top: 6px; font-size: 16px; color: #c9d1f5; }
     main h2 { font-size: 24px; margin: 44px 0 0; }
     .claims { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 16px 0 0; }
     .claim:last-child:nth-child(odd) { grid-column: 1 / -1; }
-    .claim { background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px 16px; display: flex; flex-direction: column; }
+    .claim { background: var(--card, #ffffff); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px 16px; display: flex; flex-direction: column; }
     .claim h3 { display: flex; align-items: center; gap: 12px; margin: 0 0 8px; font-size: 19px; }
-    .claim .ico { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; background: var(--night-1); color: #ffffff; flex: none; }
+    .claim .ico { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; background: var(--ico-bg, var(--night-1)); color: #ffffff; flex: none; }
     .claim .ico svg { width: 26px; height: 26px; }
     .claim p { margin: 0 0 10px; max-width: none; font-size: 16px; line-height: 1.55; }
     .claim a.more { margin-top: auto; font-weight: 700; font-size: 16px; }
     .close { margin-top: 40px; }
     @media (max-width: 760px) { .nums { grid-template-columns: 1fr; } .claims { grid-template-columns: 1fr; } }
+
+    /* The theme switch (theme.js, theme.css): this page's own colours for each theme. They come after
+       theme.css, so they win over its homepage colours; the header and footer stay dark in both. */
+    html[data-theme] { --night-1: #111827; --icon: #ffffff; }
+    html[data-theme="light"] { color-scheme: light; --paper: #fbfaf7; --surface: #f1f2f7; --line: #e3e6ef; --heading: #111827; --ink: #2b3245; --muted: #5d6680; --link: #2e4a9e; --card: #ffffff; }
+    html[data-theme="dark"] { color-scheme: dark; --paper: #111827; --surface: rgba(255,255,255,.06); --line: rgba(255,255,255,.12); --heading: #ffffff; --ink: #e6eaff; --muted: #a7b1dc; --link: #ffd21f; --card: rgba(255,255,255,.05); --tile: rgba(255,255,255,.06); --tile-line: rgba(255,255,255,.12); --ico-bg: #2e4a9e; }
+    html[data-theme="dark"] { background: linear-gradient(135deg, #111827 0%, #1e293b 45%, #312e81 100%) fixed; background-color: #111827; }
+    html[data-theme="dark"] body { background: transparent; }
 </style>
 </head>
 <body>
