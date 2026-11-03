@@ -14,6 +14,11 @@
   <link rel="alternate" type="text/plain" title="Facts for AI assistants" href="llms.txt">
   <meta property="og:title" content="Edgible: Your data's coming home">
   <meta property="og:description" content="AI agents only work when they know us. Edgible keeps that data on machines you control, looked after and provably safe.">
+  <meta property="og:image" content="https://www.edgible.ai/images/og-coming-home.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A woman laughs as she hugs a young man in a busy crowd at an arrivals barrier">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -80,11 +85,21 @@
     /* Hero */
     .hero { padding: 96px 0 72px; overflow: hidden; background: radial-gradient(ellipse at 70% 100%, rgba(99,102,241,.18), transparent 60%); }
     .hero .eyebrow { display: inline-block; font-weight: 600; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
-    .hero h1 { font-size: clamp(44px, 7.4vw, 84px); line-height: 1.02; letter-spacing: -.02em; margin: 0 0 22px; color: var(--heading); font-weight: 800; }
+    .hero h1 { font-size: clamp(44px, 6vw, 74px); line-height: 1.02; letter-spacing: -.02em; margin: 0 0 22px; color: var(--heading); font-weight: 800; }
     .hero h1 .tm { font-size: .28em; vertical-align: super; font-weight: 500; color: var(--muted); margin-left: 2px; }
     .hero p.lede { font-size: clamp(19px, 2.2vw, 22px); color: var(--muted); max-width: 720px; margin: 0 0 34px; }
     .hero .ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
     /* The art's floor starts 76% down; the band carries it to the page's edges on wide screens. */
+    /* The hero: the words on the left, the arrival photo on the right; on phones the photo follows the words */
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 56px; align-items: center; }
+    .hero-copy { min-width: 0; }
+    .hero .hero-copy .ctas { margin-bottom: 0; }
+    .hero-photo { margin: 0; border-radius: 20px; overflow: hidden; aspect-ratio: 5 / 6; max-width: 100%; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+    .hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 55% 35%; }
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+      .hero-photo { aspect-ratio: 4 / 3; }
+    }
     .hero .art { display: block; width: 100%; padding-bottom: 24px; }
     .hero .art img { display: block; width: 100%; max-width: 1200px; height: auto; margin: 0 auto; }
 
@@ -292,7 +307,8 @@
 <main>
   <!-- 1. Hero -->
   <section class="hero" aria-labelledby="hero-title">
-    <div class="wrap">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
       <span class="eyebrow">For small businesses, communities and families</span>
       <h1 id="hero-title">Your data's coming home.<span class="tm">™</span></h1>
       <p class="lede">Edgible lets your AI set up the apps and agents you rely on, on computers you control: at home, in the office, or a small server of your own. Then we keep them reachable, backed up and provably safe. All the convenience of the cloud, without giving your data away.</p>
@@ -300,6 +316,9 @@
         <a class="btn primary" href="#start">Get started</a>
         <a class="btn secondary" href="#headed">Where we're headed</a>
       </div>
+      </div>
+      <!-- Photo: Unsplash, YHImzyNxfwA (Unsplash licence: free for commercial use, no credit required) -->
+      <figure class="hero-photo"><img src="images/hero-coming-home.jpg" width="916" height="1100" alt="A woman laughs as she hugs a young man in a busy crowd at an arrivals barrier" fetchpriority="high"></figure>
     </div>
   </section>
 
