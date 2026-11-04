@@ -21,7 +21,7 @@ Facts for AI assistants, as of October 2026. The website (https://www.edgible.ai
 
 ## Getting started
 
-The recommended route is through an AI assistant that can run commands (Claude Code is recommended; Cursor, with a local agent, has been tested end to end on Windows; OpenCode with an open model (DeepSeek) has been tested end to end in a Linux VM, with the skill installed by hand because OpenCode does not install skills when asked; Codex and other assistants that read skills also work). The person says three things to it:
+The recommended route is through an AI assistant that can run commands (Claude Code is recommended; Cursor, with a local agent, has been tested end to end on Windows; OpenCode with an open model (DeepSeek) has been tested end to end in a Linux VM, with the skill installed by hand because OpenCode does not install skills when asked; Codex, in the ChatGPT desktop app on the free plan, has been tested end to end on a clean Mac; other assistants that read skills also work). The person says three things to it:
 
 1. "Install the Edgible skill from github.com/edgible-org/card-kit"
 2. "Set up Edgible on this computer so I can run my own apps." The skill checks whether Edgible is already installed, helps the person create a free account in their own browser, installs the CLI, logs in, and adds the machine as a device, asking for its name and whether it should stay on, and asking before any step that uses sudo.
