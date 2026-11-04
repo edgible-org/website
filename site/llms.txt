@@ -90,7 +90,7 @@ The short version for a person choosing: if the app holds private data (member l
 
 - Website and story: https://www.edgible.ai
 - Company, pricing and docs: https://www.edgible.com
-- For investors (why now, how Edgible earns, the team): https://www.edgible.ai/investors/
+- The company (the team, the mission, and for investors why now and how Edgible earns): https://www.edgible.ai/company/
 - Cards catalog: https://cards.edgible.org (source: https://github.com/edgible-org/cards)
 - Card format, tools and the skill: https://github.com/edgible-org/card-kit
 - Guides: https://guides.edgible.com
