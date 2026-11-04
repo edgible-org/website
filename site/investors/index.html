@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <script>document.documentElement.className += " js";</script>
+  <link rel="stylesheet" href="../menu.css">
   <link rel="stylesheet" href="../theme.css">
   <script src="../theme.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Edgible: A billion agents. A trillion apps.</title>
   <meta name="description" content="Why Edgible matters as agents and bespoke apps become how everyone uses computing, and how we plan to earn.">
-  <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#111827">
   <link rel="icon" type="image/png" href="../images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,10 +47,13 @@
     a { color: var(--accent-text); }
     .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
 
-    header.bar { background: var(--bar-bg); border-bottom: 1px solid var(--line); }
+    header.bar { position: sticky; top: 0; z-index: 10; background: var(--bar-bg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
     header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
     .logo img { display: block; height: 24px; width: auto; }
     header.bar .note { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    nav.links { display: flex; gap: 24px; font-weight: 500; font-size: 16px; }
+    nav.links a { text-decoration: none; color: #a7b1dc; }
+    nav.links a:hover, nav.links a[aria-current] { color: #ffffff; }
 
     .btn { display: inline-block; padding: 13px 24px; border-radius: 999px; font-weight: 600; font-size: 17px; text-decoration: none; }
     .btn.primary { background: var(--yellow); color: var(--on-yellow); box-shadow: 0 6px 22px rgba(255,210,31,.25); }
@@ -137,7 +141,16 @@
 <header class="bar">
   <div class="wrap">
     <a class="logo" href="../"><img src="../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
-    <span class="note">For investors</span>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="links" id="site-nav">
+      <a href="../#today">Product</a>
+      <a href="../#headed">About</a>
+      <a href="../proof/">Proof</a>
+      <a class="ext" href="https://cards.edgible.org">Cards</a>
+      <a href="./" aria-current="page">Investors</a>
+      <a href="../contact/">Contact</a>
+    </nav>
+    <a class="nav-cta" href="../#start">Get started</a>
   </div>
 </header>
 
@@ -351,9 +364,13 @@
 <footer>
   <div class="wrap">
     <span>© 2026 Edgible. Keep your data close.</span>
-    <a class="foot-logo" href="../"><img src="../images/edgible-symbol-white.png" alt="Edgible"></a>
+    <div class="foot-right">
+      <span><a href="https://cards.edgible.org">Cards</a> · <a href="https://guides.edgible.com">Guides</a> · <a href="https://cards.edgible.org/add-your-app/">Add your app</a> · <a href="../llms.txt">For AI assistants</a> · <a href="../contact/">Contact</a></span>
+      <a class="foot-logo" href="../"><img src="../images/edgible-symbol-white.png" alt="Edgible"></a>
+    </div>
   </div>
 </footer>
 
+<script src="../menu.js" defer></script>
 </body>
 </html>
