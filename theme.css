@@ -1,0 +1,80 @@
+/* The light theme and its toggle, shared by every page. Dark is the default look; theme.js sets
+   data-theme="light" on <html> when the visitor picked light. */
+:root { --icon: #e6eaff; }
+.ico { color: var(--icon); }
+
+/* The header toggle (theme.js adds it): a sun in dark mode, a moon in light mode */
+.theme-btn { order: 1; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-left: 12px; padding: 0; border: 0; border-radius: 10px; background: none; color: inherit; cursor: pointer; }
+.theme-btn:hover { background: var(--hover, rgba(255,255,255,.08)); }
+.theme-btn:focus-visible { outline: 2px solid #ffd21f; outline-offset: 2px; }
+.theme-btn svg { width: 22px; height: 22px; }
+.theme-btn .moon { display: none; }
+html[data-theme="light"] .theme-btn .sun { display: none; }
+html[data-theme="light"] .theme-btn .moon { display: block; }
+header.bar .logo { margin-right: auto; }
+.menu-btn { order: 2; }
+.js header.bar .menu-btn { margin-left: 2px; }
+
+html[data-theme="light"] {
+  color-scheme: light;
+  --night-1: #f6f7fd;
+  --night-2: #eef1fc;
+  --night-3: #e1e6fa;
+  --bg: #f6f7fd;
+  --bg-alt: rgba(17,24,39,.035);
+  --surface: #ffffff;
+  --line: rgba(17,24,39,.12);
+  --heading: #0d1450;
+  --ink: #2b3245;
+  --muted: #4d5878;
+  --muted-2: #7a84a8;
+  --accent-text: #8a6500;
+  --coral: #d4492a;
+  --teal: #1f7a68;
+  --say-bg: rgba(17,24,39,.05);
+  --icon: #1b2559;
+}
+html[data-theme="light"] .sky { display: none; }
+/* white panels with a hint of shadow in place of glass cards */
+html[data-theme="light"] .step, html[data-theme="light"] .way, html[data-theme="light"] .future,
+html[data-theme="light"] .story-ex, html[data-theme="light"] .share-two div, html[data-theme="light"] .stack li,
+html[data-theme="light"] .start-steps li { box-shadow: 0 1px 3px rgba(17,24,39,.07), 0 6px 18px rgba(17,24,39,.04); backdrop-filter: none; }
+html[data-theme="light"] .stack .l1 { box-shadow: none; }
+html[data-theme="light"] .future.wide { background: linear-gradient(120deg, rgba(79,195,168,.14), transparent 60%), #fff; }
+html[data-theme="light"] .btn.primary { box-shadow: 0 6px 18px rgba(255,210,31,.35); }
+html[data-theme="light"] .btn.secondary { color: var(--heading); }
+html[data-theme="light"] .hero .eyebrow { color: var(--teal); }
+html[data-theme="light"] .headed { background: radial-gradient(ellipse at 20% 0%, rgba(79,195,168,.14), transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(255,210,31,.12), transparent 55%); }
+html[data-theme="light"] .closing { background: radial-gradient(ellipse at 50% 0%, rgba(255,210,31,.14), transparent 60%), var(--bg-alt); }
+html[data-theme="light"] .asks li { box-shadow: 0 4px 14px rgba(17,24,39,.12); }
+
+/* the header and footer stay the very dark blue in light, with the dark theme's colours inside them */
+html[data-theme="light"] { --bar-bg: #111827; }
+html[data-theme="light"] header.bar, html[data-theme="light"] footer {
+  --heading: #ffffff; --ink: #e6eaff; --muted: #a7b1dc; --accent-text: #ffd21f;
+  --line: rgba(255,255,255,.12); --bar-line: rgba(255,255,255,.12); --line-soft: rgba(255,255,255,.08);
+  --hover: rgba(255,255,255,.08); --menu-ink: #e6eaff; --bar-solid: #111827;
+  color: var(--ink);
+}
+
+/* the AI-loop and padlock figures carry their colours as attributes: recolour them for light */
+html[data-theme="light"] .loop svg text[fill="#ffffff"], html[data-theme="light"] .padlock-fig svg text[fill="#ffffff"] { fill: var(--heading); }
+html[data-theme="light"] .loop svg text[fill="#a7b1dc"], html[data-theme="light"] .padlock-fig svg text[fill="#a7b1dc"] { fill: var(--muted); }
+html[data-theme="light"] .padlock-fig svg text[fill="#4fc3a8"] { fill: var(--teal); }
+html[data-theme="light"] .padlock-fig svg text[fill="#ff7a59"] { fill: var(--coral); }
+html[data-theme="light"] .loop svg [stroke="#ffd21f"], html[data-theme="light"] .padlock-fig svg [stroke="#ffd21f"] { stroke: #c99700; }
+html[data-theme="light"] .loop svg marker path[fill="#ffd21f"] { fill: #c99700; }
+html[data-theme="light"] .padlock-fig svg [color="#ffd21f"] { color: #c99700; }
+html[data-theme="light"] .padlock-fig svg [fill="#ffd21f"] { fill: #c99700; }
+html[data-theme="light"] .padlock-fig svg [fill="#a7b1dc"] { fill: #8b95b8; }
+html[data-theme="light"] .padlock-fig svg line[stroke="#a7b1dc"] { stroke: #8b95b8; }
+html[data-theme="light"] .padlock-fig svg marker path { fill: #8b95b8; }
+html[data-theme="light"] .padlock-fig svg rect[fill="rgba(255,255,255,.05)"] { fill: #fff; }
+html[data-theme="light"] .padlock-fig svg line[stroke="rgba(255,255,255,.12)"] { stroke: var(--line); }
+html[data-theme="light"] .loop svg rect[fill="#1b2236"], html[data-theme="light"] .loop svg rect[fill="#232b45"], html[data-theme="light"] .loop svg rect[fill="#262f4d"] { fill: #fff; }
+html[data-theme="light"] .loop svg rect[stroke="#ffffff"] { stroke: var(--heading); }
+html[data-theme="light"] .loop svg circle[fill="#ffffff"] { fill: var(--heading); }
+html[data-theme="light"] .loop svg circle[stroke="#ffffff"] { stroke: var(--heading); }
+/* the pictograms inside the plain circles go dark; the ones inside the green circles stay white */
+html[data-theme="light"] .loop svg circle[fill-opacity] + g [fill="#ffffff"] { fill: var(--heading); }
+html[data-theme="light"] .loop svg circle[fill-opacity] + g [stroke="#ffffff"] { stroke: var(--heading); }

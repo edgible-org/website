@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>document.documentElement.className += " js";</script>
+  <link rel="stylesheet" href="../menu.css">
+  <link rel="stylesheet" href="../theme.css">
+  <script src="../theme.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proof · Edgible</title>
+  <meta name="description" content="What runs today, and where you can check it: tested cards, AI-assisted setup, proven backups, and a catalog that runs on Edgible itself.">
+  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* The main page's typeface, colours, top bar and footer (site/index.html), with styles for reading. */
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Nexa"; src: url("../fonts/Nexa-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+    /* Playbooks are for doing, so they read on a light page; the dark top bar keeps them Edgible's. */
+    :root {
+      --night-1: #111827;
+      --line: #e3e6ef;
+      --paper: #fbfaf7;
+      --surface: #f1f2f7;
+      --yellow: #ffd21f;
+      --prompt: #fff8d6;
+      --link: #2e4a9e;
+      --heading: #111827;
+      --ink: #2b3245;
+      --muted: #5d6680;
+      --radius: 14px;
+      --wrap: 1120px;
+      --read: 760px;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { margin: 0; font-family: Nexa, Jost, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; color: var(--ink); background: var(--paper); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--link); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+    header.bar { position: sticky; top: 0; z-index: 10; background: var(--night-1); border-bottom: 1px solid rgba(255,255,255,.12); }
+    header.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 24px; width: auto; }
+    nav.links { display: flex; gap: 24px; font-weight: 500; font-size: 16px; }
+    nav.links a { text-decoration: none; color: #a7b1dc; }
+    nav.links a:hover { color: #ffffff; }
+
+    main { max-width: 1040px; margin: 0 auto; padding: 56px 24px 88px; }
+    h1, h2, h3 { color: var(--heading); line-height: 1.25; font-weight: 800; }
+    h1 { font-size: 40px; margin: 0 0 16px; }
+    h2 { font-size: 26px; margin: 48px 0 12px; }
+    h3 { font-size: 20px; margin: 32px 0 8px; }
+    p, li { max-width: 70ch; }
+    strong { color: var(--heading); }
+    /* A quote is something to say to your AI, or a box such as What you need. */
+    blockquote { margin: 20px 0; padding: 16px 20px; background: var(--prompt); border-left: 4px solid var(--yellow); border-radius: 0 var(--radius) var(--radius) 0; color: var(--heading); }
+    blockquote p { margin: 0; }
+    blockquote p + p, blockquote ul { margin-top: 10px; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; background: var(--surface); padding: 2px 6px; border-radius: 6px; }
+    pre { background: var(--night-1); color: #e6eaff; border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; }
+    pre code { background: none; padding: 0; color: inherit; }
+    details { margin: 24px 0; padding: 12px 18px; background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); }
+    summary { cursor: pointer; color: var(--heading); font-weight: 700; }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 16px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--heading); }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+    /* The site's icons are drawn light on dark, so on these pages each sits on a navy tile. */
+    h2 .ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--night-1); color: #ffffff; margin-right: 12px; vertical-align: middle; flex: none; }
+    h2 .ico svg { width: 30px; height: 30px; }
+    h2:has(.ico) { display: flex; align-items: center; }
+
+    /* Previous and Next, at the end of each chapter. */
+    nav.chapters { display: flex; gap: 14px; margin-top: 56px; flex-wrap: wrap; }
+    nav.chapters a { flex: 1 1 240px; display: block; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; text-decoration: none; color: var(--heading); font-weight: 700; }
+    nav.chapters a:hover { border-color: var(--link); }
+    nav.chapters a span { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 4px; }
+    nav.chapters a.next { text-align: right; margin-left: auto; }
+    footer { padding: 14px 0; font-size: 14px; color: #a7b1dc; background: var(--night-1); }
+    footer a { color: #a7b1dc; }
+    footer a:hover { color: #ffffff; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer .foot-right { display: flex; align-items: center; gap: 20px; }
+    footer .foot-logo img { display: block; height: 36px; width: auto; opacity: .9; }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      main { padding: 40px 16px 64px; }
+      nav.links { gap: 16px; font-size: 15px; }
+      h1 { font-size: 32px; }
+      table { display: block; overflow-x: auto; }
+    }
+    /* The path, drawn. */
+    figure.flow { margin: 28px auto; max-width: 460px; }
+    figure.flow svg { width: 100%; height: auto; display: block; font-family: Nexa, Jost, system-ui, sans-serif; }
+    .flow .box { fill: #ffffff; stroke: var(--line); stroke-width: 1.5; }
+    .flow .box.opt { stroke-dasharray: 5 4; stroke: var(--muted); }
+    .flow .num { fill: var(--yellow); }
+    .flow .numt { fill: var(--heading); font-weight: 800; font-size: 16px; }
+    .flow .t { fill: var(--heading); font-weight: 800; font-size: 17px; }
+    .flow .t.b { font-size: 15px; }
+    .flow .s { fill: var(--muted); font-size: 13.5px; }
+    .flow .s2 { fill: var(--heading); font-weight: 700; font-size: 14px; }
+    .flow .arr { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .flow .arr.thin { stroke-width: 1.5; }
+    .lead { font-size: 20px; color: var(--heading); }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 560px) { .cols { grid-template-columns: 1fr; } }
+  
+    /* What's real today: a lead, a few numbers, and three groups of short claims, each with where to check it. */
+    .nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0 8px; }
+    .num { background: var(--tile, var(--night-1)); border: 1px solid var(--tile-line, transparent); color: #e6eaff; border-radius: var(--radius); padding: 20px 22px; }
+    .num b { display: block; font-size: 36px; line-height: 1.1; color: var(--yellow); font-weight: 800; }
+    .num > span { display: block; margin-top: 6px; font-size: 16px; color: #c9d1f5; }
+    main h2 { font-size: 24px; margin: 44px 0 0; }
+    .claims { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 16px 0 0; }
+    .claim:last-child:nth-child(odd) { grid-column: 1 / -1; }
+    .claim.story { grid-column: 1 / -1; }
+    .claim.story .lines { margin: 0 0 10px; padding: 0; list-style: none; font-size: 17px; line-height: 1.6; }
+    .claim.story .lines li + li { margin-top: 2px; }
+    .claim { background: var(--card, #ffffff); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px 16px; display: flex; flex-direction: column; }
+    .claim h3 { display: flex; align-items: center; gap: 12px; margin: 0 0 8px; font-size: 19px; }
+    .claim .ico { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; background: var(--ico-bg, var(--night-1)); color: #ffffff; flex: none; }
+    .claim .ico svg { width: 26px; height: 26px; }
+    .claim p { margin: 0 0 10px; max-width: none; font-size: 16px; line-height: 1.55; }
+    .claim a.more { margin-top: auto; font-weight: 700; font-size: 16px; }
+    .close { margin-top: 40px; }
+    @media (max-width: 760px) { .nums { grid-template-columns: 1fr; } .claims { grid-template-columns: 1fr; } }
+
+    /* The theme switch (theme.js, theme.css): this page's own colours for each theme. They come after
+       theme.css, so they win over its homepage colours; the header and footer stay dark in both. */
+    html[data-theme] { --night-1: #111827; --icon: #ffffff; }
+    html[data-theme="light"] { color-scheme: light; --paper: #fbfaf7; --surface: #f1f2f7; --line: #e3e6ef; --heading: #111827; --ink: #2b3245; --muted: #5d6680; --link: #2e4a9e; --card: #ffffff; }
+    html[data-theme="dark"] { color-scheme: dark; --paper: #111827; --surface: rgba(255,255,255,.06); --line: rgba(255,255,255,.12); --heading: #ffffff; --ink: #e6eaff; --muted: #a7b1dc; --link: #ffd21f; --card: rgba(255,255,255,.05); --tile: rgba(255,255,255,.06); --tile-line: rgba(255,255,255,.12); --ico-bg: #2e4a9e; }
+    html[data-theme="dark"] { background: linear-gradient(135deg, #111827 0%, #1e293b 45%, #312e81 100%) fixed; background-color: #111827; }
+    html[data-theme="dark"] body { background: transparent; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="../"><img src="../images/edgible-logo-white.png" alt="Edgible" width="107" height="24"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="links" id="site-nav">
+      <a href="../#today">Product</a>
+      <a href="../#headed">Vision</a>
+      <a href="./" aria-current="page">Proof</a>
+      <a class="ext" href="https://cards.edgible.org">Cards</a>
+      <a href="../company/">Company</a>
+      <a href="../contact/">Contact</a>
+    </nav>
+    <a class="nav-cta" href="../#start">Get started</a>
+  </div>
+</header>
+<main>
+<h1>What's real today</h1>
+<p class="lead">Edgible is more than a plan. Here's what runs today, and where to check each claim.</p>
+
+<div class="nums">
+  <div class="num"><b id="n-cards">53</b><span>cards in the catalog</span></div>
+  <div class="num"><b id="n-pass">46 of 47</b><span>tested cards passing</span></div>
+  <div class="num"><b>Nightly</b><span>tests on real machines<span id="n-date">, last run 2 November</span></span></div>
+</div>
+
+<h2>It works</h2>
+<div class="claims">
+    <div class="claim story">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#machine"/></svg></span>From the garage to the web</h3>
+      <ul class="lines">
+        <li>An old laptop from the garage, nursed back to life.</li>
+        <li>Cursor, running a model that isn't Claude.</li>
+        <li>&ldquo;Set up Edgible on this computer.&rdquo; Then: &ldquo;I'd like a private wiki for our family's recipes.&rdquo;</li>
+        <li>A family wiki on the web, set up, published and checked by the AI. Plain English all the way.</li>
+      </ul>
+      <a class="more" href="https://cards.edgible.org/ai/">Use cards with your AI &rarr;</a>
+    </div>
+</div>
+<div class="claims">
+    <div class="claim">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#tested"/></svg></span>Tested, not claimed</h3>
+      <p>Every card is deployed, checked and taken down on real machines, Mac and Linux. Each card shows its latest result.</p>
+      <a class="more" href="https://cards.edgible.org">See the results &rarr;</a>
+    </div>
+    <div class="claim">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#backup"/></svg></span>Backups that are proven</h3>
+      <p>A backup counts only once it has been restored and the data checked.</p>
+      <a class="more" href="https://github.com/edgible-org/cards/blob/main/HOW-IT-WORKS.md">How it works &rarr;</a>
+    </div>
+    <div class="claim">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#lock"/></svg></span>Your data stays private</h3>
+      <p>The padlock stays locked all the way to your machine. Our gateway can't open it.</p>
+      <a class="more" href="../#padlock">Where the padlock is opened &rarr;</a>
+    </div>
+    <div class="claim">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#anywhere"/></svg></span>The tunnel wish list, ticked</h3>
+      <p>What the <a href="https://github.com/anderspitman/awesome-tunneling">awesome-tunneling</a> list asks for: an address and HTTPS for every app, web and TCP, no sudo, and your own domain with one DNS record.</p>
+      <a class="more" href="https://cards.edgible.org/playbooks/use-your-own-domain/">Use your own domain &rarr;</a>
+    </div>
+</div>
+
+<h2>It's open</h2>
+<div class="claims">
+    <div class="claim">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#recipe"/></svg></span>Self-hosting made accessible</h3>
+      <p>Apps from the awesome-selfhosted world become tested, one-step cards. New ones are proposed nightly, and a person reviews each.</p>
+      <a class="more" href="https://cards.edgible.org">Browse the cards &rarr;</a>
+    </div>
+    <div class="claim">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#share"/></svg></span>Anyone can add their app</h3>
+      <p>A new user went from “I built an app” to a merged card in one sitting, with an AI doing the work.</p>
+      <a class="more" href="https://cards.edgible.org/add-your-app/">Add your app &rarr;</a>
+    </div>
+    <div class="claim">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#people"/></svg></span>A person behind every card</h3>
+      <p>Each card names who answers for it. Everything is MIT-licensed, and runs without Edgible too.</p>
+      <a class="more" href="https://cards.edgible.org/about/">Who runs this &rarr;</a>
+    </div>
+    <div class="claim">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#govern"/></svg></span>Nobody's secrets in the repo</h3>
+      <p>Passwords and keys are made on your machine. Every card is checked for committed secrets.</p>
+      <a class="more" href="https://cards.edgible.org/about/">About cards &rarr;</a>
+    </div>
+</div>
+
+<h2>It runs itself</h2>
+<div class="claims">
+    <div class="claim">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#ai"/></svg></span>Your AI does the work</h3>
+      <p>Playbooks take you from nothing to a running app with your AI beside you. The Claude phone app manages apps through our connector.</p>
+      <a class="more" href="https://cards.edgible.org/playbooks/">Read the playbooks &rarr;</a>
+    </div>
+    <div class="claim">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#machine"/></svg></span>It runs on itself</h3>
+      <p>This site and the catalog run on Edgible. Tests, new-card proposals and a morning report run with nobody at the keyboard.</p>
+      <a class="more" href="https://cards.edgible.org">The catalog, live &rarr;</a>
+    </div>
+    <div class="claim">
+      <h3><span class="ico" aria-hidden="true"><svg><use href="../images/icons.svg#record"/></svg></span>It keeps itself current</h3>
+      <p>Version updates are proposed automatically and tested on real machines before they're merged.</p>
+      <a class="more" href="https://github.com/edgible-org/cards/pulls">Recent updates &rarr;</a>
+    </div>
+</div>
+
+<p class="close">Want to see it, or talk it through? <a href="../contact/">Talk to us</a>.</p>
+<script>
+// The numbers come from the catalog's own build (the same as its homepage), so they keep up as cards
+// are added; the figures above are the fallback.
+fetch("https://raw.githubusercontent.com/edgible-org/cards/site/stats.json").then(r => r.ok ? r.json() : null).then(d => {
+  if (!d || !d.cards) return;
+  document.getElementById("n-cards").textContent = d.cards;
+  document.getElementById("n-pass").textContent = d.passing + " of " + d.tested;
+  if (d.last_run) document.getElementById("n-date").textContent = ", last run " +
+    new Date(d.last_run + "T12:00:00Z").toLocaleDateString("en-GB", {day: "numeric", month: "long"});
+}).catch(() => {});
+</script>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Edgible. Keep your data close.</span>
+    <div class="foot-right">
+      <span><a href="https://cards.edgible.org">Cards</a> · <a href="../llms.txt">For AI assistants</a></span>
+      <a class="foot-logo" href="../"><img src="../images/edgible-symbol-white.png" alt="Edgible"></a>
+    </div>
+  </div>
+</footer>
+<script src="../menu.js" defer></script>
+</body>
+</html>
